@@ -309,7 +309,7 @@ func describeEnum(typ string, nullable bool, choices []any, maxBytes int) (json.
 		default:
 			continue
 		}
-		literal, _ := json.Marshal(choice) // The decoder only produces finite JSON scalars.
+		literal, _ := json.Marshal(choice)     // The decoder only produces finite JSON scalars.
 		size := len(values) + len(literal) + 1 // Include the closing bracket.
 		if len(values) > 1 {
 			size++ // Include the separator after the previous choice.

@@ -24,6 +24,7 @@ jobs:
           go-version-file: go.mod
       - name: Verify dependencies and Go packages
         run: |
+          test -z "$(gofmt -l cmd examples internal)"
           go mod verify
           go vet ./...
           go test -race -count=1 ./...
