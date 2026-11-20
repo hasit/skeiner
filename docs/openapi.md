@@ -33,6 +33,24 @@ skeiner serve --spec ./ci.yaml \
 
 Use an explicit trusted base URL when passing credentials with a third-party specification. The URL in the spec otherwise determines where Skeiner sends a configured bearer token. Descriptions, parameter names and enum choices become model-visible discovery content.
 
+## Register a stdio MCP server
+
+Use absolute paths because the client chooses the working directory. For clients with an `mcpServers` setting, register the binary and its arguments as shown below. Configure the client to pass the named token environment variable to the server.
+
+```json
+{
+  "mcpServers": {
+    "skeiner": {
+      "command": "/absolute/path/to/skeiner",
+      "args": ["serve", "--spec", "/absolute/path/to/openapi.yaml",
+               "--base-url", "https://api.example.com/v1",
+               "--token-env", "MY_API_TOKEN",
+               "--allow", "listIncidents,getIncidentEvents"]
+    }
+  }
+}
+```
+
 ## Supported subset
 
 | Feature | What the compiler accepts |

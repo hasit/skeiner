@@ -1,5 +1,7 @@
 # Benchmarks
 
+For a comparison on a live service, the GitHub benchmark runs the same three tasks through Skeiner and GitHub's official MCP server. [Live GitHub results](github-benchmark.md)
+
 Two local workloads measure different costs. The inventory replay measures how much data reaches a caller that already has a verified program. The runtime benchmark measures how long Skeiner spends indexing, searching and running a program over a loopback API. Both run with Go and the repository fixtures. Only the initial Go dependency download requires network access.
 
 Build the CLI from the repository root before running either workload.

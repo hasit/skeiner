@@ -1,0 +1,414 @@
+{
+  "recorded_at": "2026-11-20T06:31:10.930961+00:00",
+  "repository": "git/git",
+  "revision": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+  "skeiner_version": "0.1.0-alpha.2",
+  "github_mcp_version": "2.2.0",
+  "measurements": [
+    {
+      "trial": 1,
+      "case": "release-60",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 35905,
+      "elapsed_ms": 627.7
+    },
+    {
+      "trial": 1,
+      "case": "release-60",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 28771,
+      "elapsed_ms": 662.2
+    },
+    {
+      "trial": 1,
+      "case": "release-60",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 845,
+      "reply_bytes": 42,
+      "elapsed_ms": 922.3
+    },
+    {
+      "trial": 1,
+      "case": "release-200",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 127467,
+      "elapsed_ms": 870.5
+    },
+    {
+      "trial": 1,
+      "case": "release-200",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 4,
+      "mcp_calls": 1,
+      "argument_bytes": 846,
+      "reply_bytes": 43,
+      "elapsed_ms": 1773.5
+    },
+    {
+      "trial": 1,
+      "case": "release-200",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 153184,
+      "elapsed_ms": 836.1
+    },
+    {
+      "trial": 1,
+      "case": "one-file",
+      "arm": "skeiner",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 243,
+      "reply_bytes": 52,
+      "elapsed_ms": 338.6
+    },
+    {
+      "trial": 1,
+      "case": "one-file",
+      "arm": "github-json",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 52,
+      "elapsed_ms": 354.4
+    },
+    {
+      "trial": 1,
+      "case": "one-file",
+      "arm": "github-csv",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 45,
+      "elapsed_ms": 404.4
+    },
+    {
+      "trial": 2,
+      "case": "release-60",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 28771,
+      "elapsed_ms": 403.5
+    },
+    {
+      "trial": 2,
+      "case": "release-60",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 845,
+      "reply_bytes": 42,
+      "elapsed_ms": 465.4
+    },
+    {
+      "trial": 2,
+      "case": "release-60",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 35905,
+      "elapsed_ms": 377.5
+    },
+    {
+      "trial": 2,
+      "case": "release-200",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 4,
+      "mcp_calls": 1,
+      "argument_bytes": 846,
+      "reply_bytes": 43,
+      "elapsed_ms": 1569.1
+    },
+    {
+      "trial": 2,
+      "case": "release-200",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 153184,
+      "elapsed_ms": 789.2
+    },
+    {
+      "trial": 2,
+      "case": "release-200",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 127467,
+      "elapsed_ms": 816.6
+    },
+    {
+      "trial": 2,
+      "case": "one-file",
+      "arm": "github-json",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 52,
+      "elapsed_ms": 355.9
+    },
+    {
+      "trial": 2,
+      "case": "one-file",
+      "arm": "github-csv",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 45,
+      "elapsed_ms": 369.4
+    },
+    {
+      "trial": 2,
+      "case": "one-file",
+      "arm": "skeiner",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 243,
+      "reply_bytes": 52,
+      "elapsed_ms": 396.6
+    },
+    {
+      "trial": 3,
+      "case": "release-60",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 845,
+      "reply_bytes": 42,
+      "elapsed_ms": 467.0
+    },
+    {
+      "trial": 3,
+      "case": "release-60",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 35905,
+      "elapsed_ms": 407.7
+    },
+    {
+      "trial": 3,
+      "case": "release-60",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 31,
+        "other": 18
+      },
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 119,
+      "reply_bytes": 28771,
+      "elapsed_ms": 411.8
+    },
+    {
+      "trial": 3,
+      "case": "release-200",
+      "arm": "github-json",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 153184,
+      "elapsed_ms": 813.2
+    },
+    {
+      "trial": 3,
+      "case": "release-200",
+      "arm": "github-csv",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 2,
+      "mcp_calls": 2,
+      "argument_bytes": 240,
+      "reply_bytes": 127467,
+      "elapsed_ms": 772.1
+    },
+    {
+      "trial": 3,
+      "case": "release-200",
+      "arm": "skeiner",
+      "answer": {
+        "localization": 11,
+        "merges": 62,
+        "other": 127
+      },
+      "commit_pages": 4,
+      "mcp_calls": 1,
+      "argument_bytes": 846,
+      "reply_bytes": 43,
+      "elapsed_ms": 1553.5
+    },
+    {
+      "trial": 3,
+      "case": "one-file",
+      "arm": "github-csv",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 45,
+      "elapsed_ms": 349.1
+    },
+    {
+      "trial": 3,
+      "case": "one-file",
+      "arm": "skeiner",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 243,
+      "reply_bytes": 52,
+      "elapsed_ms": 321.8
+    },
+    {
+      "trial": 3,
+      "case": "one-file",
+      "arm": "github-json",
+      "answer": [
+        {
+          "sha": "9decd56cc9a41773bffa517caaa07db3f78e8646"
+        }
+      ],
+      "commit_pages": 1,
+      "mcp_calls": 1,
+      "argument_bytes": 152,
+      "reply_bytes": 52,
+      "elapsed_ms": 321.6
+    }
+  ]
+}

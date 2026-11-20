@@ -1,0 +1,29 @@
+name: Live GitHub benchmark
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+      - name: Build Skeiner and install GitHub's pinned MCP server
+        run: |
+          go build -mod=readonly -trimpath -o ./skeiner ./cmd/skeiner
+          python3 benchmarks/github/download_server.py
+      - name: Measure and verify live answers
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 benchmarks/github/benchmark.py > github-results.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: github-benchmark-results
+          path: github-results.json
