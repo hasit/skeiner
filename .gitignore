@@ -29,6 +29,13 @@ go.work.sum
 # env file
 .env
 
+# Local builds, release archives, and Python examples
+/skeiner
+/bin/
+/dist/
+__pycache__/
+.DS_Store
+
 # Editor/IDE
 # .idea/
 # .vscode/

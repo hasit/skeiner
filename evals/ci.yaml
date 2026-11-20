@@ -1,0 +1,70 @@
+version: 1
+driver: replay
+citation_fields:
+  id: id
+  text: text
+cases:
+  - id: assertion
+    state: assertion
+    prompt: "Why did run 814 fail at commit abc123? Identify the job and attempt, and cite the lines that explain the failure."
+    facts:
+      - label: run ID
+        pattern: '(?i)\brun\s*#?\s*814\b'
+      - label: commit SHA
+        pattern: '(?i)\babc123\b'
+      - label: failed job
+        pattern: '(?i)\bunit-linux\b'
+      - label: failed attempt number
+        pattern: '(?i)(attempt\s*#?\s*(1|one)\b|first attempt\b)'
+      - label: failing test
+        pattern: 'TestInvoiceRounding'
+      - label: expected and actual assertion values
+        pattern: '(?i)(expect\w*[^.]{0,25}125[^.]{0,50}124|124[^.]{0,50}(instead of|expect\w*)[^.]{0,25}125)'
+    evidence:
+      - id: 814-U1-L003
+        text: 'FAIL TestInvoiceRounding'
+      - id: 814-U1-L004
+        text: 'invoice_test.go:71: expected 125 cents, got 124 cents'
+  - id: retry
+    state: retry
+    prompt: "What happened to run 815 at commit def456? Did it ultimately pass, and what explains the earlier failure? Cite the evidence."
+    facts:
+      - label: run ID
+        pattern: '(?i)\brun\s*#?\s*815\b'
+      - label: commit SHA
+        pattern: '(?i)\bdef456\b'
+      - label: retried job
+        pattern: '(?i)\bintegration-linux\b'
+      - label: first attempt failed
+        pattern: '(?i)(attempt\s*#?\s*1|first attempt)\b[^.;]{0,85}(fail|503)'
+        reject: '(?i)(first attempt|attempt\s*#?\s*1)\s+(passed|succeeded)'
+      - label: second attempt passed
+        pattern: '(?i)(attempt\s*#?\s*2|second attempt|retry)\b[^.;]{0,85}(pass|succeed|success)'
+        reject: '(?i)(ultimately|finally|latest attempt|second attempt|attempt\s*#?\s*2)\s+(failed|unsuccessful)'
+    evidence:
+      - id: 815-I1-L002
+        text: 'registry pull failed: 503 Service Unavailable'
+      - id: 815-I2-L002
+        text: 'PASS integration suite'
+  - id: infrastructure
+    state: infrastructure
+    prompt: "Why did run 816 fail at commit fed987? Identify the job and attempt. Should we change application code based on this run? Cite the evidence."
+    facts:
+      - label: run ID
+        pattern: '(?i)\brun\s*#?\s*816\b'
+      - label: commit SHA
+        pattern: '(?i)\bfed987\b'
+      - label: failed job
+        pattern: '(?i)\bunit-linux\b'
+      - label: failed attempt number
+        pattern: '(?i)(attempt\s*#?\s*(1|one)\b|first attempt\b)'
+      - label: failure category
+        pattern: '(?i)(infrastructure|runner provisioning|no compatible executor)'
+      - label: no application fix justified
+        pattern: '(?i)(no (evidence|basis|reason|application|code)|do(es)? not (justify|warrant|support|indicate)|no .*changes?.*(needed|justified)|should(n.t| not) .*chang|would(n.t| not) .*chang|unjustified)'
+        reject: '(?i)(should|must|need to) (fix|change|modify) (the )?application code'
+    evidence:
+      - id: 816-U1-L002
+        text: 'runner provisioning failed: no compatible executor available'
+      - id: 816-U1-L003
+        text: 'test process never started'

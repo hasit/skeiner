@@ -1,0 +1,38 @@
+version: 2
+driver: openai
+citation_fields: {id: id, text: text}
+cases:
+  - id: assertion
+    state: assertion
+    prompt: "Which test failed in run 814 at commit abc123? Report the expected and actual amounts in cents and cite the log entries."
+    answer_fields:
+      - {name: test_name, type: string, description: "Name of the failing test."}
+      - {name: expected_cents, type: integer, description: "Amount the assertion expected."}
+      - {name: actual_cents, type: integer, description: "Amount the test observed."}
+    facts:
+      - {field: test_name, value: TestInvoiceRounding}
+      - {field: expected_cents, value: 125}
+      - {field: actual_cents, value: 124}
+    evidence:
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-814-unit-1}}}
+        id: 814-U1-L003
+        text: "FAIL TestInvoiceRounding"
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-814-unit-1}}}
+        id: 814-U1-L004
+        text: "invoice_test.go:71: expected 125 cents, got 124 cents"
+  - id: retry
+    state: retry
+    prompt: "Did the integration job in run 815 at commit def456 recover? Identify the outcome of each attempt and cite what happened."
+    answer_fields:
+      - {name: first_status, type: string, description: "Recorded status of attempt 1."}
+      - {name: second_status, type: string, description: "Recorded status of attempt 2."}
+    facts:
+      - {field: first_status, value: failed}
+      - {field: second_status, value: passed}
+    evidence:
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-815-integration-1}}}
+        id: 815-I1-L002
+        text: "registry pull failed: 503 Service Unavailable"
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-815-integration-2}}}
+        id: 815-I2-L002
+        text: "PASS integration suite"

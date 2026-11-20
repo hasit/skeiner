@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Pull request inventory
+  version: '1'
+paths:
+  /pulls:
+    get:
+      operationId: listPullRequests
+      summary: List pull requests with their current review and check runs
+      parameters:
+        - name: cursor
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A page in ascending pull request number order
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nextCursor:
+                    type: string
+                    nullable: true
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        number:
+                          type: integer
+                        head:
+                          type: string
+                        review:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            head:
+                              type: string
+                        requiredChecks:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              issuer:
+                                type: string
+                        checks:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                              issuer:
+                                type: string
+                              head:
+                                type: string
+                              status:
+                                type: string

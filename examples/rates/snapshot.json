@@ -1,0 +1,6 @@
+{
+  "/v2/rate/EUR/GBP?date=2024-05-15": {"date":"2024-05-15","base":"EUR","quote":"GBP","rate":0.85902},
+  "/v2/providers/ECB/rate/EUR/GBP?date=2024-05-15": {"date":"2024-05-15","base":"EUR","quote":"GBP","rate":0.8584},
+  "/v2/rate/EUR/USD?date=2024-05-15": {"date":"2024-05-15","base":"EUR","quote":"USD","rate":1.0824},
+  "/v2/providers/ECB/rate/EUR/USD?date=2024-05-15": {"date":"2024-05-15","base":"EUR","quote":"USD","rate":1.0832}
+}

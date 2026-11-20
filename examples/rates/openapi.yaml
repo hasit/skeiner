@@ -1,0 +1,63 @@
+# Minimal read-only contract for the two Frankfurter v2 operations used here.
+openapi: 3.0.3
+info:
+  title: Historical exchange rates
+  version: "1"
+servers:
+  - url: https://api.frankfurter.dev/v2
+paths:
+  /rate/{base}/{quote}:
+    get:
+      operationId: getRate
+      summary: Read the blended exchange rate for a currency pair
+      parameters:
+        - $ref: '#/components/parameters/base'
+        - $ref: '#/components/parameters/quote'
+        - $ref: '#/components/parameters/date'
+      responses:
+        '200':
+          $ref: '#/components/responses/rate'
+  /providers/{provider}/rate/{base}/{quote}:
+    get:
+      operationId: getProviderRate
+      summary: Read a named provider's exchange rate for a currency pair
+      parameters:
+        - name: provider
+          in: path
+          required: true
+          schema: {type: string}
+        - $ref: '#/components/parameters/base'
+        - $ref: '#/components/parameters/quote'
+        - $ref: '#/components/parameters/date'
+      responses:
+        '200':
+          $ref: '#/components/responses/rate'
+components:
+  parameters:
+    base:
+      name: base
+      in: path
+      required: true
+      schema: {type: string}
+    quote:
+      name: quote
+      in: path
+      required: true
+      schema: {type: string}
+    date:
+      name: date
+      in: query
+      description: Historical observation date in YYYY-MM-DD form
+      schema: {type: string}
+  responses:
+    rate:
+      description: Rate and observation date
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              base: {type: string}
+              quote: {type: string}
+              date: {type: string}
+              rate: {type: number}

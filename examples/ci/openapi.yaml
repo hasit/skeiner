@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Example CI
+  version: 1.0.0
+  description: A read-only API for exploring CI runs, retries and build logs.
+servers:
+  - url: http://127.0.0.1:8087
+paths:
+  /runs/{runId}:
+    get:
+      operationId: getRun
+      tags: [runs, jobs]
+      summary: Look up a CI run and its jobs
+      description: Returns the commit SHA and current status of each job in the run. Job status reflects its latest attempt.
+      parameters:
+        - name: runId
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: The run and its jobs
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Run'}
+  /jobs/{jobId}/attempts:
+    get:
+      operationId: listJobAttempts
+      tags: [jobs, attempts, retries]
+      summary: List all attempts of a CI job, including retries
+      description: Attempt numbers start at one. Use the greatest number for the latest outcome. Each attempt has its own logs.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Attempts in chronological order
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [attempts]
+                properties:
+                  attempts:
+                    type: array
+                    items: {$ref: '#/components/schemas/Attempt'}
+  /attempts/{attemptId}/logs:
+    get:
+      operationId: getAttemptLogs
+      tags: [attempts, logs]
+      summary: Retrieve a page of job attempt log lines
+      description: Read execution output, including test assertions and runner errors. Start without a cursor and pass each nextCursor until it is null. Cite the stable line IDs.
+      parameters:
+        - name: attemptId
+          in: path
+          required: true
+          schema: {type: string}
+        - name: cursor
+          in: query
+          description: Opaque nextCursor from the preceding page of this attempt
+          schema: {type: string}
+      responses:
+        '200':
+          description: Chronologically ordered log lines and a continuation cursor
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [attemptId, lines, nextCursor]
+                properties:
+                  attemptId: {type: string}
+                  lines:
+                    type: array
+                    items: {$ref: '#/components/schemas/LogLine'}
+                  nextCursor: {type: string, nullable: true}
+  /runs:
+    get:
+      operationId: listRuns
+      tags: [runs, commits]
+      summary: Find CI runs and outcomes for a commit SHA
+      description: Returns runs for the exact SHA, including current status. An empty list means no run is available for this commit yet.
+      parameters:
+        - name: sha
+          in: query
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Matching runs
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [runs]
+                properties:
+                  runs:
+                    type: array
+                    items: {$ref: '#/components/schemas/Run'}
+  /test-history:
+    get:
+      operationId: getTestHistory
+      tags: [tests, history]
+      summary: Look up recorded outcomes of a named test across commits
+      description: Returns completed test outcomes and their run and attempt identifiers. A job that never started testing contributes no test result.
+      parameters:
+        - name: test
+          in: query
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Test observations
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [test, results]
+                properties:
+                  test: {type: string}
+                  results:
+                    type: array
+                    items: {$ref: '#/components/schemas/TestObservation'}
+components:
+  schemas:
+    Run:
+      type: object
+      required: [id, sha, status, jobs]
+      properties:
+        id: {type: string}
+        sha: {type: string}
+        status: {type: string}
+        jobs:
+          type: array
+          items: {$ref: '#/components/schemas/Job'}
+    Job:
+      type: object
+      required: [id, name, status]
+      properties:
+        id: {type: string}
+        name: {type: string}
+        status: {type: string}
+    Attempt:
+      type: object
+      required: [id, number, status]
+      properties:
+        id: {type: string}
+        number: {type: integer}
+        status: {type: string}
+    LogLine:
+      type: object
+      required: [id, number, text]
+      properties:
+        id: {type: string}
+        number: {type: integer}
+        text: {type: string}
+    TestObservation:
+      type: object
+      required: [runId, sha, attemptId, status]
+      properties:
+        runId: {type: string}
+        sha: {type: string}
+        attemptId: {type: string}
+        status: {type: string}

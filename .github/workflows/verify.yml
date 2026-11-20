@@ -1,0 +1,96 @@
+name: Verify and release
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+      - name: Verify dependencies and Go packages
+        run: |
+          go mod verify
+          go vet ./...
+          go test -race -count=1 ./...
+      - name: Exercise the packaged CLI and offline examples
+        run: |
+          archive=$(scripts/package.sh "$(go env GOOS)" "$(go env GOARCH)")
+          mkdir "$RUNNER_TEMP/skeiner"
+          tar xzf "$archive" -C "$RUNNER_TEMP/skeiner"
+          cd "$RUNNER_TEMP/skeiner"
+          python3 examples/rates/quickstart.py | jq -e '. == [{"date":"2024-05-15","quote":"USD","blended":1.0824,"ecb":1.0832}]'
+          ./skeiner eval --spec examples/ci/openapi.yaml --suite evals/ci.yaml > replay.json
+          jq -e '.results | length == 3 and all(.[]; .passed)' replay.json
+          if ./skeiner eval --spec examples/ci/openapi.yaml --suite evals/ci.yaml --case assertion --state missing-assertion > missing.json; then
+            echo "The missing assertion page should fail grading." >&2
+            exit 1
+          fi
+          jq -e '.results[0] | .passed == false and (.diagnosis | contains("not retrieved"))' missing.json
+          ./skeiner tasks --suite evals/ci-structured.yaml | jq -e 'has("assertion") and has("retry")'
+      - name: Verify benchmark answers and page reads
+        run: go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -inventory
+      - name: Exercise the runtime measurements
+        run: go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -n 5 -cold 2 -operations 1000 -parallel 4
+
+  package:
+    if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+      - name: Build release archives
+        run: |
+          test "v$(go run ./cmd/skeiner version)" = "$GITHUB_REF_NAME"
+          for os in darwin linux; do
+            for arch in amd64 arm64; do
+              scripts/package.sh "$os" "$arch"
+            done
+          done
+          (cd dist && sha256sum -- *.tar.gz > SHA256SUMS)
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-archives
+          path: dist/
+          if-no-files-found: error
+
+  release:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release-archives
+          path: dist/
+      - name: Publish verified binaries
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          (cd dist && sha256sum -c SHA256SUMS)
+          flags=(--verify-tag --title "Skeiner $GITHUB_REF_NAME")
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then flags+=(--prerelease); fi
+          notes="docs/releases/$GITHUB_REF_NAME.md"
+          if [[ -f "$notes" ]]; then flags+=(--notes-file "$notes"); else flags+=(--generate-notes); fi
+          gh release create "$GITHUB_REF_NAME" "${flags[@]}" dist/SHA256SUMS dist/*.tar.gz
