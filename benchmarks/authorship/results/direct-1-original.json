@@ -1,0 +1,74 @@
+{
+  "trial": 1,
+  "arm": "direct",
+  "case": "original",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "input_tokens": 3474,
+  "cached_input_tokens": 0,
+  "output_tokens": 154,
+  "model_turns": 6,
+  "calls": [
+    {
+      "name": "listLoans",
+      "ok": true
+    },
+    {
+      "name": "listLoans",
+      "ok": true
+    },
+    {
+      "name": "listLoans",
+      "ok": true
+    },
+    {
+      "name": "listRenewals",
+      "ok": true
+    },
+    {
+      "name": "listRenewals",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 1122,
+  "answer": [
+    {
+      "loan": "L-07",
+      "object": "O-16",
+      "due": "2026-02-28"
+    },
+    {
+      "loan": "L-01",
+      "object": "O-64",
+      "due": "2026-03-24"
+    }
+  ],
+  "elapsed_seconds": 6.578,
+  "reads": [
+    [
+      "loans",
+      "MOSS",
+      ""
+    ],
+    [
+      "loans",
+      "MOSS",
+      "page-2"
+    ],
+    [
+      "loans",
+      "MOSS",
+      "page-3"
+    ],
+    [
+      "renewals",
+      "MOSS",
+      ""
+    ],
+    [
+      "renewals",
+      "MOSS",
+      "page-2"
+    ]
+  ],
+  "correct": false
+}

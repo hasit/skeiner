@@ -6,7 +6,7 @@ Skeiner exposes two tools over the Model Context Protocol (MCP). With `search`, 
 
 For example, a program can ask *which pull requests have a published review and a failed required check on the current commit?* It can read every page and return just the matching PR, review, and check IDs. Skeiner handles HTTP and credentials in Go. Its binary includes the JavaScript runtime.
 
-[Alpha release](https://github.com/hasit/skeiner/releases/tag/v0.1.0-alpha.1) · [Architecture](docs/architecture.md) · [Benchmarks](docs/benchmarks.md) · [OpenAPI support](docs/openapi.md)
+[Alpha release](https://github.com/hasit/skeiner/releases/tag/v0.1.0-alpha.2) · [Architecture](docs/architecture.md) · [Benchmarks](docs/benchmarks.md) · [OpenAPI support](docs/openapi.md)
 
 ## Run the offline quickstart
 
@@ -31,7 +31,7 @@ go build -o ./skeiner ./cmd/skeiner
 python3 examples/rates/quickstart.py
 ```
 
-For just the CLI, install the tagged Go module with `go install github.com/hasit/skeiner/cmd/skeiner@v0.1.0-alpha.1`.
+For just the CLI, install the tagged Go module with `go install github.com/hasit/skeiner/cmd/skeiner@v0.1.0-alpha.2`.
 
 ## Rerun a saved program
 
@@ -41,6 +41,15 @@ The quickstart's JavaScript is a plain file. To rerun it against the public Fran
 ./skeiner run --spec examples/rates/openapi.yaml \
   --base-url https://api.frankfurter.dev/v2 --token-env '' \
   --allow getRate,getProviderRate --mode async --program examples/rates/compare.js
+```
+
+A saved program can read its parameters from `api.input`. Pass a JSON file with `run --input-file`, or send the same value as the MCP `execute` tool's `input` argument. That lets you change a record ID, date, or pagination checkpoint without editing the program. [Writing a parameterized program](docs/sandbox.md)
+
+To check a saved investigation before scheduling it, run it against cases with known answers. This command runs one file against three local CI snapshots and checks its counts and citations against the records it actually retrieved.
+
+```sh
+./skeiner eval --spec examples/ci/openapi.yaml --allow getAttemptLogs \
+  --program examples/ci/find-lines.js --suite evals/log-scan.yaml
 ```
 
 ## Connect an agent to your API
@@ -95,6 +104,8 @@ The inventory benchmark scans 54 synthetic pull requests across six pages. Both 
 | JSON reply bytes returned to the client | 18,277 | 366 |
 
 That is **98.0% fewer reply bytes** on this fixture. The benchmark reruns the same program after changing four records and checks both answers against expected IDs. It runs without a model. Model token use, answer latency, and cost depend on the client and workload. [Method, runtime timings and results](docs/benchmarks.md) · [Saved investigation](benchmarks/inventory/blocked.js)
+
+On a separate museum-loans API, three fresh model authors each produced a program that passed all three snapshots once discovery showed the API's exact status values. The study includes the initial authoring cost, the verification reads, and a direct Python implementation. For recurring CLI jobs, an opt-in compilation cache reduced median process-to-answer time from 230 ms to 64 ms in a three-read loopback benchmark. [Authorship study](docs/authorship.md) · [Fresh-process measurements](docs/benchmarks.md#rerunning-a-saved-program-from-a-fresh-process)
 
 ```sh
 go build -o ./skeiner ./cmd/skeiner

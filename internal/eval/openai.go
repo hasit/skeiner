@@ -74,6 +74,9 @@ func ParseAnswer(raw []byte, task TaskInput) (Answer, error) {
 	if d.Decode(&extra) != io.EOF {
 		return answer, errors.New("expected one agent answer JSON object")
 	}
+	if task.Version == 2 && answer.Citations == nil {
+		return answer, errors.New("structured answers require a citations array; use [] for zero citations")
+	}
 	if task.Version != 2 && strings.TrimSpace(answer.Summary) == "" {
 		return answer, errors.New("invalid agent answer: expected summary and citations")
 	}
@@ -98,7 +101,11 @@ func (d *modelDriver) Answer(ctx context.Context, task TaskInput, c Client) (Ans
 	if !names["search"] || !names["execute"] {
 		return empty, errors.New("MCP discovery must expose search and execute")
 	}
-	messages := []message{{Role: "system", Content: AnswerInstruction(task)}, {Role: "user", Content: task.Prompt}}
+	prompt := task.Prompt
+	if task.Input != nil {
+		prompt += "\nPublic JSON input for this case:\n" + string(task.Input)
+	}
+	messages := []message{{Role: "system", Content: AnswerInstruction(task)}, {Role: "user", Content: prompt}}
 	calls := 0
 	for turn := 0; turn < 20; turn++ {
 		reply, err := d.complete(ctx, messages, tools)
@@ -114,13 +121,14 @@ func (d *modelDriver) Answer(ctx context.Context, task TaskInput, c Client) (Ans
 			if calls > 32 {
 				return empty, errors.New("model exceeded 32 MCP tool calls")
 			}
-			args := map[string]any{}
+			value, decodeErr := decodeJSON(json.RawMessage(tc.Function.Arguments))
+			args, ok := value.(map[string]any)
 			var output json.RawMessage
 			var callErr error
 			switch {
 			case !names[tc.Function.Name]:
 				callErr = errors.New("tool was not advertised")
-			case json.Unmarshal([]byte(tc.Function.Arguments), &args) != nil || args == nil:
+			case decodeErr != nil || !ok:
 				callErr = errors.New("invalid JSON arguments")
 			default:
 				output, callErr = c.Call(ctx, tc.Function.Name, args)

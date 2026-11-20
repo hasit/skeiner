@@ -284,6 +284,91 @@ func TestSearchDescribesScalarParameterEnums(t *testing.T) {
 	}
 }
 
+func TestSearchDescribesResponseEnumValues(t *testing.T) {
+	read := simpleOp("listReviews")
+	properties := obj{
+		"state":    obj{"$ref": "#/components/schemas/State"},
+		"decision": obj{"type": []any{"string", "null"}, "enum": []any{"approved", "declined", nil, false}},
+		"level":    obj{"type": "integer", "enum": []any{1, 1.5, 2}},
+		"fraction": obj{"type": "number", "enum": []any{0.5, -0.25}},
+		"enabled":  obj{"type": "boolean", "enum": []any{false, true}},
+		"missing":  obj{"type": "null", "enum": []any{nil}},
+		"plain":    obj{"type": "string"},
+		"id":       obj{"type": "integer", "enum": []any{uint64(9007199254740993), 7}},
+	}
+	read["responses"] = obj{"200": obj{"content": obj{"application/json": obj{"schema": obj{
+		"type": "array", "items": obj{"type": "object", "properties": properties},
+	}}}}}
+	doc := rootDoc(obj{"/reviews": obj{"get": read}})
+	doc["openapi"] = "3.1.0"
+	doc["components"] = obj{"schemas": obj{"State": obj{"type": "string", "enum": []any{"open", "closed", false, obj{"nested": true}}}}}
+	hits := fromDoc(t, doc, nil).Search("listReviews")
+	if len(hits) != 1 {
+		t.Fatalf("expected usable operation, got %d", len(hits))
+	}
+	data, err := json.Marshal(hits[0].Response["200"])
+	if err != nil {
+		t.Fatal(err)
+	}
+	var response struct {
+		Items struct {
+			Properties map[string]struct {
+				Enum          json.RawMessage
+				EnumTruncated bool
+				Nullable      bool
+			}
+		}
+	}
+	if err := json.Unmarshal(data, &response); err != nil {
+		t.Fatal(err)
+	}
+	want := map[string]string{
+		"state": `["open","closed"]`, "decision": `["approved","declined",null]`,
+		"level": `[1,2]`, "fraction": `[0.5,-0.25]`, "enabled": `[false,true]`,
+		"missing": `[null]`, "id": `[7]`, "plain": "",
+	}
+	for key, choices := range want {
+		field, ok := response.Items.Properties[key]
+		if !ok || string(field.Enum) != choices || field.EnumTruncated != (key == "id") || field.Nullable != (key == "decision") {
+			t.Errorf("field %q: %+v, want choices %s", key, field, choices)
+		}
+	}
+}
+
+func TestResponseEnumDiscoveryBudgetAcrossStatuses(t *testing.T) {
+	read := simpleOp("read")
+	responses := obj{}
+	for i := 0; i < 8; i++ {
+		// Escaping quotes makes the encoded strings larger than their UTF-8 length.
+		schema := obj{"type": "string", "enum": []any{"first", strings.Repeat(`"`, 495), strings.Repeat("x", 1500)}}
+		responses[strconv.Itoa(200+i)] = obj{"content": obj{"application/json": obj{"schema": schema}}}
+	}
+	read["responses"] = responses
+	c := fromDoc(t, rootDoc(obj{"/read": obj{"get": read}}), nil)
+	hits := c.Search("read")
+	if len(hits) != 1 || len(hits[0].Response) != len(responses) {
+		t.Fatalf("expected every success status to remain discoverable")
+	}
+	total := 0
+	for status, raw := range hits[0].Response {
+		field := asObj(raw)
+		values, _ := field["enum"].(json.RawMessage)
+		if field["type"] != "string" || field["enumTruncated"] != true || len(values) > maxEnumBytes {
+			t.Fatalf("status %s lost its shape or exceeded its budget: %s", status, values)
+		}
+		if status == "200" {
+			var choices []string
+			if json.Unmarshal(values, &choices) != nil || !reflect.DeepEqual(choices, []string{"first", strings.Repeat(`"`, 495)}) {
+				t.Fatalf("expected two whole literals for the first status, got %s", values)
+			}
+		}
+		total += len(values)
+	}
+	if total > maxResponseEnumBytes {
+		t.Errorf("response enum arrays use %d bytes, limit is %d", total, maxResponseEnumBytes)
+	}
+}
+
 func TestCredentialHeadersRequireExplicitSelectionAndBindings(t *testing.T) {
 	key := obj{"in": "header", "name": "API-KEY", "required": true, "schema": obj{"type": "string"}}
 	username := obj{"in": "header", "name": "api-username", "style": "simple", "required": true, "schema": obj{"type": "string"}}

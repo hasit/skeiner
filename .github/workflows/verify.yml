@@ -42,10 +42,16 @@ jobs:
           fi
           jq -e '.results[0] | .passed == false and (.diagnosis | contains("not retrieved"))' missing.json
           ./skeiner tasks --suite evals/ci-structured.yaml | jq -e 'has("assertion") and has("retry")'
+          ./skeiner eval --spec examples/ci/openapi.yaml --suite evals/log-scan.yaml --program examples/ci/find-lines.js > saved.json
+          jq -e '.driver == "saved-program" and (.results | length == 3 and all(.[]; .passed)) and (.results[] | select(.case=="absent") | .answer.citations == [])' saved.json
       - name: Verify benchmark answers and page reads
         run: go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -inventory
       - name: Exercise the runtime measurements
-        run: go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -n 5 -cold 2 -operations 1000 -parallel 4
+        run: |
+          go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -n 5 -cold 2 -operations 1000 -parallel 4
+          go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -reruns -cold 2
+      - name: Replay archived investigations and direct controls
+        run: python3 benchmarks/authorship/study.py --binary "$RUNNER_TEMP/skeiner/skeiner" replay
 
   package:
     if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'

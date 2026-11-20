@@ -1,0 +1,61 @@
+{
+  "trial": 1,
+  "arm": "author",
+  "case": "original",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "input_tokens": 8755,
+  "cached_input_tokens": 7424,
+  "output_tokens": 2101,
+  "model_turns": 5,
+  "calls": [
+    {
+      "name": "execute",
+      "ok": false
+    },
+    {
+      "name": "execute",
+      "ok": false
+    },
+    {
+      "name": "search",
+      "ok": true
+    },
+    {
+      "name": "execute",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 1425,
+  "answer": [],
+  "saved_mode": "async",
+  "elapsed_seconds": 20.141,
+  "reads": [
+    [
+      "loans",
+      "MOSS",
+      ""
+    ],
+    [
+      "loans",
+      "MOSS",
+      "page-2"
+    ],
+    [
+      "loans",
+      "MOSS",
+      "page-3"
+    ],
+    [
+      "renewals",
+      "MOSS",
+      ""
+    ],
+    [
+      "renewals",
+      "MOSS",
+      "page-2"
+    ]
+  ],
+  "correct": false,
+  "program_sha256": "2fe477cf11209a0df72e095a0cf458e44b5544560f689ed2b779447bb838da3a"
+}

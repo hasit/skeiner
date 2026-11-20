@@ -23,6 +23,15 @@ The missing page removes the assertion and its expected and actual values. The g
 
 ## Grade facts and citations
 
+To validate your own saved JavaScript, pass it to `eval --program`. Skeiner executes the same file once per case over MCP and observes its actual upstream reads. Each case can supply a public JSON `input`, available as `api.input` in the program and included in task exports. Keep the fixture state, expected facts and required evidence in the owner-side rubric.
+
+```sh
+skeiner eval --spec examples/ci/openapi.yaml --allow getAttemptLogs \
+  --suite evals/log-scan.yaml --program examples/ci/find-lines.js
+```
+
+The same file finds a failure on an early page, a passing line in a different attempt, and zero matches after a page is removed. To exercise a regression, add `--case early-failure --state missing-assertion`. That run must fail because the original rubric requires a record the API no longer returns. For the version 2 grader, return a `facts` object and a `citations` array. The example includes the complete request arguments for each cited page. [Saved log investigation](../examples/ci/find-lines.js) · [Cases and expected evidence](../evals/log-scan.yaml)
+
 The replay suite uses the version 1 format. It checks regular expressions against a summary and corroborates cited records in successful responses. For a new investigation, use a version 2 suite to specify typed facts and where the supporting evidence must come from. [Structured CI suite](../evals/ci-structured.yaml)
 
 A version 2 case has two audiences.
@@ -44,7 +53,20 @@ The driver interacts through an in-memory MCP session using the same tools as `s
 
 For a prepared API, repeat `--state-url NAME=URL` to map suite states to their endpoints. A state URL with a different base origin or path prefix clears the original bearer and header credentials. Use a process configured for the matching base URL when a state needs those credentials.
 
+### Fresh CI diagnosis trials
+
+We ran the assertion and retry cases twice each with GPT-4.1. We then repeated the four conversations with extra instructions to discover parameter types first and retain the page arguments beside each citation. Each conversation started fresh and used the same fixture, tools and grading rules.
+
+| Instructions | All requested facts correct | Facts and citations both passed | HTTP responses received |
+| --- | ---: | ---: | ---: |
+| Published | 1/4 | 0/4 | 21 |
+| Additional discovery and citation guidance | 3/4 | 0/4 | 20 |
+
+In one trial the model returned both correct monetary amounts but attributed a log record to the wrong page. More guidance improved the factual count in this small sample and still produced no fully grounded diagnosis. The published driver keeps the original wording. Use the case-level checks when qualifying a saved program or an agent for unattended use. [Eight graded answers and exact instruction change](../benchmarks/ci-diagnosis/results.json)
+
 ## Use an external driver
+
+For a program that returns an ordinary array or object, compare the output of `run` with an independently prepared expected JSON value. For example, after writing `actual.json`, use `jq -e --slurpfile expected expected.json '. == $expected[0]' actual.json`. This checks the returned values and array order. Use the structured suite when you also need to verify which API record supplied a citation. The museum benchmark exercises both known failures and correct programs against changed inputs. [Museum replay and grader](authorship.md)
 
 `tasks` exports the public contract and answer instructions. Give the external driver only the value for its task. Have the owner-side harness record successful upstream exchanges independently and collect the driver's final answer.
 

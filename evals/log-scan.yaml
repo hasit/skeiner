@@ -1,0 +1,35 @@
+version: 2
+citation_fields: {id: id, text: text}
+cases:
+  - id: early-failure
+    state: assertion
+    prompt: "Count the log lines containing the requested substring. Cite every match."
+    input: {attemptId: att-814-unit-1, contains: "FAIL "}
+    answer_fields:
+      - {name: matches, type: integer, description: "Number of matched records."}
+    facts:
+      - {field: matches, value: 1}
+    evidence:
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-814-unit-1}}}
+        id: 814-U1-L003
+        text: "FAIL TestInvoiceRounding"
+  - id: recovered
+    state: retry
+    prompt: "Count the log lines containing the requested substring. Cite every match."
+    input: {attemptId: att-815-integration-2, contains: "PASS "}
+    answer_fields:
+      - {name: matches, type: integer, description: "Number of matched records."}
+    facts:
+      - {field: matches, value: 1}
+    evidence:
+      - source: {operation: getAttemptLogs, args: {path: {attemptId: att-815-integration-2}}}
+        id: 815-I2-L002
+        text: "PASS integration suite"
+  - id: absent
+    state: missing-assertion
+    prompt: "Count the log lines containing the requested substring. Cite every match."
+    input: {attemptId: att-814-unit-1, contains: "FAIL "}
+    answer_fields:
+      - {name: matches, type: integer, description: "Number of matched records."}
+    facts:
+      - {field: matches, value: 0}

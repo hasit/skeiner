@@ -207,7 +207,7 @@ func publicTask(s suite, t task) TaskInput {
 	if t.CitationFields != nil {
 		fields = *t.CitationFields
 	}
-	return TaskInput{Prompt: t.Prompt, Version: s.Version, AnswerFields: append([]AnswerField(nil), t.AnswerFields...), CitationFields: fields}
+	return TaskInput{Prompt: t.Prompt, Input: t.Input, Version: s.Version, AnswerFields: append([]AnswerField(nil), t.AnswerFields...), CitationFields: fields}
 }
 
 func newRecorder(s suite, t task, redact func(string) string) *recorder {

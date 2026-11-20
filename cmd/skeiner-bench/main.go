@@ -238,6 +238,7 @@ func peak(ctx context.Context, binary, spec string, handler http.Handler, parall
 func run() error {
 	binaryFlag := flag.String("binary", "./skeiner", "built production CLI")
 	inventory := flag.Bool("inventory", false, "run the paginated inventory comparison instead of runtime timings")
+	reruns := flag.Bool("reruns", false, "measure fresh saved-program processes with and without a runtime cache")
 	spec := flag.String("spec", "examples/ci/openapi.yaml", "CI fixture specification")
 	n := flag.Int("n", 100, "warm samples per measurement")
 	processes := flag.Int("cold", 5, "fresh process samples")
@@ -253,6 +254,12 @@ func run() error {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Minute)
 	defer cancel()
+	if *reruns {
+		if *inventory {
+			return errors.New("select one workload: -reruns or -inventory")
+		}
+		return measureReruns(ctx, binary, *spec, *processes)
+	}
 	if *inventory {
 		return compareInventory(ctx, binary)
 	}

@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: Museum lending register
+  version: "1"
+paths:
+  /loans:
+    get:
+      operationId: listLoans
+      summary: Read one page of museum object loans at a branch
+      parameters:
+        - {$ref: '#/components/parameters/branch'}
+        - {$ref: '#/components/parameters/cursor'}
+      responses:
+        '200':
+          description: Loan records and continuation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  loans:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loanId: {type: string}
+                        objectId: {type: string}
+                        dueDate: {type: string}
+                        status: {type: string, enum: [open, returned]}
+                  nextCursor: {type: string, nullable: true}
+  /renewals:
+    get:
+      operationId: listRenewals
+      summary: Read one page of approved and withdrawn museum loan renewals at a branch
+      parameters:
+        - {$ref: '#/components/parameters/branch'}
+        - {$ref: '#/components/parameters/cursor'}
+      responses:
+        '200':
+          description: Renewal decisions and continuation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  renewals:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        loanId: {type: string}
+                        decision: {type: string, enum: [approved, withdrawn]}
+                        through: {type: string}
+                  nextCursor: {type: string, nullable: true}
+components:
+  parameters:
+    branch:
+      name: branch
+      in: query
+      required: true
+      schema: {type: string}
+    cursor:
+      name: cursor
+      in: query
+      description: Omit for the first page. Pass the returned nextCursor until it is null.
+      schema: {type: string}

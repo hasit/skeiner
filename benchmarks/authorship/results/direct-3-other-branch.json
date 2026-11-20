@@ -1,0 +1,65 @@
+{
+  "trial": 3,
+  "arm": "direct",
+  "case": "other-branch",
+  "model": "gpt-4.1-2025-04-14",
+  "input_tokens": 1527,
+  "cached_input_tokens": 0,
+  "output_tokens": 177,
+  "model_turns": 3,
+  "calls": [
+    {
+      "name": "listLoans",
+      "ok": true
+    },
+    {
+      "name": "listRenewals",
+      "ok": true
+    },
+    {
+      "name": "listLoans",
+      "ok": true
+    },
+    {
+      "name": "listRenewals",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 917,
+  "answer": [
+    {
+      "loan": "P-77",
+      "object": "X-91",
+      "due": "2026-03-10"
+    },
+    {
+      "loan": "P-12",
+      "object": "X-18",
+      "due": "2026-03-08"
+    }
+  ],
+  "elapsed_seconds": 2.453,
+  "reads": [
+    [
+      "loans",
+      "PIER",
+      ""
+    ],
+    [
+      "renewals",
+      "PIER",
+      ""
+    ],
+    [
+      "loans",
+      "PIER",
+      "page-2"
+    ],
+    [
+      "renewals",
+      "PIER",
+      "page-2"
+    ]
+  ],
+  "correct": false
+}

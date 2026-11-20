@@ -44,7 +44,9 @@ Use an explicit trusted base URL when passing credentials with a third-party spe
 | Responses | Up to eight documented success responses, each with `application/json` as its sole media type. Discovery summarizes objects, arrays and primitives per status. Actual JSON passes into the guest, including a top-level array or scalar. Composition such as `oneOf` or `allOf` is outside the supported subset. |
 | Authentication | Anonymous and HTTP bearer alternatives. An explicitly selected GET can use required, simple string header parameters named `Api-Key` and `Api-Username`. Bind their values using `--header-env` and supply an explicit HTTPS base URL, or HTTP on loopback. OpenAPI `apiKey` security schemes, OAuth flows and arbitrary guest-supplied headers are unsupported. |
 
-Search returns up to eight enabled operations. For GET response schemas in OpenAPI 3.1 and 3.2, a type such as `["string","null"]` appears as `{"type":"string","nullable":true}`. An unconstrained schema is marked `incomplete`. A `truncated` marker identifies a shape that exceeded the discovery depth, field or size budget. `enumTruncated` identifies omitted choices. Store large integer identifiers as strings in the API contract so they survive the JavaScript boundary exactly.
+Search returns up to eight enabled operations. Scalar response fields retain their declared enum values, including inside arrays and referenced schemas. For example, `{"type":"string","enum":["open","closed"]}` gives a program the exact spellings to compare. For GET response schemas in OpenAPI 3.1 and 3.2, a type such as `["string","null"]` appears with `"type":"string","nullable":true`. Its enum can contain an explicit JSON `null`.
+
+Discovery emits whole enum literals in declaration order, with at most 1 KiB per list and 4 KiB for response enum lists across an operation's success statuses. `enumTruncated` flags choices omitted for space or numeric precision. Use string identifiers for integers outside JavaScript's safe range. An unconstrained schema is marked `incomplete`. A `truncated` marker identifies a shape that exceeded the discovery depth or field budget.
 
 ## HTTP behavior
 

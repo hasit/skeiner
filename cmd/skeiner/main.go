@@ -94,15 +94,22 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 		return nil
 	})
 	var suite, driver, model, caseID, state string
-	var program, programMode string
-	if mode == "run" {
+	var cacheDir string
+	if mode == "run" || mode == "serve" {
+		fs.StringVar(&cacheDir, "runtime-cache", "", "private directory for reusing compiled QuickJS across processes (Linux/macOS)")
+	}
+	var program, programMode, inputFile string
+	if mode == "run" || mode == "eval" {
 		fs.StringVar(&program, "program", "", "file containing a JavaScript function body that returns JSON")
 		fs.StringVar(&programMode, "mode", "", "JavaScript call mode (sync or async, detected when omitted)")
+	}
+	if mode == "run" {
+		fs.StringVar(&inputFile, "input-file", "", "file containing a JSON value for api.input (32 KiB maximum)")
 	}
 	stateURLs := map[string]string{}
 	if mode == "eval" {
 		fs.StringVar(&suite, "suite", "", "owner-side YAML task suite")
-		fs.StringVar(&driver, "driver", "", "replay (CI integration) or openai (live model); defaults to suite driver")
+		fs.StringVar(&driver, "driver", "", "replay (CI integration), openai (live model), or program (saved JavaScript); --program selects the program driver")
 		fs.Func("state-url", "map a suite state to a prepared API base URL: NAME=URL (repeatable)", func(v string) error {
 			k, u, ok := strings.Cut(v, "=")
 			if !ok || k == "" || u == "" {
@@ -126,6 +133,15 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 	}
 	if mode == "run" && program == "" {
 		return errors.New("run requires --program")
+	}
+	if mode == "eval" && program != "" {
+		if driver != "" && driver != "program" {
+			return errors.New("--program requires the program driver")
+		}
+		driver = "program"
+	}
+	if programMode != "" && (program == "" || programMode != "async" && programMode != "sync") {
+		return errors.New("--mode requires --program and a mode of sync or async")
 	}
 	if ids == nil && len(getPaths) == 0 {
 		if inherited, ok := os.LookupEnv("SKEINER_ALLOW"); ok {
@@ -184,7 +200,7 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 			return err
 		}
 	}
-	engine, err := sandbox.New(ctx)
+	engine, err := sandbox.NewWithCache(ctx, cacheDir)
 	if err != nil {
 		return fmt.Errorf("initialize embedded JavaScript: %w", err)
 	}
@@ -193,7 +209,7 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 		return transport.New(service.New(callerCat, engine, client, nil)).Run(ctx, &mcp.StdioTransport{})
 	}
 	if mode == "run" {
-		return runProgram(ctx, service.New(callerCat, engine, client, nil), program, sandbox.Mode(programMode), out)
+		return runProgram(ctx, service.New(callerCat, engine, client, nil), program, sandbox.Mode(programMode), inputFile, out)
 	}
 
 	if driver == "" {
@@ -204,6 +220,15 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 	}
 	var agent eval.Driver
 	switch driver {
+	case "program":
+		if program == "" {
+			return errors.New("program driver requires --program")
+		}
+		code, err := readProgram(program)
+		if err != nil {
+			return err
+		}
+		agent = eval.Program{Code: code, Mode: programMode}
 	case "replay":
 		agent = replay.Driver{}
 	case "openai":
@@ -212,7 +237,7 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 			return err
 		}
 	default:
-		return errors.New("--driver must be replay or openai")
+		return errors.New("--driver must be program, replay or openai")
 	}
 	opts := eval.Options{Driver: agent, Case: caseID, StateOverride: state}
 	evalSecrets := append(secrets, os.Getenv("OPENAI_API_KEY"))
@@ -279,17 +304,36 @@ func run(ctx context.Context, args []string, out, diag io.Writer) error {
 	return nil
 }
 
-func runProgram(ctx context.Context, s *service.Service, path string, mode sandbox.Mode, out io.Writer) error {
+func readBoundedFile(path string, limit int64) ([]byte, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer file.Close()
-	code, err := io.ReadAll(io.LimitReader(file, sandbox.MaxCodeBytes+1))
+	return io.ReadAll(io.LimitReader(file, limit+1))
+}
+
+func readProgram(path string) (string, error) {
+	code, err := readBoundedFile(path, sandbox.MaxCodeBytes)
+	if len(code) > sandbox.MaxCodeBytes {
+		return "", &sandbox.Error{Code: "code_limit", Message: "Shorten the JavaScript program (32 KiB maximum)."}
+	}
+	return string(code), err
+}
+
+func runProgram(ctx context.Context, s *service.Service, path string, mode sandbox.Mode, inputFile string, out io.Writer) error {
+	code, err := readProgram(path)
 	if err != nil {
 		return err
 	}
-	result, err := s.ExecuteMode(ctx, string(code), mode)
+	var input json.RawMessage
+	if inputFile != "" {
+		input, err = readBoundedFile(inputFile, sandbox.MaxInputBytes)
+		if err != nil {
+			return err
+		}
+	}
+	result, err := s.ExecuteMode(ctx, code, mode, input)
 	if err != nil {
 		return service.PublicError(err)
 	}

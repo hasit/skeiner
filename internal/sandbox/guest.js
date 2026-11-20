@@ -139,10 +139,12 @@
         }
     }
     try {
+        const data = read();
         const program = compile();
         const callAPI = program instanceof AsyncFunction ? async (op, args) => call(op, args) : (op, args) => call(op, args);
         const value = program(Object.freeze({
             call: callAPI,
+            ...(data ? {input: parse(data)} : {}),
             reducePages,
             get remainingCalls() { return remainingCalls(); }
         }));

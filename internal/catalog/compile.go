@@ -263,19 +263,28 @@ func (d document) parameter(raw any, method string, explicitlySelected bool) (Pa
 		}
 	}
 	if choices, ok := schema["enum"].([]any); ok && p.In != "header" {
-		p.Enum, p.EnumTruncated = describeEnum(p.Type, choices)
+		p.Enum, p.EnumTruncated = describeEnum(p.Type, false, choices, maxEnumBytes)
 	}
 	return p, nil
 }
 
+const maxEnumBytes = 1024
+const maxResponseEnumBytes = 4096 // Shared by all success response shapes of one operation.
+
 // Expose whole, usable JSON literals in declaration order within the discovery
 // budget. Mark omissions so callers can distinguish a partial list.
-func describeEnum(typ string, choices []any) (json.RawMessage, bool) {
-	const maxBytes = 1024
+func describeEnum(typ string, nullable bool, choices []any, maxBytes int) (json.RawMessage, bool) {
+	if maxBytes < 2 {
+		return nil, true
+	}
 	values := []byte{'['}
 	truncated := false
 	for _, choice := range choices {
 		switch v := choice.(type) {
+		case nil:
+			if !nullable && typ != "null" {
+				continue
+			}
 		case string:
 			if typ != "string" {
 				continue
@@ -300,8 +309,12 @@ func describeEnum(typ string, choices []any) (json.RawMessage, bool) {
 		default:
 			continue
 		}
-		literal, _ := json.Marshal(choice)         // The decoder only produces finite JSON scalars.
-		if len(values)+len(literal)+2 > maxBytes { // Allow for the comma and closing bracket.
+		literal, _ := json.Marshal(choice) // The decoder only produces finite JSON scalars.
+		size := len(values) + len(literal) + 1 // Include the closing bracket.
+		if len(values) > 1 {
+			size++ // Include the separator after the previous choice.
+		}
+		if size > maxBytes {
 			truncated = true
 			break
 		}
@@ -313,11 +326,17 @@ func describeEnum(typ string, choices []any) (json.RawMessage, bool) {
 	return append(values, ']'), truncated
 }
 
+type shapeBudget struct {
+	nodes     int
+	enumBytes int
+}
+
 var successCode = regexp.MustCompile(`^2([0-9][0-9]|XX)$`)
 
 func (d document) response(raw any, readSchema31 bool) (obj, error) {
 	responses := asObj(raw)
 	shapes := obj{}
+	budget := shapeBudget{enumBytes: maxResponseEnumBytes}
 	for _, code := range keys(responses) {
 		if !successCode.MatchString(code) {
 			continue
@@ -334,7 +353,7 @@ func (d document) response(raw any, readSchema31 bool) (obj, error) {
 		if media == nil || len(content) != 1 {
 			return nil, fmt.Errorf("response %s needs application/json as its single content type", code)
 		}
-		budget := 64
+		budget.nodes = 64
 		shape, err := d.shape(media["schema"], 0, &budget, readSchema31)
 		if err != nil {
 			return nil, fmt.Errorf("response %s: %w", code, err)
@@ -348,11 +367,11 @@ func (d document) response(raw any, readSchema31 bool) (obj, error) {
 }
 
 // shape returns a compact schema, with truncation visible to the client.
-func (d document) shape(raw any, depth int, budget *int, readSchema31 bool) (obj, error) {
-	if depth >= 6 || *budget <= 0 {
+func (d document) shape(raw any, depth int, budget *shapeBudget, readSchema31 bool) (obj, error) {
+	if depth >= 6 || budget.nodes <= 0 {
 		return obj{"truncated": true}, nil
 	}
-	*budget--
+	budget.nodes--
 	s, err := d.resolve(raw)
 	if err != nil {
 		return nil, err
@@ -399,7 +418,7 @@ func (d document) shape(raw any, depth int, budget *int, readSchema31 bool) (obj
 		props := asObj(s["properties"])
 		fields := obj{}
 		for i, k := range keys(props) {
-			if i >= 16 || *budget <= 0 || len(k) > 128 {
+			if i >= 16 || budget.nodes <= 0 || len(k) > 128 {
 				out["truncated"] = true
 				break
 			}
@@ -419,6 +438,16 @@ func (d document) shape(raw any, depth int, budget *int, readSchema31 bool) (obj
 		}
 		out["items"], err = d.shape(items, depth+1, budget, readSchema31)
 	case "string", "number", "integer", "boolean", "null":
+		if choices, ok := s["enum"].([]any); ok {
+			values, truncated := describeEnum(t, nullable, choices, min(maxEnumBytes, budget.enumBytes))
+			if values != nil {
+				out["enum"] = values
+				budget.enumBytes -= len(values)
+			}
+			if truncated {
+				out["enumTruncated"] = true
+			}
+		}
 	default:
 		return nil, fmt.Errorf("unsupported response schema type %q", t)
 	}

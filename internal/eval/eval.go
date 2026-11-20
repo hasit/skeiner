@@ -40,13 +40,14 @@ type Driver interface {
 	Answer(context.Context, TaskInput, Client) (Answer, error)
 }
 
-// TaskInput is the public contract. It never contains fixture state, expected
-// answers, required evidence, or operation hints from the owner-side rubric.
+// TaskInput contains the prompt, public program input and answer schema.
+// Fixture state, expected answers and required evidence stay with the grader.
 type TaskInput struct {
-	Prompt         string         `json:"prompt"`
-	Version        int            `json:"version"`
-	AnswerFields   []AnswerField  `json:"answer_fields,omitempty"`
-	CitationFields CitationFields `json:"citation_fields"`
+	Prompt         string          `json:"prompt"`
+	Input          json.RawMessage `json:"input,omitempty"`
+	Version        int             `json:"version"`
+	AnswerFields   []AnswerField   `json:"answer_fields,omitempty"`
+	CitationFields CitationFields  `json:"citation_fields"`
 }
 
 type AnswerField struct {
@@ -107,6 +108,7 @@ type CitationFields struct {
 type task struct {
 	ID             string          `json:"id"`
 	Prompt         string          `json:"prompt"`
+	Input          json.RawMessage `json:"input,omitempty"`
 	State          string          `json:"state"`
 	Facts          []fact          `json:"facts"`
 	Evidence       []Citation      `json:"evidence"`
@@ -250,7 +252,7 @@ func DefaultDriver(path string) (string, error) {
 	switch s.Driver {
 	case "":
 		return "openai", nil
-	case "openai", "replay":
+	case "openai", "replay", "program":
 		return s.Driver, nil
 	default:
 		return "", fmt.Errorf("unknown suite driver %q", s.Driver)
@@ -454,6 +456,9 @@ func runCase(parent context.Context, s suite, t task, o Options) (out Result) {
 
 func gradeAnswer(out *Result, s suite, t task, answer Answer, r *recorder) {
 	out.Answer = Answer{Summary: r.clean(answer.Summary)}
+	if answer.Citations != nil {
+		out.Answer.Citations = make([]Citation, 0, len(answer.Citations))
+	}
 	if answer.Facts != nil {
 		out.Answer.Facts = map[string]json.RawMessage{}
 		for k, v := range answer.Facts {
@@ -508,6 +513,7 @@ func gradeAnswer(out *Result, s suite, t task, answer Answer, r *recorder) {
 		}
 	}
 	if s.Version == 2 {
+		add("citations array", answer.Citations != nil, "structured answers require a citations array; use [] for zero citations")
 		add("structured answer only", strings.TrimSpace(answer.Summary) == "", "version 2 accepts facts and citations only; free-form summaries are not graded")
 		add("declared fact fields only", len(answer.Facts) == len(t.AnswerFields), "answer must contain exactly the declared fact fields")
 	}

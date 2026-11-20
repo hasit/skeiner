@@ -1,0 +1,788 @@
+{
+  "1": [
+    {
+      "case": "original",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.48
+    },
+    {
+      "case": "updated",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.227
+    },
+    {
+      "case": "other-branch",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.226
+    }
+  ],
+  "2": [
+    {
+      "case": "original",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.226
+    },
+    {
+      "case": "updated",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.227
+    },
+    {
+      "case": "other-branch",
+      "correct": false,
+      "correct_unordered": false,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [],
+      "elapsed_seconds": 0.226
+    }
+  ],
+  "3": [
+    {
+      "case": "original",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-04",
+          "object": "O-47",
+          "due": "2026-03-02"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-07",
+          "object": "O-16",
+          "due": "2026-02-28"
+        }
+      ],
+      "elapsed_seconds": 0.256
+    },
+    {
+      "case": "updated",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-03",
+          "object": "O-82",
+          "due": "2026-03-15"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-06",
+          "object": "O-33",
+          "due": "2026-03-18"
+        },
+        {
+          "loan": "L-09",
+          "object": "O-37",
+          "due": "2026-03-16"
+        }
+      ],
+      "elapsed_seconds": 0.251
+    },
+    {
+      "case": "other-branch",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "P-12",
+          "object": "X-18",
+          "due": "2026-03-08"
+        },
+        {
+          "loan": "P-77",
+          "object": "X-91",
+          "due": "2026-03-10"
+        }
+      ],
+      "elapsed_seconds": 0.278
+    }
+  ],
+  "4": [
+    {
+      "case": "original",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-04",
+          "object": "O-47",
+          "due": "2026-03-02"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-07",
+          "object": "O-16",
+          "due": "2026-02-28"
+        }
+      ],
+      "elapsed_seconds": 0.294
+    },
+    {
+      "case": "updated",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-03",
+          "object": "O-82",
+          "due": "2026-03-15"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-06",
+          "object": "O-33",
+          "due": "2026-03-18"
+        },
+        {
+          "loan": "L-09",
+          "object": "O-37",
+          "due": "2026-03-16"
+        }
+      ],
+      "elapsed_seconds": 0.243
+    },
+    {
+      "case": "other-branch",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "P-12",
+          "object": "X-18",
+          "due": "2026-03-08"
+        },
+        {
+          "loan": "P-77",
+          "object": "X-91",
+          "due": "2026-03-10"
+        }
+      ],
+      "elapsed_seconds": 0.248
+    }
+  ],
+  "5": [
+    {
+      "case": "original",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-04",
+          "object": "O-47",
+          "due": "2026-03-02"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-07",
+          "object": "O-16",
+          "due": "2026-02-28"
+        }
+      ],
+      "elapsed_seconds": 0.242
+    },
+    {
+      "case": "updated",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-03",
+          "object": "O-82",
+          "due": "2026-03-15"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-06",
+          "object": "O-33",
+          "due": "2026-03-18"
+        },
+        {
+          "loan": "L-09",
+          "object": "O-37",
+          "due": "2026-03-16"
+        }
+      ],
+      "elapsed_seconds": 0.242
+    },
+    {
+      "case": "other-branch",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "P-12",
+          "object": "X-18",
+          "due": "2026-03-08"
+        },
+        {
+          "loan": "P-77",
+          "object": "X-91",
+          "due": "2026-03-10"
+        }
+      ],
+      "elapsed_seconds": 0.235
+    }
+  ],
+  "6": [
+    {
+      "case": "original",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-04",
+          "object": "O-47",
+          "due": "2026-03-02"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-07",
+          "object": "O-16",
+          "due": "2026-02-28"
+        }
+      ],
+      "elapsed_seconds": 0.248
+    },
+    {
+      "case": "updated",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "MOSS",
+          ""
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-2"
+        ],
+        [
+          "loans",
+          "MOSS",
+          "page-3"
+        ],
+        [
+          "renewals",
+          "MOSS",
+          ""
+        ],
+        [
+          "renewals",
+          "MOSS",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "L-03",
+          "object": "O-82",
+          "due": "2026-03-15"
+        },
+        {
+          "loan": "L-05",
+          "object": "O-11",
+          "due": "2026-03-13"
+        },
+        {
+          "loan": "L-06",
+          "object": "O-33",
+          "due": "2026-03-18"
+        },
+        {
+          "loan": "L-09",
+          "object": "O-37",
+          "due": "2026-03-16"
+        }
+      ],
+      "elapsed_seconds": 0.263
+    },
+    {
+      "case": "other-branch",
+      "correct": true,
+      "correct_unordered": true,
+      "reads": [
+        [
+          "loans",
+          "PIER",
+          ""
+        ],
+        [
+          "loans",
+          "PIER",
+          "page-2"
+        ],
+        [
+          "renewals",
+          "PIER",
+          ""
+        ],
+        [
+          "renewals",
+          "PIER",
+          "page-2"
+        ]
+      ],
+      "answer": [
+        {
+          "loan": "P-12",
+          "object": "X-18",
+          "due": "2026-03-08"
+        },
+        {
+          "loan": "P-77",
+          "object": "X-91",
+          "due": "2026-03-10"
+        }
+      ],
+      "elapsed_seconds": 0.277
+    }
+  ]
+}

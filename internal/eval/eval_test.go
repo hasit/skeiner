@@ -87,6 +87,19 @@ cases:
 		})
 	}
 }
+func TestStructuredAnswerRequiresCitationsArray(t *testing.T) {
+	task := TaskInput{Version: 2}
+	for _, raw := range []string{`{"facts":{"matches":0}}`, `{"facts":{"matches":0},"citations":null}`} {
+		if _, err := ParseAnswer([]byte(raw), task); err == nil {
+			t.Fatalf("accepted missing citations array: %s", raw)
+		}
+	}
+	answer, err := ParseAnswer([]byte(`{"facts":{"matches":0},"citations":[]}`), task)
+	if err != nil || answer.Citations == nil {
+		t.Fatalf("expected an explicit empty array: %+v, %v", answer, err)
+	}
+}
+
 func TestOpenAIConversation(t *testing.T) {
 	stage := 0
 	api := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

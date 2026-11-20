@@ -10,7 +10,9 @@ import (
 	"fmt"
 	"io"
 	"math"
+	"sync"
 	"time"
+	"unicode/utf8"
 
 	quickjs "github.com/paralin/go-quickjs-wasi"
 	"github.com/tetratelabs/wazero"
@@ -21,6 +23,7 @@ import (
 const (
 	MemoryBytes    = 32 << 20
 	MaxCodeBytes   = 32 << 10
+	MaxInputBytes  = 32 << 10
 	MaxOutputBytes = 16 << 10
 	MaxCalls       = 16
 	MaxConcurrent  = 4
@@ -46,24 +49,64 @@ type Engine struct {
 	runtime  wazero.Runtime
 	compiled wazero.CompiledModule
 	slots    chan struct{}
+	cache    wazero.CompilationCache
 }
 
 func New(ctx context.Context) (*Engine, error) {
-	config := wazero.NewRuntimeConfig().WithMemoryLimitPages(MemoryBytes / 65536).WithCloseOnContextDone(true)
-	r := wazero.NewRuntimeWithConfig(ctx, config)
-	if _, err := wasi_snapshot_preview1.Instantiate(ctx, r); err != nil {
-		r.Close(ctx)
-		return nil, fmt.Errorf("initialize WASI: %w", err)
-	}
-	compiled, err := r.CompileModule(ctx, quickjs.QuickJSWASM)
-	if err != nil {
-		r.Close(ctx)
-		return nil, fmt.Errorf("compile embedded QuickJS: %w", err)
-	}
-	return &Engine{runtime: r, compiled: compiled, slots: make(chan struct{}, MaxConcurrent)}, nil
+	return NewWithCache(ctx, "")
 }
 
-func (e *Engine) Close(ctx context.Context) error { return e.runtime.Close(ctx) }
+// NewWithCache accepts an optional host-owned directory for compiled QuickJS.
+// Each guest still gets a new instance and its own execution state.
+func NewWithCache(ctx context.Context, dir string) (*Engine, error) {
+	engine, err := newRuntime(ctx, dir)
+	if err != nil {
+		return nil, err
+	}
+	if _, err := wasi_snapshot_preview1.Instantiate(ctx, engine.runtime); err != nil {
+		engine.Close(ctx)
+		return nil, fmt.Errorf("initialize WASI: %w", err)
+	}
+	compiled, err := engine.runtime.CompileModule(ctx, quickjs.QuickJSWASM)
+	if err != nil {
+		engine.Close(ctx)
+		return nil, fmt.Errorf("compile embedded QuickJS: %w", err)
+	}
+	engine.compiled = compiled
+	return engine, nil
+}
+
+// Both wazero constructors lazily write a process-wide version string in
+// v1.9.0. Serialize setup while allowing compilation and execution to overlap.
+var runtimeInit sync.Mutex
+
+func newRuntime(ctx context.Context, dir string) (*Engine, error) {
+	runtimeInit.Lock()
+	defer runtimeInit.Unlock()
+	config := wazero.NewRuntimeConfig().WithMemoryLimitPages(MemoryBytes / 65536).WithCloseOnContextDone(true)
+	var cache wazero.CompilationCache
+	if dir != "" {
+		path, err := privateCacheDir(dir)
+		if err != nil {
+			return nil, err
+		}
+		cache, err = wazero.NewCompilationCacheWithDir(path)
+		if err != nil {
+			return nil, fmt.Errorf("open runtime cache: %w", err)
+		}
+		config = config.WithCompilationCache(cache)
+	}
+	r := wazero.NewRuntimeWithConfig(ctx, config)
+	return &Engine{runtime: r, slots: make(chan struct{}, MaxConcurrent), cache: cache}, nil
+}
+
+func (e *Engine) Close(ctx context.Context) error {
+	err := e.runtime.Close(ctx)
+	if e.cache != nil {
+		err = errors.Join(err, e.cache.Close(ctx))
+	}
+	return err
+}
 
 // Callback authorizes an operation, dispatches it, and returns client-safe errors.
 type Callback func(context.Context, string, json.RawMessage) (json.RawMessage, error)
@@ -83,18 +126,33 @@ func (e *Engine) Run(ctx context.Context, code string, call Callback) (json.RawM
 // RunMode invokes host calls serially under one overall deadline in every JavaScript mode.
 // The callback must authorize each operation and return client-safe errors.
 func (e *Engine) RunMode(ctx context.Context, code string, mode Mode, call Callback) (json.RawMessage, error) {
-	return e.RunModeWithPages(ctx, code, mode, call, nil)
+	return e.RunModeWithPages(ctx, code, mode, nil, call, nil)
 }
 
 // RunModeWithPages enables paginated reads when readPage is supplied. That
 // callback must require an authorized GET. Both callbacks share one call budget.
-func (e *Engine) RunModeWithPages(ctx context.Context, code string, mode Mode, call, readPage Callback) (json.RawMessage, error) {
+func (e *Engine) RunModeWithPages(ctx context.Context, code string, mode Mode, input json.RawMessage, call, readPage Callback) (json.RawMessage, error) {
 	if mode != ModeAuto && mode != ModeSync && mode != ModeAsync {
 		return nil, &Error{"invalid_arguments", "Choose sync or async execution mode."}
 	}
 	if len(code) > MaxCodeBytes {
 		return nil, &Error{"code_limit", "Shorten the JavaScript program (32 KiB maximum)."}
 	}
+	b := &bridge{call: call, readPage: readPage}
+	if input != nil {
+		if len(input) > MaxInputBytes {
+			return nil, &Error{"input_limit", "Reduce the program input (32 KiB maximum)."}
+		}
+		if !utf8.Valid(input) || json.Compact(&b.reply, input) != nil {
+			return nil, &Error{"invalid_input", "Supply one UTF-8 JSON value as the program input."}
+		}
+		if !safeJSNumbers(input) {
+			return nil, unsafeIntegerError()
+		}
+	}
+	// The first private stdin line carries data, separate from the JS source.
+	// A blank line means omitted input; the JSON literal null remains distinct.
+	b.reply.WriteByte('\n')
 	ctx, cancel := context.WithTimeout(ctx, MaxDuration)
 	defer cancel()
 	admission, endAdmission := context.WithTimeout(ctx, maxSlotWait)
@@ -115,7 +173,7 @@ func (e *Engine) RunModeWithPages(ctx context.Context, code string, mode Mode, c
 	defer interrupt()
 	budget := startGuestBudget(interrupt)
 	defer budget.timer.Stop()
-	b := &bridge{ctx: guest, budget: budget, call: call, readPage: readPage}
+	b.ctx, b.budget = guest, budget
 	body, err := json.Marshal(code)
 	if err != nil {
 		return nil, err

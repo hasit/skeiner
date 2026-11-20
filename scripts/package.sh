@@ -17,8 +17,8 @@ cp LICENSE THIRD_PARTY_NOTICES.txt "$stage/"
 mkdir -p "$stage/examples/rates" "$stage/examples/ci" "$stage/evals" dist
 cp examples/rates/compare.js examples/rates/openapi.yaml examples/rates/quickstart.py \
     examples/rates/snapshot.json "$stage/examples/rates/"
-cp examples/ci/openapi.yaml "$stage/examples/ci/"
-cp evals/ci.yaml evals/ci-structured.yaml "$stage/evals/"
+cp examples/ci/openapi.yaml examples/ci/find-lines.js "$stage/examples/ci/"
+cp evals/ci.yaml evals/ci-structured.yaml evals/log-scan.yaml "$stage/evals/"
 cat > "$stage/README.txt" <<'EOF'
 Skeiner runs JavaScript programs against an OpenAPI service.
 
@@ -27,6 +27,7 @@ From the extracted directory:
     ./skeiner version
     python3 examples/rates/quickstart.py
     ./skeiner eval --spec examples/ci/openapi.yaml --suite evals/ci.yaml
+    ./skeiner eval --spec examples/ci/openapi.yaml --suite evals/log-scan.yaml --program examples/ci/find-lines.js
 
 The examples use local snapshots. The binary includes its JavaScript runtime.
 For setup, architecture, benchmarks and source, visit https://github.com/hasit/skeiner.

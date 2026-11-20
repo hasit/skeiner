@@ -1,0 +1,334 @@
+{
+  "model": "gpt-4.1-2025-04-14",
+  "suite": "evals/ci-structured.yaml",
+  "instruction_change": {
+    "replace": "First investigate the user's task using the available tools.",
+    "with": "Discover operation IDs, input types and response fields with search before calling them. In JavaScript, retain each cited record's ID, exact text, operation ID and the same args object passed to api.call, including its page cursor. Return the required facts and those citations together."
+  },
+  "trials": [
+    {
+      "instruction": "published",
+      "repetition": 1,
+      "case": "assertion",
+      "passed": false,
+      "http_responses": 12,
+      "answer": {
+        "citations": [
+          {
+            "id": "814-U1-L003",
+            "text": "FAIL TestInvoiceRounding",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-814-unit-1"
+                }
+              }
+            }
+          }
+        ],
+        "facts": {
+          "actual_cents": null,
+          "expected_cents": null,
+          "test_name": "TestInvoiceRounding"
+        }
+      },
+      "failed_checks": [
+        "citation 814-U1-L003",
+        "citation 814-U1-L004",
+        "source for citation 814-U1-L003",
+        "fact expected_cents",
+        "fact actual_cents"
+      ]
+    },
+    {
+      "instruction": "published",
+      "repetition": 1,
+      "case": "retry",
+      "passed": false,
+      "http_responses": 3,
+      "answer": {
+        "citations": null,
+        "facts": {
+          "first_status": null,
+          "second_status": null
+        }
+      },
+      "failed_checks": [
+        "citation 815-I1-L002",
+        "citation 815-I2-L002",
+        "fact first_status",
+        "fact second_status"
+      ]
+    },
+    {
+      "instruction": "published",
+      "repetition": 2,
+      "case": "assertion",
+      "passed": false,
+      "http_responses": 4,
+      "answer": {
+        "citations": null,
+        "facts": {
+          "actual_cents": null,
+          "expected_cents": null,
+          "test_name": null
+        }
+      },
+      "failed_checks": [
+        "citation 814-U1-L003",
+        "citation 814-U1-L004",
+        "fact test_name",
+        "fact expected_cents",
+        "fact actual_cents"
+      ]
+    },
+    {
+      "instruction": "published",
+      "repetition": 2,
+      "case": "retry",
+      "passed": false,
+      "http_responses": 2,
+      "answer": {
+        "citations": [
+          {
+            "id": "att-815-integration-1",
+            "text": "{\"id\":\"att-815-integration-1\",\"number\":1,\"status\":\"failed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          },
+          {
+            "id": "att-815-integration-2",
+            "text": "{\"id\":\"att-815-integration-2\",\"number\":2,\"status\":\"passed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          }
+        ],
+        "facts": {
+          "first_status": "failed",
+          "second_status": "passed"
+        }
+      },
+      "failed_checks": [
+        "citation 815-I1-L002",
+        "citation 815-I2-L002",
+        "source for citation att-815-integration-1",
+        "source for citation att-815-integration-2"
+      ]
+    },
+    {
+      "instruction": "more-guidance",
+      "repetition": 1,
+      "case": "assertion",
+      "passed": false,
+      "http_responses": 7,
+      "answer": {
+        "citations": [
+          {
+            "id": "814-U1-L003",
+            "text": "FAIL TestInvoiceRounding",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-814-unit-1"
+                }
+              }
+            }
+          },
+          {
+            "id": "814-U1-L004",
+            "text": "invoice_test.go:71: expected 125 cents, got 124 cents",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-814-unit-1"
+                }
+              }
+            }
+          }
+        ],
+        "facts": {
+          "actual_cents": 124,
+          "expected_cents": 125,
+          "test_name": "TestInvoiceRounding"
+        }
+      },
+      "failed_checks": [
+        "citation 814-U1-L003",
+        "citation 814-U1-L004",
+        "source for citation 814-U1-L003",
+        "source for citation 814-U1-L004"
+      ]
+    },
+    {
+      "instruction": "more-guidance",
+      "repetition": 1,
+      "case": "retry",
+      "passed": false,
+      "http_responses": 4,
+      "answer": {
+        "citations": [
+          {
+            "id": "att-815-integration-1",
+            "text": "{\"id\":\"att-815-integration-1\",\"number\":1,\"status\":\"failed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          },
+          {
+            "id": "att-815-integration-2",
+            "text": "{\"id\":\"att-815-integration-2\",\"number\":2,\"status\":\"passed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          },
+          {
+            "id": "815-I1-L002",
+            "text": "registry pull failed: 503 Service Unavailable",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-815-integration-1"
+                }
+              }
+            }
+          },
+          {
+            "id": "815-I2-L002",
+            "text": "PASS integration suite",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-815-integration-2"
+                }
+              }
+            }
+          }
+        ],
+        "facts": {
+          "first_status": "failed",
+          "second_status": "passed"
+        }
+      },
+      "failed_checks": [
+        "source for citation att-815-integration-1",
+        "source for citation att-815-integration-2"
+      ]
+    },
+    {
+      "instruction": "more-guidance",
+      "repetition": 2,
+      "case": "assertion",
+      "passed": false,
+      "http_responses": 5,
+      "answer": {
+        "citations": null,
+        "facts": {
+          "actual_cents": 0,
+          "expected_cents": 0,
+          "test_name": ""
+        }
+      },
+      "failed_checks": [
+        "citation 814-U1-L003",
+        "citation 814-U1-L004",
+        "fact test_name",
+        "fact expected_cents",
+        "fact actual_cents"
+      ]
+    },
+    {
+      "instruction": "more-guidance",
+      "repetition": 2,
+      "case": "retry",
+      "passed": false,
+      "http_responses": 4,
+      "answer": {
+        "citations": [
+          {
+            "id": "att-815-integration-1",
+            "text": "{\"id\":\"att-815-integration-1\",\"number\":1,\"status\":\"failed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          },
+          {
+            "id": "815-I1-L002",
+            "text": "registry pull failed: 503 Service Unavailable",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-815-integration-1"
+                }
+              }
+            }
+          },
+          {
+            "id": "att-815-integration-2",
+            "text": "{\"id\":\"att-815-integration-2\",\"number\":2,\"status\":\"passed\"}",
+            "source": {
+              "operation": "listJobAttempts",
+              "args": {
+                "path": {
+                  "jobId": "job-815-integration"
+                }
+              }
+            }
+          },
+          {
+            "id": "815-I2-L002",
+            "text": "PASS integration suite",
+            "source": {
+              "operation": "getAttemptLogs",
+              "args": {
+                "path": {
+                  "attemptId": "att-815-integration-2"
+                }
+              }
+            }
+          }
+        ],
+        "facts": {
+          "first_status": "failed",
+          "second_status": "passed"
+        }
+      },
+      "failed_checks": [
+        "source for citation att-815-integration-1",
+        "source for citation att-815-integration-2"
+      ]
+    }
+  ]
+}

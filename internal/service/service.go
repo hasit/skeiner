@@ -43,14 +43,14 @@ func (s *Service) Search(query string) (json.RawMessage, error) {
 }
 
 func (s *Service) Execute(ctx context.Context, code string) (json.RawMessage, error) {
-	return s.ExecuteMode(ctx, code, sandbox.ModeAuto)
+	return s.ExecuteMode(ctx, code, sandbox.ModeAuto, nil)
 }
 
-func (s *Service) ExecuteMode(ctx context.Context, code string, mode sandbox.Mode) (json.RawMessage, error) {
+func (s *Service) ExecuteMode(ctx context.Context, code string, mode sandbox.Mode, input json.RawMessage) (json.RawMessage, error) {
 	if strings.TrimSpace(code) == "" {
 		return nil, &dispatch.Error{Code: "invalid_arguments", Message: "provide a JavaScript function body with a return statement"}
 	}
-	return s.engine.RunModeWithPages(ctx, code, mode, s.observed(s.client.CallWithStatus), s.observed(s.client.ReadPageWithStatus))
+	return s.engine.RunModeWithPages(ctx, code, mode, input, s.observed(s.client.CallWithStatus), s.observed(s.client.ReadPageWithStatus))
 }
 
 func (s *Service) observed(call func(context.Context, string, json.RawMessage) (json.RawMessage, int, error)) sandbox.Callback {

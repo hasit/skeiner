@@ -72,6 +72,35 @@ func TestRunSavedProgram(t *testing.T) {
 	}
 }
 
+func TestRunUnchangedProgramWithJSONInputs(t *testing.T) {
+	handler, err := fixture.New("all")
+	if err != nil {
+		t.Fatal(err)
+	}
+	server := httptest.NewServer(handler)
+	defer server.Close()
+	dir := t.TempDir()
+	program := filepath.Join(dir, "status.js")
+	input := filepath.Join(dir, "request.json")
+	if err := os.WriteFile(program, []byte(`return (await api.call("getRun", {path:{runId:api.input.id}})).status;`), 0600); err != nil {
+		t.Fatal(err)
+	}
+	spec, _ := examplePaths()
+	args := []string{"run", "--spec", spec, "--base-url", server.URL, "--allow", "getRun", "--program", program, "--input-file", input}
+	for _, tc := range []struct{ input, status string }{
+		{`{"id":"814"}`, `"failed"`},
+		{`{"id":"815"}`, `"passed"`},
+	} {
+		if err := os.WriteFile(input, []byte(tc.input), 0600); err != nil {
+			t.Fatal(err)
+		}
+		var out bytes.Buffer
+		if err := run(context.Background(), args, &out, io.Discard); err != nil || strings.TrimSpace(out.String()) != tc.status {
+			t.Fatalf("input %s returned %s, %v", tc.input, out.String(), err)
+		}
+	}
+}
+
 func TestAcceptanceAndRegression(t *testing.T) {
 	spec, suite := examplePaths()
 	for _, test := range []struct {
@@ -103,6 +132,29 @@ func TestAcceptanceAndRegression(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestSavedProgramMissingEvidence(t *testing.T) {
+	spec, suite := examplePaths()
+	suite = filepath.Join(filepath.Dir(suite), "log-scan.yaml")
+	program := filepath.Join(filepath.Dir(spec), "find-lines.js")
+	var out bytes.Buffer
+	err := run(context.Background(), []string{"eval", "--spec", spec, "--suite", suite,
+		"--program", program, "--case", "early-failure", "--state", "missing-assertion"}, &out, io.Discard)
+	if err == nil {
+		t.Fatal("expected a failed evaluation when the required log record is missing")
+	}
+	var report eval.Report
+	if err := json.Unmarshal(out.Bytes(), &report); err != nil {
+		t.Fatal(err)
+	}
+	if report.Driver != "saved-program" || len(report.Results) != 1 {
+		t.Fatalf("unexpected report: %+v", report)
+	}
+	result := report.Results[0]
+	if result.Passed || string(result.Answer.Facts["matches"]) != "0" || !strings.Contains(result.Diagnosis, "not retrieved") {
+		t.Fatalf("expected a valid zero-match answer and a failed evidence check: %+v", result)
 	}
 }
 
@@ -275,6 +327,19 @@ func TestMCPSubprocess(t *testing.T) {
 	}
 	if result.IsError || result.Content[0].(*mcp.TextContent).Text != "5" {
 		t.Fatalf("execute: %+v", result)
+	}
+	for _, tc := range []struct {
+		args map[string]any
+		want string
+	}{
+		{map[string]any{"code": "return typeof api.input;"}, `"undefined"`},
+		{map[string]any{"code": "return api.input;", "input": nil}, "null"},
+		{map[string]any{"code": "return api.input[1];", "mode": "async", "input": []any{false, "saved"}}, `"saved"`},
+	} {
+		result, err := cs.CallTool(ctx, &mcp.CallToolParams{Name: "execute", Arguments: tc.args})
+		if err != nil || result.IsError || result.Content[0].(*mcp.TextContent).Text != tc.want {
+			t.Fatalf("input via MCP: %+v, error %v; want %s", result, err, tc.want)
+		}
 	}
 	result, err = cs.CallTool(ctx, &mcp.CallToolParams{Name: "execute", Arguments: map[string]string{
 		"mode": "async",

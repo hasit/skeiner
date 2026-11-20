@@ -179,6 +179,42 @@ func TestCandidate(t *testing.T) {
 		}
 	})
 
+	t.Run("program input is bounded JSON data", func(t *testing.T) {
+		for _, tc := range []struct {
+			input json.RawMessage
+			code  string
+		}{
+			{json.RawMessage(""), "invalid_input"},
+			{json.RawMessage("1 2"), "invalid_input"},
+			{json.RawMessage{'"', 0xff, '"'}, "invalid_input"},
+			{json.RawMessage("9007199254740993"), "unsafe_integer"},
+			{json.RawMessage(strings.Repeat(" ", MaxInputBytes) + "0"), "input_limit"},
+		} {
+			_, err := e.RunModeWithPages(context.Background(), `return api.call("read");`, ModeAsync, tc.input, func(context.Context, string, json.RawMessage) (json.RawMessage, error) {
+				t.Error("invalid program input reached the upstream")
+				return nil, nil
+			}, nil)
+			var failure *Error
+			if !errors.As(err, &failure) || failure.Code != tc.code {
+				t.Fatalf("want %s, got %v", tc.code, err)
+			}
+		}
+		raw := json.RawMessage(`{
+  "__proto__": "a literal key",
+  "note": "quoted \"code\"\nwith é",
+  "fraction": 0.25
+}`)
+		result, err := e.RunModeWithPages(context.Background(), `return [Object.hasOwn(api.input, "__proto__"), api.input.note, api.input.fraction];`, ModeSync, raw, nil, nil)
+		if err != nil || string(result) != `[true,"quoted \"code\"\nwith é",0.25]` {
+			t.Fatalf("round-trip input: %s, %v", result, err)
+		}
+		atLimit := json.RawMessage(`"` + strings.Repeat("a", MaxInputBytes-2) + `"`)
+		result, err = e.RunModeWithPages(context.Background(), `return api.input.length;`, ModeAuto, atLimit, nil, nil)
+		if err != nil || string(result) != fmt.Sprint(MaxInputBytes-2) {
+			t.Fatalf("input at the byte limit: %s, %v", result, err)
+		}
+	})
+
 	t.Run("unsafe integers authored by the guest", func(t *testing.T) {
 		for _, code := range []string{
 			`return api.call("lookup", {path:{id:9007199254740993}});`,
@@ -455,13 +491,15 @@ func TestCandidate(t *testing.T) {
 			return json.RawMessage("true"), nil
 		}
 		program := `const args = {path:{project:"p1"},query:{scope:"open"}};
+			if (!api.input) api.call("metadata");
+			const {state:initial, nextCursor:cursor} = api.input ?? {state:0, nextCursor:0};
 			return api.reducePages("list", {args, cursorParam:"page", cursor, initial,
 				next: page => page.next, reduce: (state, page) => {
 					args.query.scope = "changed";
 					return state + page.count;
 				}
 			});`
-		raw, err := e.RunModeWithPages(context.Background(), `api.call("metadata"); const initial=0, cursor=0; `+program, ModeSync, metadata, page)
+		raw, err := e.RunModeWithPages(context.Background(), program, ModeSync, nil, metadata, page)
 		var first struct {
 			State      int
 			Complete   bool
@@ -471,8 +509,7 @@ func TestCandidate(t *testing.T) {
 			first.Complete || first.NextCursor != reads || first.State != 2*reads {
 			t.Fatalf("first execution: %s, %d pages: %v", raw, reads, err)
 		}
-		resume := fmt.Sprintf("const {state:initial,nextCursor:cursor} = %s; ", raw)
-		got, err := e.RunModeWithPages(context.Background(), resume+program, ModeAsync, metadata, page)
+		got, err := e.RunModeWithPages(context.Background(), program, ModeAsync, raw, metadata, page)
 		if err != nil || reads != MaxCalls+1 || string(got) != fmt.Sprintf(`{"state":%d,"complete":true,"nextCursor":null}`, 2*reads) {
 			t.Fatalf("resumed execution: %s, %d pages: %v", got, reads, err)
 		}
@@ -496,7 +533,7 @@ func TestCandidate(t *testing.T) {
 					return json.Marshal(map[string]int{"n": reads})
 				}
 				body := fmt.Sprintf(`return api.reducePages("list", {cursorParam:"page", initial:0, next:%s, reduce:%s});`, tc.next, tc.reduce)
-				_, err := e.RunModeWithPages(context.Background(), body, ModeAuto, nil, page)
+				_, err := e.RunModeWithPages(context.Background(), body, ModeAuto, nil, nil, page)
 				var guestErr *Error
 				if !errors.As(err, &guestErr) || guestErr.Code != tc.want || reads != tc.reads {
 					t.Fatalf("got %v after %d reads; want %s after %d", err, reads, tc.want, tc.reads)

@@ -25,7 +25,7 @@ flowchart LR
 
 At startup the Go host reads one local specification, resolves local references and builds a catalog from the supported operations, the owner's selection and the available credentials. A lexical index ranks IDs, paths, tags, summaries and parameters. An exact ID gets the highest search priority. Searching never contacts the API. Both entry points use the same catalog for dispatch, including when a program already knows an ID and skips discovery.
 
-The host compiles the embedded QuickJS interpreter once per engine using wazero. Each execution gets a fresh WebAssembly instance, a heap and private in-memory streams. Program source, page data and accumulators live in that execution. The client owns saved source and any continuation it wants to use later.
+The host compiles the embedded QuickJS interpreter once per engine using wazero. On macOS and Linux an optional host directory can retain its machine code for subsequent processes. Each execution gets a fresh WebAssembly instance, a heap and private in-memory streams. Program source, caller input, page data and accumulators live in that execution. The client owns saved source and any continuation it wants to use later. [Runtime cache behavior](benchmarks.md#rerunning-a-saved-program-from-a-fresh-process)
 
 ## One investigation
 
