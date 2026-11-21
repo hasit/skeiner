@@ -1,0 +1,86 @@
+name: Remote release provenance benchmark
+on:
+  workflow_dispatch:
+    inputs:
+      token_sha256:
+        description: SHA-256 of a fresh random bearer token held by the remote client
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  host:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+      - name: Build Skeiner and install the pinned runtimes
+        run: |
+          go build -trimpath -o ./skeiner ./cmd/skeiner
+          python3 benchmarks/discovery/client_install.py
+          cd "$RUNNER_TEMP"
+          curl --fail --silent --show-error --location --retry 3 \
+            https://github.com/cloudflare/cloudflared/releases/download/2026.11.1/cloudflared-linux-amd64 -o cloudflared
+          echo '97bb3b02d23a5980fc9c15a1a270e692da1923f103f920d5b16d4931d5ab55e7  cloudflared' | sha256sum --check
+          chmod 755 cloudflared
+      - name: Start and warm the two workers and public-release gateway
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BENCH_TOKEN_SHA256: ${{ inputs.token_sha256 }}
+        run: |
+          [[ "$BENCH_TOKEN_SHA256" =~ ^[a-f0-9]{64}$ ]]
+          (
+            set +e
+            env -i PATH="$PATH" HOME="$HOME" GITHUB_TOKEN="$GITHUB_TOKEN" BENCH_TOKEN_SHA256="$BENCH_TOKEN_SHA256" \
+              python3 benchmarks/discovery/remote_host.py --port 8765 --receipt "$RUNNER_TEMP/server.json" \
+                --ready-file "$RUNNER_TEMP/remote-ready" --requests 120 --seconds 600 &
+            pid=$!
+            echo "$pid" > "$RUNNER_TEMP/remote-host.pid"
+            wait "$pid"
+            echo "$?" > "$RUNNER_TEMP/remote-host.exit"
+          ) </dev/null >"$RUNNER_TEMP/remote-host.log" 2>&1 &
+          for _ in {1..45}; do
+            if [[ -f "$RUNNER_TEMP/remote-host.exit" ]]; then
+              cat "$RUNNER_TEMP/remote-host.log" >&2
+              exit 1
+            fi
+            if [[ -f "$RUNNER_TEMP/remote-ready" ]]; then exit 0; fi
+            sleep 1
+          done
+          echo 'Benchmark workers did not become ready in time.' >&2
+          exit 1
+      - name: Open a temporary HTTPS route to the benchmark listener
+        run: python3 benchmarks/discovery/remote_tunnel.py "$RUNNER_TEMP"
+      - name: Announce the HTTPS address to the remote client
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: remote-endpoint
+          path: ${{ runner.temp }}/endpoint.txt
+          retention-days: 1
+          if-no-files-found: error
+      - name: Wait for the remote client to finish
+        run: |
+          while [[ ! -s "$RUNNER_TEMP/remote-host.exit" ]]; do sleep 2; done
+          exit "$(cat "$RUNNER_TEMP/remote-host.exit")"
+      - name: Close the temporary route and benchmark listener
+        if: always()
+        run: |
+          for service in remote-tunnel remote-host; do
+            pidfile="$RUNNER_TEMP/$service.pid"
+            if [[ -s "$pidfile" ]]; then kill "$(cat "$pidfile")" 2>/dev/null || true; fi
+          done
+      - name: Archive gateway-side measurements
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: remote-server
+          path: ${{ runner.temp }}/server.json
+          retention-days: 7
+          if-no-files-found: warn
