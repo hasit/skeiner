@@ -2,7 +2,7 @@
 
 Skeiner is an MCP server for OpenAPI. An agent uses `search` to find operations and `execute` to call them from JavaScript. Save a working program and rerun it from the CLI.
 
-In a live GitHub benchmark, both servers read the same 60 commits. GitHub MCP returned 35,905 bytes of selected commit data. Skeiner counted the matching subjects inside the program and returned 42 bytes. [Benchmark and tradeoffs](docs/github-benchmark.md)
+Three saved Skeiner programs each found the longest hot spell in all ten cities. A model reading daily highs got 18 of 30 answers right. Skeiner's model cost averaged 34% less. Client-side JavaScript matched Skeiner's accuracy at lower cost. [Open-Meteo study](docs/weather-benchmark.md) · [Live GitHub comparison](docs/github-benchmark.md)
 
 ## Run the offline quickstart
 

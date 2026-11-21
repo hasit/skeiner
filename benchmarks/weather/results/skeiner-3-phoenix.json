@@ -1,0 +1,142 @@
+{
+  "arm": "skeiner",
+  "trial": 3,
+  "case": "phoenix",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "turns": [
+    {
+      "input_tokens": 527,
+      "output_tokens": 13,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 797,
+      "output_tokens": 482,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1311,
+      "output_tokens": 486,
+      "cached_input_tokens": 1152,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1829,
+      "output_tokens": 507,
+      "cached_input_tokens": 1664,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 2368,
+      "output_tokens": 572,
+      "cached_input_tokens": 2176,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 2977,
+      "output_tokens": 31,
+      "cached_input_tokens": 2816,
+      "finish_reason": "stop"
+    }
+  ],
+  "calls": [
+    {
+      "name": "search",
+      "arguments": {
+        "query": "archive"
+      },
+      "ok": true,
+      "reply_bytes": 994
+    },
+    {
+      "name": "execute",
+      "source_sha256": "ef823cd055c10c2411936d62189c369163fa273563c38fb5767ce3f86c12bc0c",
+      "arguments": {
+        "input": {
+          "latitude": 33.4484,
+          "longitude": -112.074,
+          "timezone": "America/Phoenix",
+          "start_date": "2020-06-01",
+          "end_date": "2020-08-31",
+          "daily": "temperature_2m_max",
+          "models": "era5",
+          "temperature_unit": "celsius",
+          "threshold": 40
+        }
+      },
+      "ok": false,
+      "reply_bytes": 119,
+      "error": "{\"code\":\"javascript_error\",\"message\":\"JavaScript type error. Check variable names, response fields, and array bounds.\"}"
+    },
+    {
+      "name": "execute",
+      "source_sha256": "95a90492a47e4756d7068fa06d93cba122f7bad7e1e5e84c26b68025be6e4d20",
+      "arguments": {
+        "input": {
+          "latitude": 33.4484,
+          "longitude": -112.074,
+          "timezone": "America/Phoenix",
+          "start_date": "2020-06-01",
+          "end_date": "2020-08-31",
+          "daily": "temperature_2m_max",
+          "models": "era5",
+          "temperature_unit": "celsius",
+          "threshold": 40
+        }
+      },
+      "ok": false,
+      "reply_bytes": 119,
+      "error": "{\"code\":\"javascript_error\",\"message\":\"JavaScript type error. Check variable names, response fields, and array bounds.\"}"
+    },
+    {
+      "name": "execute",
+      "source_sha256": "0ceabba27067c0b1f1194f7a69a390912cda35eed507e43fff2a95f8e684fb82",
+      "arguments": {},
+      "ok": false,
+      "reply_bytes": 119,
+      "error": "{\"code\":\"javascript_error\",\"message\":\"JavaScript type error. Check variable names, response fields, and array bounds.\"}"
+    },
+    {
+      "name": "execute",
+      "source_sha256": "aacbb91ee7d1770c894c9f888827169f7225a4fd44e502d55fa95d2bde70561c",
+      "arguments": {
+        "input": {
+          "latitude": 33.4484,
+          "longitude": -112.074,
+          "timezone": "America/Phoenix",
+          "start_date": "2020-06-01",
+          "end_date": "2020-08-31",
+          "daily": "temperature_2m_max",
+          "models": "era5",
+          "temperature_unit": "celsius",
+          "threshold": 40
+        }
+      },
+      "ok": true,
+      "reply_bytes": 65
+    }
+  ],
+  "reads": [
+    {
+      "case": "phoenix",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 1416,
+  "input_tokens": 9809,
+  "cached_input_tokens": 7808,
+  "output_tokens": 2091,
+  "answer": {
+    "start": "2020-07-25",
+    "end": "2020-08-20",
+    "days": 27,
+    "peak_c": 47.8
+  },
+  "elapsed_seconds": 17.498,
+  "program_sha256": "aacbb91ee7d1770c894c9f888827169f7225a4fd44e502d55fa95d2bde70561c",
+  "saved_mode": null,
+  "model_turns": 6,
+  "correct": true
+}

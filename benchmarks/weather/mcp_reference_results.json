@@ -1,0 +1,128 @@
+{
+  "observed_at": "2026-11-21T04:02:11.424042+00:00",
+  "endpoint": "https://open-meteo.caseyjhand.com/mcp",
+  "server": "open-meteo-mcp-server",
+  "version": "0.6.1",
+  "cases": {
+    "phoenix": {
+      "daily_inline": {
+        "historical": {
+          "argument_bytes": 208,
+          "reply_text_bytes": 4355,
+          "elapsed_ms": 553.5
+        },
+        "records": 92,
+        "daily_rows_in_reply": 92,
+        "spilled": false,
+        "answer": {
+          "start": "2020-07-25",
+          "end": "2020-08-20",
+          "days": 27,
+          "peak_c": 47.8
+        }
+      },
+      "hourly_plus_daily_sql": {
+        "historical": {
+          "argument_bytes": 246,
+          "reply_text_bytes": 7917,
+          "elapsed_ms": 480.2
+        },
+        "records": 2300,
+        "daily_rows_in_reply": 80,
+        "spilled": true,
+        "hourly_rows_in_reply": 77,
+        "sql": {
+          "argument_bytes": 626,
+          "reply_text_bytes": 187,
+          "elapsed_ms": 293.4
+        },
+        "answer": {
+          "start": "2020-07-25",
+          "end": "2020-08-20",
+          "days": 27,
+          "peak_c": 47.8
+        }
+      }
+    },
+    "paris": {
+      "hourly_plus_daily_sql": {
+        "historical": {
+          "argument_bytes": 241,
+          "reply_text_bytes": 7908,
+          "elapsed_ms": 595.1
+        },
+        "records": 2300,
+        "daily_rows_in_reply": 80,
+        "spilled": true,
+        "hourly_rows_in_reply": 77,
+        "sql": {
+          "argument_bytes": 626,
+          "reply_text_bytes": 186,
+          "elapsed_ms": 288.7
+        },
+        "answer": {
+          "start": "2020-08-05",
+          "end": "2020-08-12",
+          "days": 8,
+          "peak_c": 37.8
+        }
+      },
+      "daily_inline": {
+        "historical": {
+          "argument_bytes": 203,
+          "reply_text_bytes": 4344,
+          "elapsed_ms": 447.5
+        },
+        "records": 92,
+        "daily_rows_in_reply": 92,
+        "spilled": false,
+        "answer": {
+          "start": "2020-08-05",
+          "end": "2020-08-12",
+          "days": 8,
+          "peak_c": 37.8
+        }
+      }
+    },
+    "london": {
+      "daily_inline": {
+        "historical": {
+          "argument_bytes": 205,
+          "reply_text_bytes": 4361,
+          "elapsed_ms": 467.6
+        },
+        "records": 92,
+        "daily_rows_in_reply": 92,
+        "spilled": false,
+        "answer": {
+          "start": null,
+          "end": null,
+          "days": 0,
+          "peak_c": null
+        }
+      },
+      "hourly_plus_daily_sql": {
+        "historical": {
+          "argument_bytes": 243,
+          "reply_text_bytes": 7913,
+          "elapsed_ms": 579.7
+        },
+        "records": 2300,
+        "daily_rows_in_reply": 80,
+        "spilled": true,
+        "hourly_rows_in_reply": 77,
+        "sql": {
+          "argument_bytes": 626,
+          "reply_text_bytes": 162,
+          "elapsed_ms": 302.5
+        },
+        "answer": {
+          "start": null,
+          "end": null,
+          "days": 0,
+          "peak_c": null
+        }
+      }
+    }
+  }
+}

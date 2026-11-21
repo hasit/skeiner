@@ -1,0 +1,320 @@
+{
+  "skeiner-1": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.281
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.251
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.223
+    }
+  ],
+  "reducer-1": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.237
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.252
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.229
+    }
+  ],
+  "skeiner-2": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.238
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.222
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.218
+    }
+  ],
+  "reducer-2": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.218
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.219
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.218
+    }
+  ],
+  "skeiner-3": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.217
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.216
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.217
+    }
+  ],
+  "reducer-3": [
+    {
+      "case": "phoenix",
+      "answer": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "phoenix",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.219
+    },
+    {
+      "case": "paris",
+      "answer": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "paris",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.225
+    },
+    {
+      "case": "london",
+      "answer": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "london",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    }
+  ]
+}

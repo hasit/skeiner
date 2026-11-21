@@ -53,6 +53,11 @@ jobs:
           go run ./cmd/skeiner-bench -binary "$RUNNER_TEMP/skeiner/skeiner" -reruns -cold 2
       - name: Replay archived investigations and direct controls
         run: python3 benchmarks/authorship/study.py --binary "$RUNNER_TEMP/skeiner/skeiner" replay
+      - name: Verify historical weather answers and archived model programs
+        run: |
+          python3 benchmarks/weather/study.py --binary "$RUNNER_TEMP/skeiner/skeiner" replay
+          python3 benchmarks/weather/study.py --binary "$RUNNER_TEMP/skeiner/skeiner" extension-replay
+          python3 benchmarks/weather/sql_study.py verify
 
   package:
     if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'

@@ -1,0 +1,728 @@
+{
+  "skeiner-1": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.229
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.222
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.241
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.216
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.236
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.234
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.231
+    }
+  ],
+  "reducer-1": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.242
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.288
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.231
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.228
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.228
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.223
+    }
+  ],
+  "skeiner-2": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.22
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.229
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.222
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.227
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.222
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.226
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    }
+  ],
+  "reducer-2": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.22
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.223
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.224
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.222
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    }
+  ],
+  "skeiner-3": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.225
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.219
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.221
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.229
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.224
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.223
+    }
+  ],
+  "reducer-3": [
+    {
+      "case": "new_york",
+      "answer": {
+        "start": "2019-08-18",
+        "end": "2019-08-22",
+        "days": 5,
+        "peak_c": 32
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "new_york",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.219
+    },
+    {
+      "case": "chicago",
+      "answer": {
+        "start": "2019-07-19",
+        "end": "2019-07-20",
+        "days": 2,
+        "peak_c": 33
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "chicago",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.219
+    },
+    {
+      "case": "madrid",
+      "answer": {
+        "start": "2019-06-22",
+        "end": "2019-07-08",
+        "days": 17,
+        "peak_c": 40.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "madrid",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.226
+    },
+    {
+      "case": "berlin",
+      "answer": {
+        "start": "2019-06-02",
+        "end": "2019-06-06",
+        "days": 5,
+        "peak_c": 33.9
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "berlin",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.218
+    },
+    {
+      "case": "tokyo",
+      "answer": {
+        "start": "2019-07-24",
+        "end": "2019-08-21",
+        "days": 29,
+        "peak_c": 34.4
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "tokyo",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.216
+    },
+    {
+      "case": "seoul",
+      "answer": {
+        "start": "2019-08-01",
+        "end": "2019-08-11",
+        "days": 11,
+        "peak_c": 35.7
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "seoul",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.216
+    },
+    {
+      "case": "sydney",
+      "answer": {
+        "start": "2020-01-30",
+        "end": "2020-02-03",
+        "days": 5,
+        "peak_c": 42
+      },
+      "correct": true,
+      "reads": [
+        {
+          "case": "sydney",
+          "ok": true
+        }
+      ],
+      "elapsed_seconds": 0.215
+    }
+  ]
+}

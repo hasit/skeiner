@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: Open-Meteo historical daily maximum temperatures
+  version: '1'
+servers:
+  - url: https://archive-api.open-meteo.com
+paths:
+  /v1/archive:
+    get:
+      operationId: getDailyWeather
+      summary: Daily maximum 2 m temperatures at one location for an inclusive local date range
+      parameters:
+        - {in: query, name: latitude, required: true, schema: {type: number}}
+        - {in: query, name: longitude, required: true, schema: {type: number}}
+        - {in: query, name: start_date, required: true, schema: {type: string, format: date}}
+        - {in: query, name: end_date, required: true, schema: {type: string, format: date}}
+        - {in: query, name: timezone, required: true, schema: {type: string}}
+        - {in: query, name: daily, required: true, schema: {type: string, enum: [temperature_2m_max]}}
+        - {in: query, name: models, required: true, schema: {type: string, enum: [era5]}}
+        - {in: query, name: temperature_unit, schema: {type: string, enum: [celsius], default: celsius}}
+      responses:
+        '200':
+          description: Matching arrays of local dates and daily maxima in degrees Celsius
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  daily:
+                    type: object
+                    properties:
+                      time: {type: array, items: {type: string, format: date}}
+                      temperature_2m_max: {type: array, items: {type: number, nullable: true}}

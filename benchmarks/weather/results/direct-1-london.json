@@ -1,0 +1,49 @@
+{
+  "arm": "direct",
+  "trial": 1,
+  "case": "london",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "turns": [
+    {
+      "input_tokens": 262,
+      "output_tokens": 14,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1389,
+      "output_tokens": 29,
+      "cached_input_tokens": 0,
+      "finish_reason": "stop"
+    }
+  ],
+  "calls": [
+    {
+      "name": "daily_weather",
+      "arguments": {
+        "dated": true
+      },
+      "ok": true,
+      "reply_bytes": 1841
+    }
+  ],
+  "reads": [
+    {
+      "case": "london",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 1841,
+  "input_tokens": 1651,
+  "cached_input_tokens": 0,
+  "output_tokens": 43,
+  "answer": {
+    "start": null,
+    "end": null,
+    "days": 0,
+    "peak_c": null
+  },
+  "elapsed_seconds": 2.321,
+  "model_turns": 2,
+  "correct": true
+}

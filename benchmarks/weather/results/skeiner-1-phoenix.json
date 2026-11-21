@@ -1,0 +1,102 @@
+{
+  "arm": "skeiner",
+  "trial": 1,
+  "case": "phoenix",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "turns": [
+    {
+      "input_tokens": 527,
+      "output_tokens": 13,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 797,
+      "output_tokens": 499,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1321,
+      "output_tokens": 579,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1937,
+      "output_tokens": 31,
+      "cached_input_tokens": 1664,
+      "finish_reason": "stop"
+    }
+  ],
+  "calls": [
+    {
+      "name": "search",
+      "arguments": {
+        "query": "archive"
+      },
+      "ok": true,
+      "reply_bytes": 994
+    },
+    {
+      "name": "execute",
+      "source_sha256": "6b1d89f1afc14c0f7d27f0013ec7a170e96f973f4f42214d073474a31d6c4054",
+      "arguments": {
+        "input": {
+          "latitude": 33.4484,
+          "longitude": -112.074,
+          "timezone": "America/Phoenix",
+          "start_date": "2020-06-01",
+          "end_date": "2020-08-31",
+          "daily": "temperature_2m_max",
+          "models": "era5",
+          "temperature_unit": "celsius",
+          "threshold": 40
+        }
+      },
+      "ok": false,
+      "reply_bytes": 96,
+      "error": "{\"code\":\"invalid_arguments\",\"message\":\"expected an object with optional path and query objects\"}"
+    },
+    {
+      "name": "execute",
+      "source_sha256": "34f5864daad5628e1fb78afd70c1010f195acd38180e0b6719a8e2ff78bed38d",
+      "arguments": {
+        "input": {
+          "latitude": 33.4484,
+          "longitude": -112.074,
+          "timezone": "America/Phoenix",
+          "start_date": "2020-06-01",
+          "end_date": "2020-08-31",
+          "daily": "temperature_2m_max",
+          "models": "era5",
+          "temperature_unit": "celsius",
+          "threshold": 40
+        }
+      },
+      "ok": true,
+      "reply_bytes": 65
+    }
+  ],
+  "reads": [
+    {
+      "case": "phoenix",
+      "ok": true
+    }
+  ],
+  "tool_reply_bytes": 1155,
+  "input_tokens": 4582,
+  "cached_input_tokens": 1664,
+  "output_tokens": 1122,
+  "answer": {
+    "start": "2020-07-25",
+    "end": "2020-08-20",
+    "days": 27,
+    "peak_c": 47.8
+  },
+  "elapsed_seconds": 11.024,
+  "program_sha256": "34f5864daad5628e1fb78afd70c1010f195acd38180e0b6719a8e2ff78bed38d",
+  "saved_mode": null,
+  "model_turns": 4,
+  "correct": true
+}

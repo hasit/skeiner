@@ -1,0 +1,67 @@
+{
+  "observed_at": "2026-11-21T04:01:51.322044+00:00",
+  "program": "skeiner-1.js",
+  "program_sha256": "34f5864daad5628e1fb78afd70c1010f195acd38180e0b6719a8e2ff78bed38d",
+  "cases": {
+    "phoenix": {
+      "daily_sha256": "3801a6ed48aefb2b616a8f9d479ea3f980366a0f0d282c99d23c7aa112d87688",
+      "days": 92,
+      "native": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "native_seconds": 0.703,
+      "native_correct": true,
+      "skeiner": {
+        "start": "2020-07-25",
+        "end": "2020-08-20",
+        "days": 27,
+        "peak_c": 47.8
+      },
+      "skeiner_seconds": 0.943,
+      "skeiner_correct": true
+    },
+    "paris": {
+      "daily_sha256": "ef4de3e274594245421261004a0c33cde8c152ea687f06082ce93dbb67b6909f",
+      "days": 92,
+      "native": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "native_seconds": 0.684,
+      "native_correct": true,
+      "skeiner": {
+        "start": "2020-08-05",
+        "end": "2020-08-12",
+        "days": 8,
+        "peak_c": 37.8
+      },
+      "skeiner_seconds": 0.923,
+      "skeiner_correct": true
+    },
+    "london": {
+      "daily_sha256": "5fde5c3138f3b2e5dd4b3ae33e04bd284aaf978669d60d6f03b21b03828339fe",
+      "days": 92,
+      "native": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "native_seconds": 0.693,
+      "native_correct": true,
+      "skeiner": {
+        "start": null,
+        "end": null,
+        "days": 0,
+        "peak_c": null
+      },
+      "skeiner_seconds": 0.922,
+      "skeiner_correct": true
+    }
+  }
+}

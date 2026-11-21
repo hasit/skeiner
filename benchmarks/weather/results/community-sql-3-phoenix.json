@@ -1,0 +1,76 @@
+{
+  "arm": "community-sql",
+  "case": "phoenix",
+  "trial": 3,
+  "model": "gpt-4.1-mini-2025-04-14",
+  "started_at": "2026-11-21T04:02:45.731774+00:00",
+  "input_tokens": 2773,
+  "cached_input_tokens": 1152,
+  "output_tokens": 813,
+  "turns": [
+    {
+      "input_tokens": 387,
+      "output_tokens": 387,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 976,
+      "output_tokens": 395,
+      "cached_input_tokens": 0,
+      "finish_reason": "tool_calls"
+    },
+    {
+      "input_tokens": 1410,
+      "output_tokens": 31,
+      "cached_input_tokens": 1152,
+      "finish_reason": "stop"
+    }
+  ],
+  "calls": [
+    {
+      "name": "query_weather",
+      "source_sha256": "4ab0f7aaba9e8e11c78b91907a1b0f1529321900be03df657c8e119fdf10006f",
+      "ok": false,
+      "error": "openmeteo_dataframe_query: [{'type': 'text', 'text': 'Error: Canvas query failed to prepare: Failed to extract statements: Parser Error: syntax error at or near \"end\"\\\\\\n\\\\\\nLINE 32:   COALESCE((SELECT end FROM agg_spells ORDER BY days DESC, start LIMIT 1),...\\\\\\n&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;^^^\\n\\nRecovery: Fix the SQL syntax the message names and send a single read-only SELECT. Put AS before an alias that is a SQL keyword, or double-quote it.\\n\\n(reason invalid_sql · request ZZ471-OPQHA)'}]",
+      "model_reply_bytes": 636
+    },
+    {
+      "name": "query_weather",
+      "source_sha256": "edda970484477e51a7a022b6ac089bd09fa7b10b0e59dbb26bd7429f58bdabd8",
+      "rows": [
+        {
+          "start": "2020-07-25",
+          "end": "2020-08-20",
+          "days": "27",
+          "peak_c": 47.8
+        }
+      ],
+      "ok": true,
+      "argument_bytes": 1258,
+      "reply_text_bytes": 187,
+      "elapsed_ms": 298.1,
+      "model_reply_bytes": 69
+    }
+  ],
+  "answer": {
+    "start": "2020-07-25",
+    "end": "2020-08-20",
+    "days": 27,
+    "peak_c": 47.8
+  },
+  "server": {
+    "name": "open-meteo-mcp-server",
+    "version": "0.6.1",
+    "title": "open-meteo-mcp-server",
+    "description": "Geocode places, fetch global weather forecasts, historical climate, marine conditions, air quality, and terrain elevation via MCP. STDIO or Streamable HTTP."
+  },
+  "stage": {
+    "argument_bytes": 246,
+    "reply_text_bytes": 7917,
+    "elapsed_ms": 553.6
+  },
+  "elapsed_seconds": 9.759,
+  "correct": true,
+  "program_sha256": "edda970484477e51a7a022b6ac089bd09fa7b10b0e59dbb26bd7429f58bdabd8"
+}
