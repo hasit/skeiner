@@ -64,6 +64,14 @@ jobs:
           python3 benchmarks/discovery/dataset.py verify
           python3 benchmarks/discovery/study.py --binary "$RUNNER_TEMP/skeiner/skeiner" replay
           python3 benchmarks/discovery/remote_client.py published
+      - name: Replay OpenAPI setup integrations against a local service
+        run: |
+          python3 benchmarks/setup/spec.py
+          npm ci --prefix benchmarks/setup/js_toolkit --ignore-scripts --no-audit --no-fund
+          npm ci --prefix benchmarks/setup/js_toolkit/custom --ignore-scripts --no-audit --no-fund
+          python3 benchmarks/setup/study.py replay --binary "$RUNNER_TEMP/skeiner/skeiner"
+          python3 benchmarks/setup/report.py
+          python3 benchmarks/setup/output_study.py replay --binary "$RUNNER_TEMP/skeiner/skeiner"
 
   package:
     if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'

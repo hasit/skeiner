@@ -1,0 +1,17 @@
+{
+  "command": "skeiner",
+  "args": [
+    "serve",
+    "--spec",
+    "${SPEC}",
+    "--base-url",
+    "${BASE_URL}",
+    "--token-env",
+    "VAULT_TOKEN",
+    "--allow",
+    "GetVaults,GetVaultById"
+  ],
+  "env": {
+    "VAULT_TOKEN": "${TOKEN}"
+  }
+}

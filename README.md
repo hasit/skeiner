@@ -2,7 +2,7 @@
 
 Skeiner is an MCP server for OpenAPI. An agent uses `search` to find operations and `execute` to call them from JavaScript. Save a working program and rerun it from the CLI.
 
-Saved programs found the longest hot spell in all ten cities in our weather study. In a GitHub release audit, Skeiner and client-side JavaScript independently discovered the endpoints and both got 12/12 answers right. [Weather results](docs/weather-benchmark.md) · [Release audit results](docs/discovery-benchmark.md)
+Compare Skeiner with JavaScript on three measured workflows. [Permissioned API setup](docs/setup-benchmark.md) · [GitHub release audit](docs/discovery-benchmark.md) · [Historical weather](docs/weather-benchmark.md)
 
 ## Run the offline quickstart
 

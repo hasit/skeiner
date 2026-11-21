@@ -1,0 +1,9 @@
+{
+  "name": "skeiner-setup-benchmark-toolkit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinned JavaScript runtime for the OpenAPI setup benchmark",
+  "dependencies": {
+    "@ivotoby/openapi-mcp-server": "1.18.0"
+  }
+}

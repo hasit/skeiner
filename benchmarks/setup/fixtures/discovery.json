@@ -1,0 +1,194 @@
+{
+  "spec_sha256": "e597c52210719e5bf9b27556d6f3ead28434a35a8e8c827f71eec19899cc873d",
+  "observations": [
+    {
+      "arm": "skeiner",
+      "version": "0.1.0-alpha.2",
+      "method": "tools/call",
+      "params": {
+        "name": "search",
+        "arguments": {
+          "query": "vault"
+        }
+      },
+      "metadata": [
+        {
+          "operationId": "GetVaultById",
+          "method": "GET",
+          "path": "/vaults/{vaultUuid}",
+          "summary": "Get Vault details and metadata",
+          "tags": [
+            "Vaults"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "vaultUuid",
+              "type": "string",
+              "required": true,
+              "description": "The UUID of the Vault to fetch Items from"
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "attributeVersion": {
+                  "type": "integer"
+                },
+                "contentVersion": {
+                  "type": "integer"
+                },
+                "createdAt": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "items": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "USER_CREATED",
+                    "PERSONAL",
+                    "EVERYONE",
+                    "TRANSFER"
+                  ],
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "GetVaults",
+          "method": "GET",
+          "path": "/vaults",
+          "summary": "Get all Vaults",
+          "tags": [
+            "Vaults"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "filter",
+              "type": "string",
+              "required": false,
+              "description": "Filter the Vault collection based on Vault name using SCIM eq filter"
+            }
+          ],
+          "response": {
+            "200": {
+              "items": {
+                "properties": {
+                  "attributeVersion": {
+                    "type": "integer"
+                  },
+                  "contentVersion": {
+                    "type": "integer"
+                  },
+                  "createdAt": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "USER_CREATED",
+                      "PERSONAL",
+                      "EVERYONE",
+                      "TRANSFER"
+                    ],
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        }
+      ],
+      "upstream_http_requests": 0
+    },
+    {
+      "arm": "package",
+      "version": "1.18.0",
+      "method": "tools/list",
+      "params": {},
+      "metadata": [
+        {
+          "name": "get-vaults",
+          "description": "Get all Vaults",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "filter": {
+                "description": "Filter the Vault collection based on Vault name using SCIM eq filter",
+                "x-parameter-location": "query",
+                "type": "string",
+                "example": "name eq \"Some Vault Name\""
+              }
+            }
+          },
+          "tags": [
+            "Vaults"
+          ],
+          "httpMethod": "GET",
+          "resourceName": "vaults",
+          "originalPath": "/vaults",
+          "x-original-path": "/vaults"
+        },
+        {
+          "name": "get-vault-by-id",
+          "description": "Get Vault details and metadata",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "vaultUuid": {
+                "description": "The UUID of the Vault to fetch Items from",
+                "x-parameter-location": "path",
+                "type": "string",
+                "pattern": "^[\\da-z]{26}$"
+              }
+            },
+            "required": [
+              "vaultUuid"
+            ]
+          },
+          "tags": [
+            "Vaults"
+          ],
+          "httpMethod": "GET",
+          "resourceName": "vaults",
+          "originalPath": "/vaults/{vaultUuid}",
+          "x-original-path": "/vaults/{vaultUuid}"
+        }
+      ],
+      "upstream_http_requests": 0
+    }
+  ]
+}

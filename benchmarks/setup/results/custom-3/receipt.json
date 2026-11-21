@@ -1,0 +1,189 @@
+{
+  "arm": "custom",
+  "trial": 3,
+  "settings": {
+    "model": "gpt-6.2-astra",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "service_tier": "default",
+    "store": false,
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "max_output_tokens": 5000,
+    "prompt_cache_options": {
+      "mode": "explicit"
+    },
+    "parallel_tool_calls": false
+  },
+  "prompt_sha256": "410fdd0fe2e683dbe00ef12419166984e69654c7815c6f04bb43f9fa78c54720",
+  "started_utc": "2026-11-21T05:10:23.112990+00:00",
+  "turns": [
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 873,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 18,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 891
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 2.203
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 1956,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 26,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1982
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 2.079
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 2867,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 890,
+        "output_tokens_details": {
+          "reasoning_tokens": 13
+        },
+        "total_tokens": 3757
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 12.319
+    }
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "name": "read_spec",
+      "arguments": {
+        "lines": 120
+      },
+      "output_sha256": "aca069fa4e9e32bd4bfae96ca8c3c76aaf329624fe625d588f32e4e3a0c3619d",
+      "ok": true
+    },
+    {
+      "turn": 2,
+      "name": "read_spec",
+      "arguments": {
+        "search": "  /vaults:",
+        "lines": 110
+      },
+      "output_sha256": "a07f641935a930fe193a78961eafcf5a9b15857521e4f040b245cab4cf5826fa",
+      "ok": true
+    },
+    {
+      "turn": 3,
+      "name": "submit_setup",
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "submission": {
+        "command": "deno-worker",
+        "args": [
+          "worker.js"
+        ],
+        "env": {
+          "SPEC": "${SPEC}",
+          "BASE_URL": "${BASE_URL}",
+          "TOKEN": "${TOKEN}"
+        },
+        "worker": "const doc=parseYaml(await Deno.readTextFile(Deno.env.get('SPEC')));\nconst base=new URL(Deno.env.get('BASE_URL')), token=Deno.env.get('TOKEN');\nif (!token || !['http:','https:'].includes(base.protocol) || base.search || base.hash || base.username || base.password) throw Error('Invalid configuration');\nconst catalog=new Map();\nfor(const [path,id] of [['/vaults','GetVaults'],['/vaults/{vaultUuid}','GetVaultById']]){\n const item=doc.paths[path],op=item.get;\n if(op.operationId!==id) throw Error('Unexpected operation');\n const params=new Map(),properties=Object.create(null),required=[];\n for(const p of [...(item.parameters??[]),...(op.parameters??[])]){\n  if(p.schema?.type!=='string' || !(p.in==='query' || (p.in==='path' && path.endsWith('{vaultUuid}') && p.name==='vaultUuid'))) throw Error('Unsupported parameter');\n  params.set(p.name,p);\n }\n for(const [key,p] of params){properties[key]={type:'string',...(p.description?{description:p.description}:{}),...(p.schema.pattern?{pattern:p.schema.pattern}:{})};if(p.required || p.in==='path')required.push(key);}\n catalog.set(id,{path,params,tool:{name:id,description:op.summary,inputSchema:{type:'object',properties,required,additionalProperties:false}}});\n}\nconst server=new Server({name:'vault-metadata',version:'1.0.0'},{capabilities:{tools:{}}});\nserver.setRequestHandler(ListToolsRequestSchema,async()=>({tools:Array.from(catalog.values(),e=>e.tool)}));\nconst fail=message=>({isError:true,content:[{type:'text',text:message}]});\nserver.setRequestHandler(CallToolRequestSchema,async req=>{\n const entry=catalog.get(req.params.name);if(!entry)return fail('Unknown tool');\n try{\n const args=req.params.arguments??{};if(typeof args!=='object'||Array.isArray(args)||Object.keys(args).some(k=>!entry.params.has(k)))return fail('Invalid arguments');\n let path=entry.path;const u=new URL(base);\n for(const [k,p] of entry.params){if(!Object.hasOwn(args,k)){if(p.required||p.in==='path')return fail('Missing required argument');continue;}\n const v=args[k];if(typeof v!=='string'||(p.schema.pattern && !new RegExp(p.schema.pattern).test(v)))return fail('Invalid argument');\n if(p.in==='query')u.searchParams.set(k,v);else {if(!/^[a-z0-9]{26}$/.test(v))return fail('Invalid vault UUID');path=path.replace('{vaultUuid}',encodeURIComponent(v));}}\n u.pathname=base.pathname.replace(/\\/+$/,'')+path;\n const r=await fetch(u,{method:'GET',redirect:'error',headers:{Authorization:'Bearer '+token,Accept:'application/json'}});if(!r.ok)return fail('Upstream request failed');\n const data=await r.json();if(entry.path==='/vaults'?!Array.isArray(data):(!data||typeof data!=='object'||Array.isArray(data)))return fail('Invalid upstream response');\n const containsSecret=x=>typeof x==='string'?x.includes(token):x && typeof x==='object' && Object.entries(x).some(([k,v])=>k.includes(token)||containsSecret(v));\n if(containsSecret(data))return fail('Unsafe upstream response');return {content:[{type:'text',text:JSON.stringify(data)}]};\n }catch{return fail('Request failed');}\n});\nawait server.connect(new StdioServerTransport());"
+      },
+      "grade": {
+        "passed": true,
+        "checks_total": 26,
+        "checks_passed": 26,
+        "epochs": [
+          {
+            "phase": "upstream",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true
+            }
+          },
+          {
+            "phase": "modified_spec_rotated_host",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true,
+              "new_query_parameter_discovered": true,
+              "new_query_parameter_forwarded": true
+            }
+          }
+        ]
+      },
+      "elapsed_seconds": 0.505
+    }
+  ],
+  "passed": true,
+  "stop": "first_pass",
+  "elapsed_seconds": 17.107,
+  "final_metrics": {
+    "config_bytes": 158,
+    "config_nonblank_lines": 11,
+    "config_arg_count": 1,
+    "config_env_count": 3,
+    "source_bytes": 3062,
+    "source_nonblank_lines": 34
+  }
+}

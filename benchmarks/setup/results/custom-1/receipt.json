@@ -1,0 +1,158 @@
+{
+  "arm": "custom",
+  "trial": 1,
+  "settings": {
+    "model": "gpt-6.2-astra",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "service_tier": "default",
+    "store": false,
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "max_output_tokens": 5000,
+    "prompt_cache_options": {
+      "mode": "explicit"
+    },
+    "parallel_tool_calls": false
+  },
+  "prompt_sha256": "410fdd0fe2e683dbe00ef12419166984e69654c7815c6f04bb43f9fa78c54720",
+  "started_utc": "2026-11-21T05:09:54.999222+00:00",
+  "turns": [
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 873,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 896
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 2.924
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 1833,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 801,
+        "output_tokens_details": {
+          "reasoning_tokens": 13
+        },
+        "total_tokens": 2634
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 10.778
+    }
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "name": "read_spec",
+      "arguments": {
+        "search": "operationId",
+        "lines": 120
+      },
+      "output_sha256": "2b893a0355e25b64709d548e52076ab121f91962c6087378dae9e0eba168f7b3",
+      "ok": true
+    },
+    {
+      "turn": 2,
+      "name": "submit_setup",
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "submission": {
+        "command": "deno-worker",
+        "args": [
+          "worker.js"
+        ],
+        "env": {
+          "SPEC": "${SPEC}",
+          "BASE_URL": "${BASE_URL}",
+          "TOKEN": "${TOKEN}"
+        },
+        "worker": "const doc=parseYaml(await Deno.readTextFile(Deno.env.get('SPEC')));\nconst base=new URL(Deno.env.get('BASE_URL')), token=Deno.env.get('TOKEN');\nif(!token || !['http:','https:'].includes(base.protocol) || base.search || base.hash || base.username || base.password) throw new Error('Invalid configuration');\nconst catalog=new Map();\nfor(const [route,name] of [['/vaults','GetVaults'],['/vaults/{vaultUuid}','GetVaultById']]) {\n const op=doc.paths[route].get;\n if(op.operationId!==name) throw new Error('Approved operation mismatch');\n const properties=Object.create(null),required=[],params=new Map();\n for(const p of op.parameters??[]) {\n  if(p.schema?.type!=='string'||!(p.in==='query'||(p.in==='path'&&p.name==='vaultUuid'&&route.endsWith('{vaultUuid}')))) throw new Error('Unsupported parameter');\n  properties[p.name]={type:'string',description:p.description??p.name,...(p.schema.pattern?{pattern:p.schema.pattern}:{})};\n  if(p.required||p.in==='path') required.push(p.name);\n  params.set(p.name,p);\n }\n catalog.set(name,{route,params,tool:{name,description:op.summary,inputSchema:{type:'object',properties,required,additionalProperties:false}}});\n}\nconst server=new Server({name:'vault-metadata',version:'1.0.0'},{capabilities:{tools:{}}});\nserver.setRequestHandler(ListToolsRequestSchema,async()=>({tools:[...catalog.values()].map(x=>x.tool)}));\nconst error=()=>({isError:true,content:[{type:'text',text:'Request rejected or unavailable.'}]});\nfunction sensitive(x){if(typeof x==='string')return x.includes(token);return !!x&&typeof x==='object'&&Object.entries(x).some(([k,v])=>k.includes(token)||sensitive(v));}\nserver.setRequestHandler(CallToolRequestSchema,async req=>{try{\n const entry=catalog.get(req.params.name);if(!entry)return error();\n const args=req.params.arguments??{};if(typeof args!=='object'||Array.isArray(args)||entry.tool.inputSchema.required.some(k=>!Object.hasOwn(args,k)))return error();\n const url=new URL(base.href);let path=entry.route;\n for(const [key,value] of Object.entries(args)){\n  const p=entry.params.get(key);if(!p||typeof value!=='string'||(p.schema.pattern&&!new RegExp(p.schema.pattern).test(value)))return error();\n  if(p.in==='query')url.searchParams.set(key,value);else {if(!/^[a-z0-9]{26}$/.test(value))return error();path=path.replace('{vaultUuid}',encodeURIComponent(value));}\n }\n url.pathname=base.pathname.replace(/\\/+$/,'')+path;\n const res=await fetch(url,{method:'GET',headers:{Authorization:'Bearer '+token,Accept:'application/json'},redirect:'error'});if(!res.ok)return error();\n const data=await res.json();if(sensitive(data))return error();return {content:[{type:'text',text:JSON.stringify(data)}]};\n}catch{return error();}});\nawait server.connect(new StdioServerTransport());"
+      },
+      "grade": {
+        "passed": true,
+        "checks_total": 26,
+        "checks_passed": 26,
+        "epochs": [
+          {
+            "phase": "upstream",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true
+            }
+          },
+          {
+            "phase": "modified_spec_rotated_host",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true,
+              "new_query_parameter_discovered": true,
+              "new_query_parameter_forwarded": true
+            }
+          }
+        ]
+      },
+      "elapsed_seconds": 0.894
+    }
+  ],
+  "passed": true,
+  "stop": "first_pass",
+  "elapsed_seconds": 14.598,
+  "final_metrics": {
+    "config_bytes": 158,
+    "config_nonblank_lines": 11,
+    "config_arg_count": 1,
+    "config_env_count": 3,
+    "source_bytes": 2733,
+    "source_nonblank_lines": 33
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "arm": "custom",
+  "trial": 1,
+  "settings": {
+    "model": "gpt-6.2-astra",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "service_tier": "default",
+    "store": false,
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "max_output_tokens": 5000,
+    "prompt_cache_options": {
+      "mode": "explicit"
+    },
+    "parallel_tool_calls": false
+  },
+  "prompt_sha256": "fc7bf7b7b32f9127dd54e399df4b59ba54ebdfbbbf491e9eafa11f4582f5b2e1",
+  "started_utc": "2026-11-21T05:12:41.149332+00:00",
+  "turns": [
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 1838,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 25,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1863
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 1.98
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 2648,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 24,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2672
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 2.119
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 3313,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 1026,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 4339
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 13.128
+    }
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "name": "read_spec",
+      "arguments": {
+        "search": "/vaults:",
+        "lines": 100
+      },
+      "output_sha256": "786e827923cd85e8ff3861c879a5b237a1094314ba0f156e90dfe7fe2a974f71",
+      "ok": true
+    },
+    {
+      "turn": 2,
+      "name": "read_spec",
+      "arguments": {
+        "search": "    Vault:",
+        "lines": 72
+      },
+      "output_sha256": "9887cc2f7524ae0b693ee7d3bcff6cb5e8053d287b14e91d4b1d1c5b18576d1a",
+      "ok": true
+    },
+    {
+      "turn": 3,
+      "name": "submit_setup",
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "submission": {
+        "command": "deno-worker",
+        "args": [
+          "worker.js"
+        ],
+        "env": {
+          "SPEC": "${SPEC}",
+          "BASE_URL": "${BASE_URL}",
+          "TOKEN": "${TOKEN}"
+        },
+        "worker": "const doc=parseYaml(await Deno.readTextFile(Deno.env.get('SPEC')));\nconst base=new URL(Deno.env.get('BASE_URL')), token=Deno.env.get('TOKEN');\nif(!token || !['http:','https:'].includes(base.protocol) || base.search || base.hash || base.username || base.password) throw new Error('Invalid configuration');\nfunction inlineSchema(node,seen=new Set()) {\n if(Array.isArray(node)) return node.map(x=>inlineSchema(x,seen));\n if(!node || typeof node!=='object') return node;\n if(Object.hasOwn(node,'$ref')) {\n  const ref=node.$ref;\n  if(typeof ref!=='string'||!ref.startsWith('#/')||seen.has(ref)) throw new Error('Unsupported response reference');\n  let target=doc;\n  for(const part of ref.slice(2).split('/')) {\n   const key=part.replace(/~1/g,'/').replace(/~0/g,'~');\n   if(!target||!Object.hasOwn(target,key)) throw new Error('Invalid response reference');\n   target=target[key];\n  }\n  return inlineSchema(target,new Set(seen).add(ref));\n }\n return Object.fromEntries(Object.entries(node).map(([k,v])=>[k,inlineSchema(v,seen)]));\n}\nconst catalog=new Map();\nfor(const [route,name] of [['/vaults','GetVaults'],['/vaults/{vaultUuid}','GetVaultById']]) {\n const op=doc.paths[route].get;\n if(op.operationId!==name) throw new Error('Approved operation mismatch');\n const properties=Object.create(null),required=[],params=new Map();\n for(const p of op.parameters??[]) {\n  if(p.schema?.type!=='string'||!(p.in==='query'||(p.in==='path'&&p.name==='vaultUuid'&&route.endsWith('{vaultUuid}')))) throw new Error('Unsupported parameter');\n  properties[p.name]={type:'string',description:p.description??p.name,...(p.schema.pattern?{pattern:p.schema.pattern}:{})};\n  if(p.required||p.in==='path') required.push(p.name);\n  params.set(p.name,p);\n }\n const responseSchema=inlineSchema(op.responses['200'].content['application/json'].schema);\n catalog.set(name,{route,params,tool:{name,description:op.summary,_meta:{responseSchema},inputSchema:{type:'object',properties,required,additionalProperties:false}}});\n}\nconst server=new Server({name:'vault-metadata',version:'1.0.0'},{capabilities:{tools:{}}});\nserver.setRequestHandler(ListToolsRequestSchema,async()=>({tools:[...catalog.values()].map(x=>x.tool)}));\nconst error=()=>({isError:true,content:[{type:'text',text:'Request rejected or unavailable.'}]});\nfunction sensitive(x){if(typeof x==='string')return x.includes(token);return !!x&&typeof x==='object'&&Object.entries(x).some(([k,v])=>k.includes(token)||sensitive(v));}\nserver.setRequestHandler(CallToolRequestSchema,async req=>{try{\n const entry=catalog.get(req.params.name);if(!entry)return error();\n const args=req.params.arguments??{};if(typeof args!=='object'||Array.isArray(args)||entry.tool.inputSchema.required.some(k=>!Object.hasOwn(args,k)))return error();\n const url=new URL(base.href);let path=entry.route;\n for(const [key,value] of Object.entries(args)){\n  const p=entry.params.get(key);if(!p||typeof value!=='string'||(p.schema.pattern&&!new RegExp(p.schema.pattern).test(value)))return error();\n  if(p.in==='query')url.searchParams.set(key,value);else {if(!/^[a-z0-9]{26}$/.test(value))return error();path=path.replace('{vaultUuid}',encodeURIComponent(value));}\n }\n url.pathname=base.pathname.replace(/\\/+$/,'')+path;\n const res=await fetch(url,{method:'GET',headers:{Authorization:'Bearer '+token,Accept:'application/json'},redirect:'error'});if(!res.ok)return error();\n const data=await res.json();if(sensitive(data))return error();return {content:[{type:'text',text:JSON.stringify(data)}]};\n}catch{return error();}});\nawait server.connect(new StdioServerTransport());"
+      },
+      "grade": {
+        "passed": true,
+        "checks_passed": 42,
+        "checks_total": 42,
+        "primary": {
+          "passed": true,
+          "checks_total": 26,
+          "checks_passed": 26,
+          "epochs": [
+            {
+              "phase": "upstream",
+              "checks": {
+                "mcp_initialized": true,
+                "approved_catalog": true,
+                "filter_optional_string": true,
+                "vault_uuid_required_string": true,
+                "filtered_list_result": true,
+                "lookup_result": true,
+                "authenticated_list_request": true,
+                "authenticated_lookup_request": true,
+                "denied_read_rejected": true,
+                "denied_write_rejected": true,
+                "no_other_upstream_requests": true,
+                "credential_absent_from_mcp": true
+              }
+            },
+            {
+              "phase": "modified_spec_rotated_host",
+              "checks": {
+                "mcp_initialized": true,
+                "approved_catalog": true,
+                "filter_optional_string": true,
+                "vault_uuid_required_string": true,
+                "filtered_list_result": true,
+                "lookup_result": true,
+                "authenticated_list_request": true,
+                "authenticated_lookup_request": true,
+                "denied_read_rejected": true,
+                "denied_write_rejected": true,
+                "no_other_upstream_requests": true,
+                "credential_absent_from_mcp": true,
+                "new_query_parameter_discovered": true,
+                "new_query_parameter_forwarded": true
+              }
+            }
+          ]
+        },
+        "outputs": {
+          "passed": true,
+          "checks_total": 16,
+          "checks_passed": 16,
+          "epochs": [
+            {
+              "phase": "upstream",
+              "checks": {
+                "no_upstream_requests": true,
+                "GetVaults.shape": true,
+                "GetVaults.nine_field_types": true,
+                "GetVaults.four_type_enum_values": true,
+                "GetVaultById.shape": true,
+                "GetVaultById.nine_field_types": true,
+                "GetVaultById.four_type_enum_values": true
+              }
+            },
+            {
+              "phase": "modified_response",
+              "checks": {
+                "no_upstream_requests": true,
+                "GetVaults.shape": true,
+                "GetVaults.nine_field_types": true,
+                "GetVaults.four_type_enum_values": true,
+                "GetVaults.new_optional_boolean": true,
+                "GetVaultById.shape": true,
+                "GetVaultById.nine_field_types": true,
+                "GetVaultById.four_type_enum_values": true,
+                "GetVaultById.new_optional_boolean": true
+              }
+            }
+          ]
+        }
+      },
+      "elapsed_seconds": 0.681
+    }
+  ],
+  "passed": true,
+  "stop": "first_pass",
+  "elapsed_seconds": 17.912,
+  "final_metrics": {
+    "config_bytes": 158,
+    "config_nonblank_lines": 11,
+    "config_arg_count": 1,
+    "config_env_count": 3,
+    "source_bytes": 3571,
+    "source_nonblank_lines": 50
+  }
+}

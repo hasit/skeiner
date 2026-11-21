@@ -1,0 +1,299 @@
+{
+  "skeiner-1": {
+    "passed": true,
+    "checks_total": 16,
+    "checks_passed": 16,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaults.new_optional_boolean": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true,
+          "GetVaultById.new_optional_boolean": true
+        }
+      }
+    ]
+  },
+  "skeiner-2": {
+    "passed": true,
+    "checks_total": 16,
+    "checks_passed": 16,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaults.new_optional_boolean": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true,
+          "GetVaultById.new_optional_boolean": true
+        }
+      }
+    ]
+  },
+  "skeiner-3": {
+    "passed": true,
+    "checks_total": 16,
+    "checks_passed": 16,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": true,
+          "GetVaults.nine_field_types": true,
+          "GetVaults.four_type_enum_values": true,
+          "GetVaults.new_optional_boolean": true,
+          "GetVaultById.shape": true,
+          "GetVaultById.nine_field_types": true,
+          "GetVaultById.four_type_enum_values": true,
+          "GetVaultById.new_optional_boolean": true
+        }
+      }
+    ]
+  },
+  "package-1": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  },
+  "package-2": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  },
+  "package-3": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  },
+  "custom-1": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  },
+  "custom-2": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  },
+  "custom-3": {
+    "passed": false,
+    "checks_total": 16,
+    "checks_passed": 2,
+    "epochs": [
+      {
+        "phase": "upstream",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false
+        }
+      },
+      {
+        "phase": "modified_response",
+        "checks": {
+          "no_upstream_requests": true,
+          "GetVaults.shape": false,
+          "GetVaults.nine_field_types": false,
+          "GetVaults.four_type_enum_values": false,
+          "GetVaults.new_optional_boolean": false,
+          "GetVaultById.shape": false,
+          "GetVaultById.nine_field_types": false,
+          "GetVaultById.four_type_enum_values": false,
+          "GetVaultById.new_optional_boolean": false
+        }
+      }
+    ]
+  }
+}

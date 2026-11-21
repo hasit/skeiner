@@ -1,0 +1,164 @@
+{
+  "arm": "package",
+  "trial": 3,
+  "settings": {
+    "model": "gpt-6.2-astra",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "service_tier": "default",
+    "store": false,
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "max_output_tokens": 5000,
+    "prompt_cache_options": {
+      "mode": "explicit"
+    },
+    "parallel_tool_calls": false
+  },
+  "prompt_sha256": "3046eedd9fca0f17b96d8c6674a3580b7fdc301f415e8271c6d3fb9a545f2106",
+  "started_utc": "2026-11-21T05:10:23.113067+00:00",
+  "turns": [
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 774,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 23,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 797
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 1.805
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 1734,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 78,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 1812
+      },
+      "status": "completed",
+      "service_tier": "default",
+      "elapsed_seconds": 2.237
+    }
+  ],
+  "steps": [
+    {
+      "turn": 1,
+      "name": "read_spec",
+      "arguments": {
+        "search": "operationId",
+        "lines": 120
+      },
+      "output_sha256": "2b893a0355e25b64709d548e52076ab121f91962c6087378dae9e0eba168f7b3",
+      "ok": true
+    },
+    {
+      "turn": 2,
+      "name": "submit_setup",
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "submission": {
+        "command": "openapi-mcp-server",
+        "args": [
+          "--openapi-spec",
+          "${SPEC}",
+          "--api-base-url",
+          "${BASE_URL}",
+          "--tools",
+          "explicit",
+          "--tool",
+          "get-vaults",
+          "--tool",
+          "get-vault-by-id"
+        ],
+        "env": {
+          "API_HEADERS": "Authorization:Bearer ${TOKEN}"
+        }
+      },
+      "grade": {
+        "passed": true,
+        "checks_total": 26,
+        "checks_passed": 26,
+        "epochs": [
+          {
+            "phase": "upstream",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true
+            }
+          },
+          {
+            "phase": "modified_spec_rotated_host",
+            "checks": {
+              "mcp_initialized": true,
+              "approved_catalog": true,
+              "filter_optional_string": true,
+              "vault_uuid_required_string": true,
+              "filtered_list_result": true,
+              "lookup_result": true,
+              "authenticated_list_request": true,
+              "authenticated_lookup_request": true,
+              "denied_read_rejected": true,
+              "denied_write_rejected": true,
+              "no_other_upstream_requests": true,
+              "credential_absent_from_mcp": true,
+              "new_query_parameter_discovered": true,
+              "new_query_parameter_forwarded": true
+            }
+          }
+        ]
+      },
+      "elapsed_seconds": 0.385
+    }
+  ],
+  "passed": true,
+  "stop": "first_pass",
+  "elapsed_seconds": 4.429,
+  "final_metrics": {
+    "config_bytes": 299,
+    "config_nonblank_lines": 18,
+    "config_arg_count": 10,
+    "config_env_count": 1,
+    "source_bytes": 0,
+    "source_nonblank_lines": 0
+  }
+}

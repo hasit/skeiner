@@ -1,0 +1,11 @@
+{
+  "command": "deno-worker",
+  "args": [
+    "worker.js"
+  ],
+  "env": {
+    "SPEC": "${SPEC}",
+    "BASE_URL": "${BASE_URL}",
+    "TOKEN": "${TOKEN}"
+  }
+}

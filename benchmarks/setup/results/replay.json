@@ -1,0 +1,97 @@
+{
+  "completed_utc": "2026-11-21T05:10:53.762775+00:00",
+  "matched": true,
+  "binary_version": "0.1.0-alpha.2",
+  "runs": [
+    {
+      "arm": "custom",
+      "trial": 1,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "621db46379104ecd2a25f15053b5ba1704fa5a2ca7c1b446d31f2317afce0997"
+    },
+    {
+      "arm": "custom",
+      "trial": 2,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "fa7c4533dd30d267093bcd6ee8333f36b5b33f92c5e5b8a8d64884fddc18341c"
+    },
+    {
+      "arm": "custom",
+      "trial": 3,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "1853220cfcffae64988987dabfacc6ac898bdd5886a5bc64696455294b9d7420"
+    },
+    {
+      "arm": "package",
+      "trial": 1,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "8543b29965b0bb606aa25ab37405a7024b2b661b978c47f7aa43755bdbce7993",
+      "worker_sha256": null
+    },
+    {
+      "arm": "package",
+      "trial": 2,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "8543b29965b0bb606aa25ab37405a7024b2b661b978c47f7aa43755bdbce7993",
+      "worker_sha256": null
+    },
+    {
+      "arm": "package",
+      "trial": 3,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "8543b29965b0bb606aa25ab37405a7024b2b661b978c47f7aa43755bdbce7993",
+      "worker_sha256": null
+    },
+    {
+      "arm": "skeiner",
+      "trial": 1,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "a264de7b7ee38529d7e406684e5a85545e1d569b42b79709bfcbda237b6370f4",
+      "worker_sha256": null
+    },
+    {
+      "arm": "skeiner",
+      "trial": 2,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "a264de7b7ee38529d7e406684e5a85545e1d569b42b79709bfcbda237b6370f4",
+      "worker_sha256": null
+    },
+    {
+      "arm": "skeiner",
+      "trial": 3,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 26,
+      "checks_total": 26,
+      "launch_sha256": "b38d413abc7eb6edb6e69a7fe048fea11762378c240e815fd537ea79279a1159",
+      "worker_sha256": null
+    }
+  ]
+}

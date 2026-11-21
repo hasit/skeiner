@@ -1,0 +1,107 @@
+[
+  {
+    "trial": 1,
+    "passed": true,
+    "stop": "first_pass",
+    "elapsed_seconds": 17.912,
+    "turns": 3,
+    "submissions": 1,
+    "input_tokens": 7799,
+    "output_tokens": 1075,
+    "modeled_usd": 0.105392,
+    "before": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 2733,
+      "source_nonblank_lines": 33
+    },
+    "after": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 3571,
+      "source_nonblank_lines": 50
+    },
+    "delta": {
+      "config_bytes": 0,
+      "config_nonblank_lines": 0,
+      "config_arg_count": 0,
+      "config_env_count": 0,
+      "source_bytes": 838,
+      "source_nonblank_lines": 17
+    }
+  },
+  {
+    "trial": 2,
+    "passed": true,
+    "stop": "first_pass",
+    "elapsed_seconds": 18.638,
+    "turns": 3,
+    "submissions": 1,
+    "input_tokens": 7637,
+    "output_tokens": 1103,
+    "modeled_usd": 0.105216,
+    "before": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 2846,
+      "source_nonblank_lines": 30
+    },
+    "after": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 3696,
+      "source_nonblank_lines": 43
+    },
+    "delta": {
+      "config_bytes": 0,
+      "config_nonblank_lines": 0,
+      "config_arg_count": 0,
+      "config_env_count": 0,
+      "source_bytes": 850,
+      "source_nonblank_lines": 13
+    }
+  },
+  {
+    "trial": 3,
+    "passed": true,
+    "stop": "first_pass",
+    "elapsed_seconds": 19.319,
+    "turns": 3,
+    "submissions": 1,
+    "input_tokens": 7848,
+    "output_tokens": 1173,
+    "modeled_usd": 0.109704,
+    "before": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 3062,
+      "source_nonblank_lines": 34
+    },
+    "after": {
+      "config_bytes": 158,
+      "config_nonblank_lines": 11,
+      "config_arg_count": 1,
+      "config_env_count": 3,
+      "source_bytes": 3892,
+      "source_nonblank_lines": 51
+    },
+    "delta": {
+      "config_bytes": 0,
+      "config_nonblank_lines": 0,
+      "config_arg_count": 0,
+      "config_env_count": 0,
+      "source_bytes": 830,
+      "source_nonblank_lines": 17
+    }
+  }
+]

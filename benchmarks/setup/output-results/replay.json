@@ -1,0 +1,37 @@
+{
+  "completed_utc": "2026-11-21T05:13:10.897134+00:00",
+  "matched": true,
+  "binary_version": "0.1.0-alpha.2",
+  "runs": [
+    {
+      "arm": "custom",
+      "trial": 1,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 42,
+      "checks_total": 42,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "de1bc7b153a85e5ef1d00fce5fec4dcc29d7f74e435260d8d4b986ccb452df43"
+    },
+    {
+      "arm": "custom",
+      "trial": 2,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 42,
+      "checks_total": 42,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "41aeac5093bb1e8268b458134fec26680b04baf832493ab236ed085fddffc2a8"
+    },
+    {
+      "arm": "custom",
+      "trial": 3,
+      "passed": true,
+      "matches": true,
+      "checks_passed": 42,
+      "checks_total": 42,
+      "launch_sha256": "7bf1ea77a9fe673039516292125ad3d9ceb50a30be01a2845327c3a4b325334f",
+      "worker_sha256": "27e65fe51d0dc378d00ac23c1eb7bf4b734bc7aaf0b15a6961f5a2f2086d8daa"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "command": "openapi-mcp-server",
+  "args": [
+    "--openapi-spec",
+    "${SPEC}",
+    "--api-base-url",
+    "${BASE_URL}",
+    "--tools",
+    "explicit",
+    "--tool",
+    "get-vaults",
+    "--tool",
+    "get-vault-by-id"
+  ],
+  "env": {
+    "API_HEADERS": "Authorization:Bearer ${TOKEN}"
+  }
+}

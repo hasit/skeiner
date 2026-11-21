@@ -1,0 +1,63 @@
+{
+  "observed_at": "2026-11-21T05:07:54.150940+00:00",
+  "target": "darwin-arm64",
+  "release": "v0.1.0-alpha.2",
+  "node": "v26.13.1",
+  "npm": "11.20.0",
+  "runs": [
+    {
+      "arm": "skeiner",
+      "trial": 1,
+      "seconds": 2.516,
+      "installed_file_bytes": 12384947
+    },
+    {
+      "arm": "package",
+      "trial": 1,
+      "seconds": 2.018,
+      "installed_file_bytes": 22696522
+    },
+    {
+      "arm": "custom",
+      "trial": 1,
+      "seconds": 1.467,
+      "installed_file_bytes": 18137647
+    },
+    {
+      "arm": "package",
+      "trial": 2,
+      "seconds": 1.858,
+      "installed_file_bytes": 22696522
+    },
+    {
+      "arm": "custom",
+      "trial": 2,
+      "seconds": 1.368,
+      "installed_file_bytes": 18137647
+    },
+    {
+      "arm": "skeiner",
+      "trial": 2,
+      "seconds": 2.461,
+      "installed_file_bytes": 12384947
+    },
+    {
+      "arm": "custom",
+      "trial": 3,
+      "seconds": 1.421,
+      "installed_file_bytes": 18137647
+    },
+    {
+      "arm": "skeiner",
+      "trial": 3,
+      "seconds": 1.163,
+      "installed_file_bytes": 12384947
+    },
+    {
+      "arm": "package",
+      "trial": 3,
+      "seconds": 1.786,
+      "installed_file_bytes": 22696522
+    }
+  ]
+}
