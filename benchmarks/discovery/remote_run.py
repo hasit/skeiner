@@ -23,6 +23,15 @@ def state(run):
     return json.loads(gh("run", "view", run, "--json", "status,conclusion,headSha,url"))
 
 
+def wait_for_end(run, seconds):
+    deadline = time.monotonic() + seconds
+    while (status := state(run))["status"] != "completed":
+        if time.monotonic() >= deadline:
+            raise TimeoutError("remote host did not finish")
+        time.sleep(4)
+    return status
+
+
 def endpoint(run, private):
     # The first artifact is available as soon as its upload step completes.
     deadline = time.monotonic() + 15 * 60
@@ -63,26 +72,31 @@ def main():
         run = match.group(1)
         print(f"Remote benchmark run {run}", flush=True)
         client = HERE / "remote_client.py"
+        run_file = out / "run.json"
+        run_file.write_text(json.dumps(state(run), indent=2) + "\n")
         try:
             origin = endpoint(run, private)
             print("Running 48 paired audits from this client", flush=True)
             subprocess.run([sys.executable, str(client), "measure", "--endpoint-file", str(origin),
                             "--token-file", str(token), "--out", str(out / "client.json")], check=True)
-            deadline = time.monotonic() + 12 * 60
-            while (status := state(run))["status"] != "completed":
-                if time.monotonic() >= deadline:
-                    raise TimeoutError("remote host did not finish")
-                time.sleep(4)
+            status = wait_for_end(run, 12 * 60)
+            run_file.write_text(json.dumps(status, indent=2) + "\n")
             gh("run", "download", run, "--name", "remote-server", "--dir", str(out))
             if status["conclusion"] != "success":
                 raise RuntimeError(f"run {run} ended with {status['conclusion']}")
             subprocess.run([sys.executable, str(client), "report", str(out / "client.json"),
                             "--host", str(out / "server.json")], check=True)
-            (out / "run.json").write_text(json.dumps(status, indent=2) + "\n")
         except BaseException:
-            # Stop the temporary route early if the caller exits before /finish.
-            if state(run)["status"] != "completed":
-                subprocess.run(["gh", "run", "cancel", run], cwd=HERE, check=False)
+            # Stop the temporary route early if the caller exits during sampling.
+            try:
+                if state(run)["status"] != "completed":
+                    gh("run", "cancel", run)
+                final = wait_for_end(run, 90)
+                run_file.write_text(json.dumps(final, indent=2) + "\n")
+                if not (out / "server.json").exists():
+                    gh("run", "download", run, "--name", "remote-server", "--dir", str(out))
+            except (TimeoutError, subprocess.SubprocessError):
+                print(f"Check run {run} for any remaining host artifacts.", file=sys.stderr)
             raise
 
 

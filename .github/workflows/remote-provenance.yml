@@ -40,7 +40,7 @@ jobs:
             set +e
             env -i PATH="$PATH" HOME="$HOME" GITHUB_TOKEN="$GITHUB_TOKEN" BENCH_TOKEN_SHA256="$BENCH_TOKEN_SHA256" \
               python3 benchmarks/discovery/remote_host.py --port 8765 --receipt "$RUNNER_TEMP/server.json" \
-                --ready-file "$RUNNER_TEMP/remote-ready" --requests 120 --seconds 600 &
+                --ready-file "$RUNNER_TEMP/remote-ready" --requests 96 --seconds 600 &
             pid=$!
             echo "$pid" > "$RUNNER_TEMP/remote-host.pid"
             wait "$pid"

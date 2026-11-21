@@ -109,19 +109,12 @@ def serve(args, token_hash):
             def do_POST(self):
                 if not self.authenticated():
                     return
-                if self.path not in ("/audit", "/finish"):
+                if self.path != "/audit":
                     self.reply(404, {"error": "unknown route"})
                     return
                 length = self.headers.get("Content-Length", "0")
                 if self.headers.get("Transfer-Encoding") or not re.fullmatch(r"[0-9]{1,3}", length):
                     self.reply(400, {"error": "invalid content length"})
-                    return
-                if self.path == "/finish":
-                    if int(length) != 0:
-                        self.reply(400, {"error": "expected empty body"})
-                        return
-                    done.set()
-                    self.reply(200, {"finished": True})
                     return
                 try:
                     request = json.loads(self.rfile.read(int(length)))
@@ -161,6 +154,7 @@ def serve(args, token_hash):
                                    "X-Benchmark-Worker-Ms": duration,
                                    "X-Grounded": int(row["grounded"]), "X-Reads": len(reads),
                                    "X-Benchmark-Sequence": seq})
+                        self.wfile.flush()
                     finally:
                         # Preserve the sample even if its response was lost in transit.
                         save(args.receipt, receipt)

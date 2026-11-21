@@ -131,10 +131,7 @@ def measure(endpoint, token, output):
                        correct=correct(case, answer), grounded=evidence == "1",
                        read_count=int(response.getheader("X-Reads", "-1")))
             save(output, record)
-        stage = "finish"
-        response, _, _, _ = request(conn, "POST", "/finish", headers, b"")
-        if response.status != 200:
-            raise RuntimeError(f"finish returned HTTP {response.status}")
+        # The host exits after its last measured response and persists its own receipt.
         record.update(complete=True, finished_at=utc())
     except Exception as exc:
         # An HTTP proxy or TLS error can quote the ephemeral origin. Keep it out of receipts.
@@ -157,7 +154,11 @@ def comparison(pairs, field):
 
 
 def report(client, host):
-    if not client.get("complete") or client["rounds"] != ROUNDS:
+    # The original client sent a separate shutdown request after every audit had been saved.
+    # Its failure can be reported separately once every timed request has a matching host record.
+    failure = client.get("failure") or {}
+    legacy_finish_error = client.get("complete") is False and failure.get("stage") == "finish"
+    if (client.get("complete") is not True and not legacy_finish_error) or client["rounds"] != ROUNDS:
         raise ValueError("client measurement incomplete")
     if len(client["runs"]) != 2 * EXPECTED_PAIRS or len(host["runs"]) != len(client["runs"]):
         raise ValueError("incomplete client or host enrollment")
@@ -205,7 +206,9 @@ def report(client, host):
             "median_elapsed_outside_worker_ms": round(median(r["elapsed_ms"] - r["worker_ms"] for r in rows), 3),
             "audits_on_reused_connection": sum(r["reused_connection"] for r in rows),
         }
-    return {"arms": arms, "remote_client": comparison(pairs.values(), "elapsed_ms"),
+    return {"verified_measured_requests": len(client["runs"]),
+            "unmeasured_shutdown_error": failure.get("kind", "unknown") if legacy_finish_error else None,
+            "arms": arms, "remote_client": comparison(pairs.values(), "elapsed_ms"),
             "worker": comparison(pairs.values(), "worker_ms"),
             "remote_client_by_round": [comparison([v for k, v in pairs.items() if k[0] == i], "elapsed_ms")
                                        for i in range(1, ROUNDS + 1)]}
