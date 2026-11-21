@@ -2,7 +2,7 @@
 
 | Study | What it measures |
 | --- | --- |
-| [GitHub release provenance](discovery-benchmark.md) | GPT-6.2 Astra discovers and follows GitHub endpoints from Skeiner and client-side JavaScript. Includes model cost and live replay latency. |
+| [GitHub release provenance](discovery-benchmark.md) | Compare program authorship and live latency. A real remote client also runs Skeiner and Deno beside the same GitHub gateway. |
 | [Open-Meteo hot spells](weather-benchmark.md) | Accuracy and cost for fresh model answers, saved programs, a client that supplies daily highs, and a community weather MCP. |
 | [GitHub commit history](github-benchmark.md) | Tool payload and latency against GitHub's official MCP server. |
 

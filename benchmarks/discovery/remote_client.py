@@ -214,6 +214,29 @@ def report(client, host):
                                        for i in range(1, ROUNDS + 1)]}
 
 
+def published():
+    sessions = {}
+    pairs = []
+    same_body = same_reads = 0
+    for folder in sorted((HERE / "results/remote").glob("session-*")):
+        client = json.loads((folder / "client.json").read_text())
+        host = json.loads((folder / "server.json").read_text())
+        run = json.loads((folder / "run.json").read_text())
+        if run["status"] != "completed" or run["headSha"] != host["commit"]:
+            raise ValueError(f"{folder.name} host differs from the archived workflow run")
+        sessions[folder.name] = report(client, host)
+        for i in range(0, len(client["runs"]), 2):
+            a, b = client["runs"][i:i + 2]
+            pairs.append({a["arm"]: a, b["arm"]: b})
+            same_body += a["response_sha256"] == b["response_sha256"]
+            same_reads += host["runs"][i]["reads"] == host["runs"][i + 1]["reads"]
+    if not pairs:
+        raise ValueError("missing published measurements")
+    return {"sessions": sessions, "pooled_client": comparison(pairs, "elapsed_ms"),
+            "pooled_worker": comparison(pairs, "worker_ms"), "pairs_with_identical_answer_bytes": same_body,
+            "pairs_with_identical_upstream_reads": same_reads}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     cmd = parser.add_subparsers(dest="command", required=True)
@@ -224,8 +247,11 @@ def main():
     check = cmd.add_parser("report")
     check.add_argument("client", type=Path)
     check.add_argument("--host", type=Path, required=True)
+    cmd.add_parser("published", help="verify both published sessions and pool the matched measurements")
     args = parser.parse_args()
-    if args.command == "report":
+    if args.command == "published":
+        print(json.dumps(published(), indent=2))
+    elif args.command == "report":
         print(json.dumps(report(json.loads(args.client.read_text()), json.loads(args.host.read_text())), indent=2))
     else:
         endpoint = args.endpoint_file.read_text().strip() if args.endpoint_file else os.getenv("REMOTE_BENCH_URL", "")

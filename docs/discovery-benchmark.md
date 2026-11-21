@@ -2,6 +2,8 @@
 
 Three GPT-6.2 Astra authors per approach independently discovered the endpoints, wrote JavaScript, and fetched the data. Both approaches produced **12 of 12 correct, evidence-backed audits**. Client-side JavaScript used about 5% less model spend. With both runtimes on the same host, warm replay was effectively tied on live GitHub. [Design recorded before model calls](../benchmarks/discovery/design.md) · [Programs and provider usage](../benchmarks/discovery/results)
 
+A later test used a real remote client with **both workers beside the gateway**. Both got all 96 audits right. Deno finished first in 64 of 96 matched pairs and was 13.8 ms faster at the paired median. [Remote comparison](#real-remote-client-equal-worker-placement)
+
 ## The task
 
 Given only a repository and a release tag, identify the commit SHA and subject, and report whether the commit and each annotated tag on the way to it contain a signature. This takes two dependent reads for a lightweight tag and three for the signed annotated tags in this sample. Native Git fetched each tag and inspected its objects independently. This check establishes signature presence. Signer trust would require separate verification. [GitHub reference API](https://docs.github.com/en/rest/git/refs#get-a-reference) · [Annotated tags](https://docs.github.com/en/rest/git/tags#get-a-tag) · [Cases and oracle](../benchmarks/discovery/fixtures/README.md)
@@ -38,7 +40,23 @@ Both arms made 90 live reads on each machine. The paired differences changed dir
 
 We repeated the same 36 macOS pairs against live GitHub with **an emulated 50 ms client-to-gateway round trip**. Each client-side GET crossed that link. Skeiner paid the same delay once to dispatch the program, then made its two or three dependent GETs from the gateway's side. Skeiner finished first in **34/36 pairs**, by **85 ms at the paired median**. Both arms still made 90 GitHub reads and returned 36 correct answers. [Placement experiment](../benchmarks/discovery/placement.md) · [All paired observations](../benchmarks/discovery/results/live/macos-link50.json)
 
-This result measures the benefit of executing near a required gateway. A JavaScript worker deployed beside that gateway could also make its dependent reads there. Skeiner currently serves MCP over stdio. The timing adds a fixed delay and excludes the transport and authentication a remote deployment would need. To reproduce it, pass `--gateway-rtt-ms 50` to the live harness.
+This result measures the benefit of executing near a required gateway. The remote-client experiment below puts both workers beside it. To reproduce the delay experiment, pass `--gateway-rtt-ms 50` to the live harness.
+
+## Real remote client, equal worker placement
+
+A macOS client dispatched one saved audit per HTTPS request through a temporary Cloudflare tunnel to a GitHub-hosted Linux machine. Both persistent workers ran there beside the same live GitHub gateway. The remote client specified the author, release and worker. Each worker followed the required Git objects itself and returned the same JSON answer format. Neither arm had an artificial delay. Each session ran the same 48 adjacent, order-balanced pairs. [Experiment design](../benchmarks/discovery/remote-design.md) · [Gateway host](../benchmarks/discovery/remote_host.py) · [Client and verifier](../benchmarks/discovery/remote_client.py)
+
+| Session | Skeiner client median | Deno client median | Median paired gap at client¹ | Median paired gap at worker¹ | Pairs Deno won at client |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| First | 580.9 ms | 581.0 ms | +8.7 ms | +7.7 ms | 29/48 |
+| Repeat on a fresh runner | 565.9 ms | 518.2 ms | +28.9 ms | +22.9 ms | 35/48 |
+| Both sessions | 574.0 ms | 531.7 ms | **+13.8 ms** | **+13.2 ms** | **64/96** |
+
+¹ We subtract Deno's duration from Skeiner's for each matched pair, then take the median of those differences. Positive values favor Deno. Each worker timer covers dispatch, program execution and live GitHub reads. The client timer also includes the HTTPS request and complete response. The setup request opened the connection before timing. Every measured audit reused it. [First session receipts](../benchmarks/discovery/results/remote/session-1) · [Second session receipts](../benchmarks/discovery/results/remote/session-2)
+
+Across both sessions, **each worker made 240 measured upstream GETs and returned 96/96 correct answers**. Every pair had identical request paths, statuses, upstream body sizes and final answer bytes. Once both workers could follow the dependent reads at the gateway, Skeiner showed no accuracy, request-count or end-to-end speed advantage on this workload. The measurements include upstream latency, so they cannot attribute the entire gap to either JavaScript engine.
+
+The first session's separate shutdown request failed after all 96 timed requests had been recorded at both ends. We kept the original receipts. For the repeat, the host closed itself after flushing the final measured response. The second workflow completed successfully. [First workflow](https://github.com/hasit/skeiner/actions/runs/44868080481) · [Repeat workflow](https://github.com/hasit/skeiner/actions/runs/44868328865)
 
 ## Reproduce
 
@@ -50,6 +68,13 @@ python3 benchmarks/discovery/client_install.py
 python3 benchmarks/discovery/dataset.py verify
 python3 benchmarks/discovery/study.py replay
 python3 benchmarks/discovery/report.py benchmarks/discovery/results/live/*.json
+python3 benchmarks/discovery/remote_client.py published
 ```
 
 Run `python3 benchmarks/discovery/live.py` with a GitHub token or an authenticated `gh` session for new live measurements. Run `python3 benchmarks/discovery/dataset.py verify-git` to refetch the upstream Git objects. To enroll six new paid authors, set `OPENAI_API_KEY` and run `python3 benchmarks/discovery/study.py measure --out /tmp/release-authors` with an empty output directory.
+
+To run the real remote comparison, use a recent authenticated GitHub CLI with workflow dispatch access to the repository. The following command starts a temporary Actions host, runs the 96 requests from your machine, downloads both receipts and verifies them. It reuses the published programs and incurs no model calls.
+
+```sh
+python3 benchmarks/discovery/remote_run.py --out /tmp/skeiner-remote-audit
+```
