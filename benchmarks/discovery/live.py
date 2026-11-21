@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from queue import Empty, LifoQueue
-from time import perf_counter
+from time import perf_counter, sleep
 from urllib.parse import urlsplit
 
 from client import warm_session
@@ -35,6 +35,7 @@ def github_gateway():
     context = ssl.create_default_context(cafile=trust)
     connections = LifoQueue()
     reads = []
+    ingress = {"delay_seconds": 0}
 
     def upstream(target):
         try:
@@ -53,6 +54,8 @@ def github_gateway():
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
+            if ingress["delay_seconds"]:
+                sleep(ingress["delay_seconds"])
             path = urlsplit(self.path).path
             if path in paths:
                 status, data = upstream(self.path)
@@ -76,7 +79,7 @@ def github_gateway():
         thread = threading.Thread(target=server.serve_forever, daemon=True)
         thread.start()
         try:
-            yield f"http://127.0.0.1:{server.server_port}", reads
+            yield f"http://127.0.0.1:{server.server_port}", reads, ingress
         finally:
             server.shutdown()
             thread.join()
@@ -84,9 +87,9 @@ def github_gateway():
                 connections.get_nowait().close()
 
 
-def measure(binary, rounds):
+def measure(binary, rounds, link_ms):
     rows = []
-    with github_gateway() as (base, reads), ExitStack() as stack:
+    with github_gateway() as (base, reads, ingress), ExitStack() as stack:
         calls = {}
         programs = {}
         for trial in TRIALS:
@@ -113,8 +116,13 @@ def measure(binary, rounds):
                         key = (arm, trial)
                         row = {"round": iteration, "trial": trial, "case": case, "arm": arm}
                         reads.clear()
+                        # A distant client crosses the same link for each individual HTTP GET
+                        # or once for a whole program dispatched to the gateway's host.
+                        ingress["delay_seconds"] = link_ms / 1000 if arm == "client" else 0
                         if key in programs:
                             start = perf_counter()
+                            if link_ms and arm == "skeiner":
+                                sleep(link_ms / 1000)
                             result, ok = calls[key]({**programs[key], "input": inputs})
                             elapsed = round((perf_counter() - start) * 1000, 2)
                             answer = answer_json(result) if ok else None
@@ -132,10 +140,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", type=Path, default=ROOT / "skeiner")
     parser.add_argument("--rounds", type=int, choices=range(1, 6), default=3)
+    parser.add_argument("--gateway-rtt-ms", type=int, choices=(0, 50), default=0,
+                        help="optional emulated client-to-gateway round trip; default is co-located")
     args = parser.parse_args()
     print(json.dumps({"started_at": datetime.now(timezone.utc).isoformat(),
                       "platform": platform.system() + "/" + platform.machine(),
-                      "rounds": args.rounds, "runs": measure(args.binary.resolve(), args.rounds)}, indent=2))
+                      "rounds": args.rounds, "emulated_gateway_rtt_ms": args.gateway_rtt_ms,
+                      "runs": measure(args.binary.resolve(), args.rounds, args.gateway_rtt_ms)}, indent=2))
 
 
 if __name__ == "__main__":

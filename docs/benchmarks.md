@@ -1,6 +1,10 @@
 # Benchmarks
 
-The weather study compares answer accuracy and model spend on Open-Meteo data. It includes fresh answers, independently authored Skeiner programs, client-side JavaScript, and a live community weather MCP. The GitHub benchmark measures tool payload and latency on three tasks against GitHub's official MCP server. [Weather results](weather-benchmark.md) · [Live GitHub results](github-benchmark.md)
+| Study | What it measures |
+| --- | --- |
+| [GitHub release provenance](discovery-benchmark.md) | GPT-6.2 Astra discovers and follows GitHub endpoints from Skeiner and client-side JavaScript. Includes model cost and live replay latency. |
+| [Open-Meteo hot spells](weather-benchmark.md) | Accuracy and cost for fresh model answers, saved programs, a client that supplies daily highs, and a community weather MCP. |
+| [GitHub commit history](github-benchmark.md) | Tool payload and latency against GitHub's official MCP server. |
 
 Two local workloads measure different costs. The inventory replay measures how much data reaches a caller that already has a verified program. The runtime benchmark measures how long Skeiner spends indexing, searching and running a program over a loopback API. Both run with Go and the repository fixtures. Only the initial Go dependency download requires network access.
 
