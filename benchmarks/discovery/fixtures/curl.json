@@ -1,0 +1,173 @@
+{
+  "/repos/curl/curl": {
+    "status": 200,
+    "body": {
+      "full_name": "curl/curl",
+      "default_branch": "master",
+      "description": "A command line tool and library for transferring data with URL syntax, supporting DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, MQTT, MQTTS, POP3, POP3S, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET, TFTP, WS and WSS. libcurl offers a myriad of powerful features",
+      "archived": false,
+      "url": "https://api.github.com/repos/curl/curl"
+    }
+  },
+  "/repos/curl/curl/branches/curl-8_11_0": {
+    "status": 404,
+    "body": {
+      "message": "Branch not found",
+      "status": "404"
+    }
+  },
+  "/repos/curl/curl/branches/master": {
+    "status": 200,
+    "body": {
+      "name": "master",
+      "protected": true,
+      "commit": {
+        "sha": "cb870c11c9a71b62780aeb41d9add1a1b34045ea",
+        "url": "https://api.github.com/repos/curl/curl/commits/cb870c11c9a71b62780aeb41d9add1a1b34045ea"
+      }
+    }
+  },
+  "/repos/curl/curl/releases/latest": {
+    "status": 200,
+    "body": {
+      "id": 412386365,
+      "tag_name": "curl-8_23_0",
+      "target_commitish": "master",
+      "draft": false,
+      "prerelease": false,
+      "name": "8.23.0",
+      "url": "https://api.github.com/repos/curl/curl/releases/412386365"
+    }
+  },
+  "/repos/curl/curl/releases/tags/curl-8_11_0": {
+    "status": 200,
+    "body": {
+      "id": 183866636,
+      "tag_name": "curl-8_11_0",
+      "target_commitish": "master",
+      "draft": false,
+      "prerelease": false,
+      "name": "8.11.0",
+      "url": "https://api.github.com/repos/curl/curl/releases/183866636"
+    }
+  },
+  "/repos/curl/curl/git/matching-refs/tags/curl-8_11_0": {
+    "status": 200,
+    "body": [
+      {
+        "ref": "refs/tags/curl-8_11_0",
+        "node_id": "MDM6UmVmNTY5MDQxOnJlZnMvdGFncy9jdXJsLThfMTFfMA==",
+        "url": "https://api.github.com/repos/curl/curl/git/refs/tags/curl-8_11_0",
+        "object": {
+          "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "type": "tag",
+          "url": "https://api.github.com/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b"
+        }
+      }
+    ]
+  },
+  "/repos/curl/curl/git/ref/tags/curl-8_11_0": {
+    "status": 200,
+    "body": {
+      "ref": "refs/tags/curl-8_11_0",
+      "node_id": "MDM6UmVmNTY5MDQxOnJlZnMvdGFncy9jdXJsLThfMTFfMA==",
+      "url": "https://api.github.com/repos/curl/curl/git/refs/tags/curl-8_11_0",
+      "object": {
+        "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b"
+      }
+    }
+  },
+  "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b": {
+    "status": 200,
+    "body": {
+      "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+      "url": "https://api.github.com/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+      "tag": "curl-8_11_0",
+      "object": {
+        "sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "type": "commit",
+        "url": "https://api.github.com/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a"
+      },
+      "message": "8.11.0\n\n[message body omitted]",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+      }
+    }
+  },
+  "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a": {
+    "status": 200,
+    "body": {
+      "sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "url": "https://api.github.com/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "tree": {
+        "sha": "5ebdafd4be022712d1590d25411b65d4d688b445",
+        "url": "https://api.github.com/repos/curl/curl/git/trees/5ebdafd4be022712d1590d25411b65d4d688b445"
+      },
+      "parents": [
+        {
+          "sha": "62020546cce90bde0a55f5a00ca8c199107cd3f6",
+          "url": "https://api.github.com/repos/curl/curl/git/commits/62020546cce90bde0a55f5a00ca8c199107cd3f6",
+          "html_url": "https://github.com/curl/curl/commit/62020546cce90bde0a55f5a00ca8c199107cd3f6"
+        }
+      ],
+      "message": "RELEASE-NOTES: synced\n\n[message body omitted]",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+      }
+    }
+  },
+  "/repos/curl/curl/git/trees/5ebdafd4be022712d1590d25411b65d4d688b445": {
+    "status": 200,
+    "body": {
+      "sha": "5ebdafd4be022712d1590d25411b65d4d688b445",
+      "url": "https://api.github.com/repos/curl/curl/git/trees/5ebdafd4be022712d1590d25411b65d4d688b445",
+      "truncated": false
+    }
+  },
+  "/repos/curl/curl/commits/curl-8_11_0": {
+    "status": 200,
+    "body": {
+      "sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "url": "https://api.github.com/repos/curl/curl/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "commit": {
+        "url": "https://api.github.com/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "tree": {
+          "sha": "5ebdafd4be022712d1590d25411b65d4d688b445",
+          "url": "https://api.github.com/repos/curl/curl/git/trees/5ebdafd4be022712d1590d25411b65d4d688b445"
+        },
+        "message": "RELEASE-NOTES: synced\n\n[message body omitted]",
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+        }
+      }
+    }
+  },
+  "/repos/curl/curl/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a": {
+    "status": 200,
+    "body": {
+      "sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "url": "https://api.github.com/repos/curl/curl/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+      "commit": {
+        "url": "https://api.github.com/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "tree": {
+          "sha": "5ebdafd4be022712d1590d25411b65d4d688b445",
+          "url": "https://api.github.com/repos/curl/curl/git/trees/5ebdafd4be022712d1590d25411b65d4d688b445"
+        },
+        "message": "RELEASE-NOTES: synced\n\n[message body omitted]",
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+        }
+      }
+    }
+  }
+}

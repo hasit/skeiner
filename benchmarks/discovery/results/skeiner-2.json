@@ -1,0 +1,645 @@
+{
+  "arm": "skeiner",
+  "trial": 2,
+  "case": "git",
+  "settings": {
+    "model": "gpt-6.2-astra",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "service_tier": "default",
+    "store": false,
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "max_output_tokens": 4000,
+    "prompt_cache_options": {
+      "mode": "explicit"
+    },
+    "parallel_tool_calls": false
+  },
+  "prompt_sha256": "4dd9709d8335a81a145ab1460a9e4d13f521493bf9ffa410af5f7ca96a2be956",
+  "elapsed_seconds": 9.405,
+  "reads": [
+    {
+      "path": "/repos/git/git/git/ref/tags/v2.47.0",
+      "ok": true
+    },
+    {
+      "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+      "ok": true
+    },
+    {
+      "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "ok": true
+    }
+  ],
+  "turns": [
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 550,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 29,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 579
+      },
+      "service_tier": "default",
+      "status": "completed",
+      "elapsed_seconds": 2.321
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 1926,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 230,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2156
+      },
+      "service_tier": "default",
+      "status": "completed",
+      "elapsed_seconds": 4.095
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "usage": {
+        "input_tokens": 2242,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cache_write_tokens_details": {
+            "ttl_12h_tokens": 0,
+            "ttl_30m_tokens": 0
+          },
+          "cached_tokens": 0
+        },
+        "output_tokens": 101,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 2343
+      },
+      "service_tier": "default",
+      "status": "completed",
+      "elapsed_seconds": 2.738
+    }
+  ],
+  "calls": [
+    {
+      "turn": 1,
+      "name": "search",
+      "argument_bytes": 98,
+      "arguments": {
+        "query": "git get ref tags annotated tag object commit message verification signature owner repo"
+      },
+      "ok": true,
+      "reply_bytes": 5295,
+      "result": [
+        {
+          "operationId": "getAnnotatedTag",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/git/tags/{tag_sha}",
+          "summary": "Get an annotated Git tag object by object SHA, including its target and signature verification",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "tag_sha",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "object": {
+                  "properties": {
+                    "sha": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "enum": [
+                        "tag",
+                        "commit",
+                        "tree",
+                        "blob"
+                      ],
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "sha": {
+                  "type": "string"
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "verification": {
+                  "properties": {
+                    "reason": {
+                      "type": "string"
+                    },
+                    "signature": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "verified": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "getGitCommit",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/git/commits/{commit_sha}",
+          "summary": "Get a Git commit object by its commit SHA, including its message and signature verification",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "commit_sha",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "sha": {
+                  "type": "string"
+                },
+                "tree": {
+                  "properties": {
+                    "sha": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "verification": {
+                  "properties": {
+                    "reason": {
+                      "type": "string"
+                    },
+                    "signature": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "verified": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "getRepositoryCommit",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/commits/{ref}",
+          "summary": "Get a repository commit by branch, tag name, or SHA, including its message and signature verification",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "ref",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "commit": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "tree": {
+                      "properties": {
+                        "sha": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "verification": {
+                      "properties": {
+                        "reason": {
+                          "type": "string"
+                        },
+                        "signature": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "sha": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "getTagReference",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/git/ref/tags/{tag}",
+          "summary": "Get an exact Git tag reference and its immediate object type and SHA",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "tag",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "object": {
+                  "properties": {
+                    "sha": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "enum": [
+                        "tag",
+                        "commit",
+                        "tree",
+                        "blob"
+                      ],
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "ref": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "listMatchingTagReferences",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/git/matching-refs/tags/{tag}",
+          "summary": "List Git tag references whose names start with a prefix",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "tag",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "items": {
+                "properties": {
+                  "object": {
+                    "properties": {
+                      "sha": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "enum": [
+                          "tag",
+                          "commit",
+                          "tree",
+                          "blob"
+                        ],
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "ref": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        {
+          "operationId": "getReleaseByTag",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/releases/tags/{tag}",
+          "summary": "Get published release metadata for a tag name",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "tag",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "draft": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "prerelease": {
+                  "type": "boolean"
+                },
+                "tag_name": {
+                  "type": "string"
+                },
+                "target_commitish": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "getGitTree",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/git/trees/{tree_sha}",
+          "summary": "Get a Git tree by tree SHA",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "tree_sha",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "sha": {
+                  "type": "string"
+                },
+                "truncated": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        {
+          "operationId": "getBranch",
+          "method": "GET",
+          "path": "/repos/{owner}/{repo}/branches/{branch}",
+          "summary": "Get a branch and its head commit",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "branch",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "owner",
+              "type": "string",
+              "required": true
+            },
+            {
+              "in": "path",
+              "name": "repo",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "response": {
+            "200": {
+              "properties": {
+                "commit": {
+                  "properties": {
+                    "sha": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "protected": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "name": "execute",
+      "argument_bytes": 756,
+      "arguments": {
+        "mode": "async",
+        "input": {
+          "owner": "git",
+          "repo": "git",
+          "tag": "v2.47.0"
+        },
+        "code": "const {owner,repo,tag}=api.input;\nconst read=(op,params)=>api.call(op,{path:{owner,repo,...params}});\nconst signed=obj=>Boolean(obj.verification.signature);\nlet {object}=await read('getTagReference',{tag});\nconst tag_chain=[];\nwhile(object.type==='tag'){\n  const node=await read('getAnnotatedTag',{tag_sha:object.sha});\n  tag_chain.push({sha:node.sha,signed:signed(node)});\n  object=node.object;\n}\nif(object.type!=='commit') throw new Error('Tag does not resolve to a commit');\nconst commit=await read('getGitCommit',{commit_sha:object.sha});\nreturn {commit_sha:commit.sha,commit_subject:commit.message.split(/\\r?\\n/,1)[0],commit_signed:signed(commit),tag_chain};"
+      },
+      "ok": true,
+      "reply_bytes": 186,
+      "result": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      }
+    }
+  ],
+  "answer": {
+    "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+    "commit_subject": "Git 2.47",
+    "commit_signed": false,
+    "tag_chain": [
+      {
+        "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+        "signed": true
+      }
+    ]
+  },
+  "stop": "final",
+  "tools_sha256": "7c96d94e93debef85b1f7b4760d20732e247a5c545b3f44c64860017191e795b",
+  "program_sha256": "db2ce5850ff8af3ceea9e164093f49cf1782847cb178352035b247f9acf54c6e",
+  "saved_mode": "async",
+  "correct": true,
+  "grounded": true
+}

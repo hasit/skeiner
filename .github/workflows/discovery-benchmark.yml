@@ -1,0 +1,31 @@
+name: Live release provenance benchmark
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@d8cbb8045d7f43706b9177cceb36c1f91a6644d5 # v7.1.0
+        with:
+          go-version-file: go.mod
+      - name: Build Skeiner and install pinned Deno
+        run: |
+          go build -trimpath -o ./skeiner ./cmd/skeiner
+          python3 benchmarks/discovery/client_install.py
+      - name: Verify the four tags against native Git
+        run: python3 benchmarks/discovery/dataset.py verify-git
+      - name: Run every enrolled program against live GitHub
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 benchmarks/discovery/live.py > linux.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-provenance-measurements
+          path: linux.json

@@ -1,0 +1,144 @@
+{
+  "/repos/golang/go": {
+    "status": 200,
+    "body": {
+      "full_name": "golang/go",
+      "default_branch": "master",
+      "description": "The Go programming language",
+      "archived": false,
+      "url": "https://api.github.com/repos/golang/go"
+    }
+  },
+  "/repos/golang/go/branches/go1.22.0": {
+    "status": 404,
+    "body": {
+      "message": "Branch not found",
+      "status": "404"
+    }
+  },
+  "/repos/golang/go/branches/master": {
+    "status": 200,
+    "body": {
+      "name": "master",
+      "protected": true,
+      "commit": {
+        "sha": "d7fbd868e418c3766423fcb8ffb12655c5c5d58d",
+        "url": "https://api.github.com/repos/golang/go/commits/d7fbd868e418c3766423fcb8ffb12655c5c5d58d"
+      }
+    }
+  },
+  "/repos/golang/go/releases/latest": {
+    "status": 404,
+    "body": {
+      "message": "Not Found",
+      "status": "404"
+    }
+  },
+  "/repos/golang/go/releases/tags/go1.22.0": {
+    "status": 404,
+    "body": {
+      "message": "Not Found",
+      "status": "404"
+    }
+  },
+  "/repos/golang/go/git/matching-refs/tags/go1.22.0": {
+    "status": 200,
+    "body": [
+      {
+        "ref": "refs/tags/go1.22.0",
+        "node_id": "MDM6UmVmMjMwOTY5NTk6cmVmcy90YWdzL2dvMS4yMi4w",
+        "url": "https://api.github.com/repos/golang/go/git/refs/tags/go1.22.0",
+        "object": {
+          "sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "type": "commit",
+          "url": "https://api.github.com/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57"
+        }
+      }
+    ]
+  },
+  "/repos/golang/go/git/ref/tags/go1.22.0": {
+    "status": 200,
+    "body": {
+      "ref": "refs/tags/go1.22.0",
+      "node_id": "MDM6UmVmMjMwOTY5NTk6cmVmcy90YWdzL2dvMS4yMi4w",
+      "url": "https://api.github.com/repos/golang/go/git/refs/tags/go1.22.0",
+      "object": {
+        "sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "type": "commit",
+        "url": "https://api.github.com/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57"
+      }
+    }
+  },
+  "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57": {
+    "status": 200,
+    "body": {
+      "sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "url": "https://api.github.com/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "tree": {
+        "sha": "aea65e849987410bf011765a7acb6a326af4f7d0",
+        "url": "https://api.github.com/repos/golang/go/git/trees/aea65e849987410bf011765a7acb6a326af4f7d0"
+      },
+      "parents": [
+        {
+          "sha": "b0957cfcf94193b4588674c96be314ad5715f194",
+          "url": "https://api.github.com/repos/golang/go/git/commits/b0957cfcf94193b4588674c96be314ad5715f194",
+          "html_url": "https://github.com/golang/go/commit/b0957cfcf94193b4588674c96be314ad5715f194"
+        }
+      ],
+      "message": "[release-branch.go1.22] go1.22.0\n\n[message body omitted]",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null
+      }
+    }
+  },
+  "/repos/golang/go/git/trees/aea65e849987410bf011765a7acb6a326af4f7d0": {
+    "status": 200,
+    "body": {
+      "sha": "aea65e849987410bf011765a7acb6a326af4f7d0",
+      "url": "https://api.github.com/repos/golang/go/git/trees/aea65e849987410bf011765a7acb6a326af4f7d0",
+      "truncated": false
+    }
+  },
+  "/repos/golang/go/commits/go1.22.0": {
+    "status": 200,
+    "body": {
+      "sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "url": "https://api.github.com/repos/golang/go/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "commit": {
+        "url": "https://api.github.com/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "tree": {
+          "sha": "aea65e849987410bf011765a7acb6a326af4f7d0",
+          "url": "https://api.github.com/repos/golang/go/git/trees/aea65e849987410bf011765a7acb6a326af4f7d0"
+        },
+        "message": "[release-branch.go1.22] go1.22.0\n\n[message body omitted]",
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null
+        }
+      }
+    }
+  },
+  "/repos/golang/go/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57": {
+    "status": 200,
+    "body": {
+      "sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "url": "https://api.github.com/repos/golang/go/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+      "commit": {
+        "url": "https://api.github.com/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "tree": {
+          "sha": "aea65e849987410bf011765a7acb6a326af4f7d0",
+          "url": "https://api.github.com/repos/golang/go/git/trees/aea65e849987410bf011765a7acb6a326af4f7d0"
+        },
+        "message": "[release-branch.go1.22] go1.22.0\n\n[message body omitted]",
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "/repos/cli/cli": {
+    "status": 200,
+    "body": {
+      "full_name": "cli/cli",
+      "default_branch": "trunk",
+      "description": "GitHub’s official command line tool",
+      "archived": false,
+      "url": "https://api.github.com/repos/cli/cli"
+    }
+  },
+  "/repos/cli/cli/branches/v2.59.0": {
+    "status": 404,
+    "body": {
+      "message": "Branch not found",
+      "status": "404"
+    }
+  },
+  "/repos/cli/cli/branches/trunk": {
+    "status": 200,
+    "body": {
+      "name": "trunk",
+      "protected": true,
+      "commit": {
+        "sha": "de06af2c2ea536d5722fda35dc2001565f9b9f64",
+        "url": "https://api.github.com/repos/cli/cli/commits/de06af2c2ea536d5722fda35dc2001565f9b9f64"
+      }
+    }
+  },
+  "/repos/cli/cli/releases/latest": {
+    "status": 200,
+    "body": {
+      "id": 449359903,
+      "tag_name": "v2.105.0",
+      "target_commitish": "e1219499a578b69e3437adaa31cd60614e23c802",
+      "draft": false,
+      "prerelease": false,
+      "name": "GitHub CLI 2.105.0",
+      "url": "https://api.github.com/repos/cli/cli/releases/449359903"
+    }
+  },
+  "/repos/cli/cli/releases/tags/v2.59.0": {
+    "status": 200,
+    "body": {
+      "id": 180220100,
+      "tag_name": "v2.59.0",
+      "target_commitish": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "draft": false,
+      "prerelease": false,
+      "name": "GitHub CLI 2.59.0",
+      "url": "https://api.github.com/repos/cli/cli/releases/180220100"
+    }
+  },
+  "/repos/cli/cli/git/matching-refs/tags/v2.59.0": {
+    "status": 200,
+    "body": [
+      {
+        "ref": "refs/tags/v2.59.0",
+        "node_id": "MDM6UmVmMjEyNjEzMDQ5OnJlZnMvdGFncy92Mi41OS4w",
+        "url": "https://api.github.com/repos/cli/cli/git/refs/tags/v2.59.0",
+        "object": {
+          "sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "type": "commit",
+          "url": "https://api.github.com/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa"
+        }
+      }
+    ]
+  },
+  "/repos/cli/cli/git/ref/tags/v2.59.0": {
+    "status": 200,
+    "body": {
+      "ref": "refs/tags/v2.59.0",
+      "node_id": "MDM6UmVmMjEyNjEzMDQ5OnJlZnMvdGFncy92Mi41OS4w",
+      "url": "https://api.github.com/repos/cli/cli/git/refs/tags/v2.59.0",
+      "object": {
+        "sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "type": "commit",
+        "url": "https://api.github.com/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa"
+      }
+    }
+  },
+  "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa": {
+    "status": 200,
+    "body": {
+      "sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "url": "https://api.github.com/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "tree": {
+        "sha": "9d0fadecbd316e1e071f0f291ebb6788bd009c78",
+        "url": "https://api.github.com/repos/cli/cli/git/trees/9d0fadecbd316e1e071f0f291ebb6788bd009c78"
+      },
+      "parents": [
+        {
+          "sha": "b98c840a7f09f719304b52a28b83fd074cc20dee",
+          "url": "https://api.github.com/repos/cli/cli/git/commits/b98c840a7f09f719304b52a28b83fd074cc20dee",
+          "html_url": "https://github.com/cli/cli/commit/b98c840a7f09f719304b52a28b83fd074cc20dee"
+        },
+        {
+          "sha": "446f66070a38b9718357255f8abd66c6acf57c7d",
+          "url": "https://api.github.com/repos/cli/cli/git/commits/446f66070a38b9718357255f8abd66c6acf57c7d",
+          "html_url": "https://github.com/cli/cli/commit/446f66070a38b9718357255f8abd66c6acf57c7d"
+        }
+      ],
+      "message": "Merge pull request #9728 from heaths/issue9704\n\n[message body omitted]",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+      }
+    }
+  },
+  "/repos/cli/cli/git/trees/9d0fadecbd316e1e071f0f291ebb6788bd009c78": {
+    "status": 200,
+    "body": {
+      "sha": "9d0fadecbd316e1e071f0f291ebb6788bd009c78",
+      "url": "https://api.github.com/repos/cli/cli/git/trees/9d0fadecbd316e1e071f0f291ebb6788bd009c78",
+      "truncated": false
+    }
+  },
+  "/repos/cli/cli/commits/v2.59.0": {
+    "status": 200,
+    "body": {
+      "sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "url": "https://api.github.com/repos/cli/cli/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "commit": {
+        "url": "https://api.github.com/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "tree": {
+          "sha": "9d0fadecbd316e1e071f0f291ebb6788bd009c78",
+          "url": "https://api.github.com/repos/cli/cli/git/trees/9d0fadecbd316e1e071f0f291ebb6788bd009c78"
+        },
+        "message": "Merge pull request #9728 from heaths/issue9704\n\n[message body omitted]",
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+        }
+      }
+    }
+  },
+  "/repos/cli/cli/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa": {
+    "status": 200,
+    "body": {
+      "sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "url": "https://api.github.com/repos/cli/cli/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+      "commit": {
+        "url": "https://api.github.com/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "tree": {
+          "sha": "9d0fadecbd316e1e071f0f291ebb6788bd009c78",
+          "url": "https://api.github.com/repos/cli/cli/git/trees/9d0fadecbd316e1e071f0f291ebb6788bd009c78"
+        },
+        "message": "Merge pull request #9728 from heaths/issue9704\n\n[message body omitted]",
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "git": {
+    "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+    "commit_subject": "Git 2.47",
+    "commit_signed": false,
+    "tag_chain": [
+      {
+        "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+        "signed": true
+      }
+    ]
+  },
+  "go": {
+    "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+    "commit_subject": "[release-branch.go1.22] go1.22.0",
+    "commit_signed": false,
+    "tag_chain": []
+  },
+  "cli": {
+    "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+    "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+    "commit_signed": true,
+    "tag_chain": []
+  },
+  "curl": {
+    "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+    "commit_subject": "RELEASE-NOTES: synced",
+    "commit_signed": true,
+    "tag_chain": [
+      {
+        "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+        "signed": true
+      }
+    ]
+  }
+}

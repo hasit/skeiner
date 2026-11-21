@@ -1,0 +1,2563 @@
+{
+  "started_at": "2026-11-21T04:22:30.129719+00:00",
+  "platform": "Darwin/arm64",
+  "rounds": 3,
+  "runs": [
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 731.67,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 807.23,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 539.24,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 522.08,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 541.91,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 550.19,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 791.44,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 1,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 743.42,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 788.29,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 721.81,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 487.46,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 486.5,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 511.87,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 573.03,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 876.68,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 2,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 810.54,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 748.73,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 807.12,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 519.44,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 534.91,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 522.86,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 520.91,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 771.88,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "trial": 3,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 890.46,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 764.83,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 707.78,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 510.2,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 460.98,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 574.71,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 576.04,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 773.88,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 1,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 728.61,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 733.3,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 695.46,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 477.6,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 488.06,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 468.58,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 517.07,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 808.53,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 2,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 831.18,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 719.36,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 743.66,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 589.62,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 476.88,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 668.07,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 530.11,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 778.56,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "trial": 3,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 763.86,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 698.28,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 731.59,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 472.81,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 507.75,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 496.03,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 476.13,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 763.19,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 1,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 767.37,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 683.05,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 795.29,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 509.07,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 565.29,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 548.9,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 536.83,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 776.46,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 2,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 798.3,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "git",
+      "arm": "skeiner",
+      "elapsed_ms": 746.91,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "git",
+      "arm": "client",
+      "elapsed_ms": 743.68,
+      "answer": {
+        "commit_sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "commit_subject": "Git 2.47",
+        "commit_signed": false,
+        "tag_chain": [
+          {
+            "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/git/git/git/ref/tags/v2.47.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 315
+        },
+        {
+          "path": "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2491
+        },
+        {
+          "path": "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1086
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "go",
+      "arm": "client",
+      "elapsed_ms": 508.26,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "go",
+      "arm": "skeiner",
+      "elapsed_ms": 602.42,
+      "answer": {
+        "commit_sha": "a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+        "commit_subject": "[release-branch.go1.22] go1.22.0",
+        "commit_signed": false,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/golang/go/git/ref/tags/go1.22.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 331
+        },
+        {
+          "path": "/repos/golang/go/git/commits/a10e42f219abb9c5bc4e7d86d9464700a42c7d57",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1419
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "cli",
+      "arm": "skeiner",
+      "elapsed_ms": 527.4,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "cli",
+      "arm": "client",
+      "elapsed_ms": 584.76,
+      "answer": {
+        "commit_sha": "7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+        "commit_subject": "Merge pull request #9728 from heaths/issue9704",
+        "commit_signed": true,
+        "tag_chain": []
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/cli/cli/git/ref/tags/v2.59.0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 325
+        },
+        {
+          "path": "/repos/cli/cli/git/commits/7aef6ec39137adb601d31d13fce8b6f26b4903fa",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 2516
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "curl",
+      "arm": "client",
+      "elapsed_ms": 793.1,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "trial": 3,
+      "case": "curl",
+      "arm": "skeiner",
+      "elapsed_ms": 764.69,
+      "answer": {
+        "commit_sha": "b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+        "commit_subject": "RELEASE-NOTES: synced",
+        "commit_signed": true,
+        "tag_chain": [
+          {
+            "sha": "1000149fafab39e60ad7e19aa63f6233719faa1b",
+            "signed": true
+          }
+        ]
+      },
+      "correct": true,
+      "grounded": true,
+      "ok": true,
+      "reads": [
+        {
+          "path": "/repos/curl/curl/git/ref/tags/curl-8_11_0",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 335
+        },
+        {
+          "path": "/repos/curl/curl/git/tags/1000149fafab39e60ad7e19aa63f6233719faa1b",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1838
+        },
+        {
+          "path": "/repos/curl/curl/git/commits/b1ef0e1a01c0bb6ee5367bd9c186a603bde3615a",
+          "status": 200,
+          "ok": true,
+          "body_bytes": 1854
+        }
+      ]
+    }
+  ]
+}

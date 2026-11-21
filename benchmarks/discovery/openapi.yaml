@@ -1,0 +1,237 @@
+openapi: 3.0.3
+info:
+  title: Public GitHub repository and Git objects
+  version: '2022-11-28'
+servers:
+  - url: https://api.github.com
+paths:
+  /repos/{owner}/{repo}:
+    get:
+      operationId: getRepository
+      summary: Get a public repository and its default branch
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Repository'}
+  /repos/{owner}/{repo}/branches/{branch}:
+    get:
+      operationId: getBranch
+      summary: Get a branch and its head commit
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/branch'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Branch'}
+  /repos/{owner}/{repo}/releases/tags/{tag}:
+    get:
+      operationId: getReleaseByTag
+      summary: Get published release metadata for a tag name
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/tag'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Release'}
+  /repos/{owner}/{repo}/releases/latest:
+    get:
+      operationId: getLatestRelease
+      summary: Get the latest published release for a repository
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Release'}
+  /repos/{owner}/{repo}/commits/{ref}:
+    get:
+      operationId: getRepositoryCommit
+      summary: Get a repository commit by branch, tag name, or SHA, including its message and signature verification
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/ref'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RepositoryCommit'}
+  /repos/{owner}/{repo}/git/ref/tags/{tag}:
+    get:
+      operationId: getTagReference
+      summary: Get an exact Git tag reference and its immediate object type and SHA
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/tag'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Reference'}
+  /repos/{owner}/{repo}/git/matching-refs/tags/{tag}:
+    get:
+      operationId: listMatchingTagReferences
+      summary: List Git tag references whose names start with a prefix
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/tag'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Refs'}
+  /repos/{owner}/{repo}/git/tags/{tag_sha}:
+    get:
+      operationId: getAnnotatedTag
+      summary: Get an annotated Git tag object by object SHA, including its target and signature verification
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/tag_sha'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/GitTag'}
+  /repos/{owner}/{repo}/git/commits/{commit_sha}:
+    get:
+      operationId: getGitCommit
+      summary: Get a Git commit object by its commit SHA, including its message and signature verification
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/commit_sha'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/GitCommit'}
+  /repos/{owner}/{repo}/git/trees/{tree_sha}:
+    get:
+      operationId: getGitTree
+      summary: Get a Git tree by tree SHA
+      parameters:
+        - {$ref: '#/components/parameters/owner'}
+        - {$ref: '#/components/parameters/repo'}
+        - {$ref: '#/components/parameters/tree_sha'}
+      responses:
+        '200':
+          description: Successful GitHub response
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Tree'}
+components:
+  parameters:
+    owner: {in: path, name: owner, required: true, schema: {type: string}}
+    repo: {in: path, name: repo, required: true, schema: {type: string}}
+    branch: {in: path, name: branch, required: true, schema: {type: string}}
+    tag: {in: path, name: tag, required: true, schema: {type: string}}
+    ref: {in: path, name: ref, required: true, schema: {type: string}}
+    tag_sha: {in: path, name: tag_sha, required: true, schema: {type: string}}
+    commit_sha: {in: path, name: commit_sha, required: true, schema: {type: string}}
+    tree_sha: {in: path, name: tree_sha, required: true, schema: {type: string}}
+  schemas:
+    Repository:
+      type: object
+      properties:
+        full_name: {type: string}
+        default_branch: {type: string}
+        archived: {type: boolean}
+    Branch:
+      type: object
+      properties:
+        name: {type: string}
+        protected: {type: boolean}
+        commit: {$ref: '#/components/schemas/ObjectId'}
+    ObjectId:
+      type: object
+      properties:
+        sha: {type: string}
+        url: {type: string}
+    Target:
+      type: object
+      properties:
+        sha: {type: string}
+        type: {type: string, enum: [tag, commit, tree, blob]}
+        url: {type: string}
+    Release:
+      type: object
+      properties:
+        id: {type: integer}
+        tag_name: {type: string}
+        target_commitish: {type: string}
+        name: {type: string}
+        draft: {type: boolean}
+        prerelease: {type: boolean}
+        url: {type: string}
+    RepositoryCommit:
+      type: object
+      properties:
+        sha: {type: string}
+        url: {type: string}
+        commit: {$ref: '#/components/schemas/GitCommitData'}
+    Reference:
+      type: object
+      properties:
+        ref: {type: string}
+        object: {$ref: '#/components/schemas/Target'}
+        url: {type: string}
+    Refs:
+      type: array
+      items: {$ref: '#/components/schemas/Reference'}
+    GitTag:
+      type: object
+      properties:
+        sha: {type: string}
+        tag: {type: string}
+        message: {type: string}
+        object: {$ref: '#/components/schemas/Target'}
+        verification: {$ref: '#/components/schemas/Verification'}
+    Verification:
+      type: object
+      properties:
+        verified: {type: boolean}
+        reason: {type: string}
+        signature: {type: string, nullable: true, description: Embedded signature if present}
+    GitCommit:
+      type: object
+      properties:
+        sha: {type: string}
+        message: {type: string}
+        verification: {$ref: '#/components/schemas/Verification'}
+        tree: {$ref: '#/components/schemas/ObjectId'}
+    GitCommitData:
+      type: object
+      properties:
+        message: {type: string}
+        verification: {$ref: '#/components/schemas/Verification'}
+        tree: {$ref: '#/components/schemas/ObjectId'}
+    Tree:
+      type: object
+      properties:
+        sha: {type: string}
+        truncated: {type: boolean}
+        url: {type: string}

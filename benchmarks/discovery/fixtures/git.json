@@ -1,0 +1,183 @@
+{
+  "/repos/git/git": {
+    "status": 200,
+    "body": {
+      "full_name": "git/git",
+      "default_branch": "master",
+      "description": "Git Source Code Mirror - This is a publish-only repository but pull requests can be turned into patches to the mailing list via GitGitGadget (https://gitgitgadget.github.io/). Please follow Documentation/SubmittingPatches procedure for any of your improvements.",
+      "archived": false,
+      "url": "https://api.github.com/repos/git/git"
+    }
+  },
+  "/repos/git/git/branches/v2.47.0": {
+    "status": 404,
+    "body": {
+      "message": "Branch not found",
+      "status": "404"
+    }
+  },
+  "/repos/git/git/branches/master": {
+    "status": 200,
+    "body": {
+      "name": "master",
+      "protected": false,
+      "commit": {
+        "sha": "f7de81456940dd6f3274e461149bba12965de609",
+        "url": "https://api.github.com/repos/git/git/commits/f7de81456940dd6f3274e461149bba12965de609"
+      }
+    }
+  },
+  "/repos/git/git/releases/latest": {
+    "status": 404,
+    "body": {
+      "message": "Not Found",
+      "status": "404"
+    }
+  },
+  "/repos/git/git/releases/tags/v2.47.0": {
+    "status": 404,
+    "body": {
+      "message": "Not Found",
+      "status": "404"
+    }
+  },
+  "/repos/git/git/git/matching-refs/tags/v2.47.0": {
+    "status": 200,
+    "body": [
+      {
+        "ref": "refs/tags/v2.47.0",
+        "node_id": "MDM6UmVmMzY1MDI6cmVmcy90YWdzL3YyLjQ3LjA=",
+        "url": "https://api.github.com/repos/git/git/git/refs/tags/v2.47.0",
+        "object": {
+          "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+          "type": "tag",
+          "url": "https://api.github.com/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b"
+        }
+      },
+      {
+        "ref": "refs/tags/v2.47.0-rc0",
+        "node_id": "MDM6UmVmMzY1MDI6cmVmcy90YWdzL3YyLjQ3LjAtcmMw",
+        "url": "https://api.github.com/repos/git/git/git/refs/tags/v2.47.0-rc0",
+        "object": {
+          "sha": "c7a54b1d6984c297a142e9a97550fefcf8abd110",
+          "type": "tag",
+          "url": "https://api.github.com/repos/git/git/git/tags/c7a54b1d6984c297a142e9a97550fefcf8abd110"
+        }
+      },
+      {
+        "ref": "refs/tags/v2.47.0-rc1",
+        "node_id": "MDM6UmVmMzY1MDI6cmVmcy90YWdzL3YyLjQ3LjAtcmMx",
+        "url": "https://api.github.com/repos/git/git/git/refs/tags/v2.47.0-rc1",
+        "object": {
+          "sha": "a52b02cb1c59feac6011fbd8195df9e0b987610b",
+          "type": "tag",
+          "url": "https://api.github.com/repos/git/git/git/tags/a52b02cb1c59feac6011fbd8195df9e0b987610b"
+        }
+      }
+    ]
+  },
+  "/repos/git/git/git/ref/tags/v2.47.0": {
+    "status": 200,
+    "body": {
+      "ref": "refs/tags/v2.47.0",
+      "node_id": "MDM6UmVmMzY1MDI6cmVmcy90YWdzL3YyLjQ3LjA=",
+      "url": "https://api.github.com/repos/git/git/git/refs/tags/v2.47.0",
+      "object": {
+        "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b"
+      }
+    }
+  },
+  "/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b": {
+    "status": 200,
+    "body": {
+      "sha": "4ec4435df758668055cc904ef64c275bc8d1089b",
+      "url": "https://api.github.com/repos/git/git/git/tags/4ec4435df758668055cc904ef64c275bc8d1089b",
+      "tag": "v2.47.0",
+      "object": {
+        "sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "type": "commit",
+        "url": "https://api.github.com/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2"
+      },
+      "message": "Git 2.47\n\n[message body omitted]",
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n[omitted]\n-----END PGP SIGNATURE-----"
+      }
+    }
+  },
+  "/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2": {
+    "status": 200,
+    "body": {
+      "sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "url": "https://api.github.com/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "tree": {
+        "sha": "e4e659abcf688f66c03918bfaf0ada121e850ff1",
+        "url": "https://api.github.com/repos/git/git/git/trees/e4e659abcf688f66c03918bfaf0ada121e850ff1"
+      },
+      "parents": [
+        {
+          "sha": "5c97f7ba5c4ac7c4df7731bce0750a8b0c1e28fb",
+          "url": "https://api.github.com/repos/git/git/git/commits/5c97f7ba5c4ac7c4df7731bce0750a8b0c1e28fb",
+          "html_url": "https://github.com/git/git/commit/5c97f7ba5c4ac7c4df7731bce0750a8b0c1e28fb"
+        }
+      ],
+      "message": "Git 2.47\n\n[message body omitted]",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null
+      }
+    }
+  },
+  "/repos/git/git/git/trees/e4e659abcf688f66c03918bfaf0ada121e850ff1": {
+    "status": 200,
+    "body": {
+      "sha": "e4e659abcf688f66c03918bfaf0ada121e850ff1",
+      "url": "https://api.github.com/repos/git/git/git/trees/e4e659abcf688f66c03918bfaf0ada121e850ff1",
+      "truncated": false
+    }
+  },
+  "/repos/git/git/commits/v2.47.0": {
+    "status": 200,
+    "body": {
+      "sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "url": "https://api.github.com/repos/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "commit": {
+        "url": "https://api.github.com/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "tree": {
+          "sha": "e4e659abcf688f66c03918bfaf0ada121e850ff1",
+          "url": "https://api.github.com/repos/git/git/git/trees/e4e659abcf688f66c03918bfaf0ada121e850ff1"
+        },
+        "message": "Git 2.47\n\n[message body omitted]",
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null
+        }
+      }
+    }
+  },
+  "/repos/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2": {
+    "status": 200,
+    "body": {
+      "sha": "777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "url": "https://api.github.com/repos/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+      "commit": {
+        "url": "https://api.github.com/repos/git/git/git/commits/777489f9e09c8d0dd6b12f9d90de6376330577a2",
+        "tree": {
+          "sha": "e4e659abcf688f66c03918bfaf0ada121e850ff1",
+          "url": "https://api.github.com/repos/git/git/git/trees/e4e659abcf688f66c03918bfaf0ada121e850ff1"
+        },
+        "message": "Git 2.47\n\n[message body omitted]",
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null
+        }
+      }
+    }
+  }
+}
