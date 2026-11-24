@@ -1,5 +1,7 @@
 # Skeiner
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/hasit-skeiner-k9ycvw?v=cb04a7cc9b5c00418c3cf0081fc30e50)](https://m8ven.ai/mcp/hasit-skeiner-k9ycvw?s=readme)
+
 Skeiner is an MCP server for OpenAPI. An agent uses `search` to find operations and `execute` to call them from JavaScript. Save a working program and rerun it from the CLI.
 
 Compare Skeiner with JavaScript on three measured workflows. [Permissioned API setup](docs/setup-benchmark.md) · [GitHub release audit](docs/discovery-benchmark.md) · [Historical weather](docs/weather-benchmark.md)
